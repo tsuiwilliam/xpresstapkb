@@ -11,6 +11,21 @@ plugins {
 android {
     compileSdk = 36
 
+    signingConfigs {
+        create("release") {
+            val storeFile = System.getenv("SIGNING_STORE_FILE")
+            val storePassword = System.getenv("SIGNING_STORE_PASSWORD")
+            val keyAlias = System.getenv("SIGNING_KEY_ALIAS")
+            val keyPassword = System.getenv("SIGNING_KEY_PASSWORD")
+            if (storeFile != null) {
+                this.storeFile = file(storeFile)
+                this.storePassword = storePassword
+                this.keyAlias = keyAlias
+                this.keyPassword = keyPassword
+            }
+        }
+    }
+
     defaultConfig {
         applicationId = "com.xpresstap.keyboard"
         minSdk = 21
@@ -30,6 +45,7 @@ android {
             isShrinkResources = false
             isDebuggable = false
             isJniDebuggable = false
+            signingConfig = signingConfigs.getByName("release")
         }
         create("nouserlib") { // same as release, but does not allow the user to provide a library
             isMinifyEnabled = true

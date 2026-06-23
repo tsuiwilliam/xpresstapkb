@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.latin.common
+package com.xpresstap.keyboard.latin.common
 
 object Links {
     const val DICTIONARY_URL = "https://codeberg.org/Helium314/aosp-dictionaries"
@@ -7,7 +7,7 @@ object Links {
     const val DICTIONARY_NORMAL_SUFFIX = "dictionaries/"
     const val DICTIONARY_EXPERIMENTAL_SUFFIX = "dictionaries_experimental/"
     const val DICTIONARY_EMOJI_CLDR_SUFFIX = "emoji_cldr_signal_dictionaries/"
-    const val GITHUB = "https://github.com/HeliBorg/HeliBoard"
+    const val GITHUB = "https://github.com/HeliBorg/xPressTap"
     const val LICENSE = "$GITHUB/blob/main/LICENSE"
     const val WIKI_URL = "$GITHUB/wiki"
     const val LAYOUT_WIKI_URL = "$WIKI_URL/2.-Layouts"

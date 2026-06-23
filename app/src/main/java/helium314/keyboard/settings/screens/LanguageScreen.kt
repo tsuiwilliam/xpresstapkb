@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings.screens
+package com.xpresstap.keyboard.settings.screens
 
 import android.content.Context
 import android.os.Build
@@ -25,30 +25,30 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.Constants.Separators
-import helium314.keyboard.latin.common.Constants.Subtype.ExtraValue
-import helium314.keyboard.latin.common.LocaleUtils
-import helium314.keyboard.latin.common.LocaleUtils.constructLocale
-import helium314.keyboard.latin.common.LocaleUtils.localizedDisplayName
-import helium314.keyboard.latin.common.splitOnWhitespace
-import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.settings.SettingsSubtype.Companion.toSettingsSubtype
-import helium314.keyboard.latin.utils.DictionaryInfoUtils
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.MissingDictionaryDialog
-import helium314.keyboard.latin.utils.SubtypeLocaleUtils
-import helium314.keyboard.latin.utils.SubtypeLocaleUtils.displayName
-import helium314.keyboard.latin.utils.SubtypeSettings
-import helium314.keyboard.latin.utils.getActivity
-import helium314.keyboard.latin.utils.locale
-import helium314.keyboard.latin.utils.prefs
-import helium314.keyboard.settings.SearchScreen
-import helium314.keyboard.settings.SettingsActivity
-import helium314.keyboard.settings.SettingsDestination
-import helium314.keyboard.latin.utils.Theme
-import helium314.keyboard.settings.initPreview
-import helium314.keyboard.latin.utils.previewDark
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.Constants.Separators
+import com.xpresstap.keyboard.latin.common.Constants.Subtype.ExtraValue
+import com.xpresstap.keyboard.latin.common.LocaleUtils
+import com.xpresstap.keyboard.latin.common.LocaleUtils.constructLocale
+import com.xpresstap.keyboard.latin.common.LocaleUtils.localizedDisplayName
+import com.xpresstap.keyboard.latin.common.splitOnWhitespace
+import com.xpresstap.keyboard.latin.settings.Defaults
+import com.xpresstap.keyboard.latin.settings.SettingsSubtype.Companion.toSettingsSubtype
+import com.xpresstap.keyboard.latin.utils.DictionaryInfoUtils
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.MissingDictionaryDialog
+import com.xpresstap.keyboard.latin.utils.SubtypeLocaleUtils
+import com.xpresstap.keyboard.latin.utils.SubtypeLocaleUtils.displayName
+import com.xpresstap.keyboard.latin.utils.SubtypeSettings
+import com.xpresstap.keyboard.latin.utils.getActivity
+import com.xpresstap.keyboard.latin.utils.locale
+import com.xpresstap.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.settings.SearchScreen
+import com.xpresstap.keyboard.settings.SettingsActivity
+import com.xpresstap.keyboard.settings.SettingsDestination
+import com.xpresstap.keyboard.latin.utils.Theme
+import com.xpresstap.keyboard.settings.initPreview
+import com.xpresstap.keyboard.latin.utils.previewDark
 import java.util.Locale
 
 @Composable

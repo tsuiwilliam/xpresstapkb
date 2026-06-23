@@ -4,20 +4,20 @@
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
 
-package helium314.keyboard.accessibility
+package com.xpresstap.keyboard.accessibility
 
 import android.os.SystemClock
-import helium314.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.accessibility.AccessibilityEvent
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
-import helium314.keyboard.keyboard.Key
-import helium314.keyboard.keyboard.KeyDetector
-import helium314.keyboard.keyboard.Keyboard
-import helium314.keyboard.keyboard.KeyboardView
+import com.xpresstap.keyboard.keyboard.Key
+import com.xpresstap.keyboard.keyboard.KeyDetector
+import com.xpresstap.keyboard.keyboard.Keyboard
+import com.xpresstap.keyboard.keyboard.KeyboardView
 
 /**
  * This class represents a delegate that can be registered in a class that extends

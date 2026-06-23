@@ -1,9 +1,9 @@
-package helium314.keyboard
+package com.xpresstap.keyboard
 
 import android.view.textservice.SuggestionsInfo
 import android.view.textservice.TextInfo
-import helium314.keyboard.latin.spellcheck.AndroidSpellCheckerService
-import helium314.keyboard.latin.spellcheck.AndroidSpellCheckerSession
+import com.xpresstap.keyboard.latin.spellcheck.AndroidSpellCheckerService
+import com.xpresstap.keyboard.latin.spellcheck.AndroidSpellCheckerSession
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner

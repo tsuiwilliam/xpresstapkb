@@ -3,16 +3,16 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
-package helium314.keyboard.keyboard
+package com.xpresstap.keyboard.keyboard
 
 import android.text.InputType
 import android.text.TextUtils
 import android.view.inputmethod.EditorInfo
-import helium314.keyboard.compat.EditorInfoCompatUtils.imeActionName
-import helium314.keyboard.latin.CapsMode
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.RichInputMethodSubtype
-import helium314.keyboard.latin.utils.InputTypeUtils
+import com.xpresstap.keyboard.compat.EditorInfoCompatUtils.imeActionName
+import com.xpresstap.keyboard.latin.CapsMode
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.RichInputMethodSubtype
+import com.xpresstap.keyboard.latin.utils.InputTypeUtils
 
 /**
  * Unique identifier for each keyboard type.

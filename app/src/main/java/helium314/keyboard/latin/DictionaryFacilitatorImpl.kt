@@ -3,40 +3,40 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
-package helium314.keyboard.latin
+package com.xpresstap.keyboard.latin
 
 import android.Manifest
 import android.content.Context
 import android.provider.UserDictionary
 import android.util.LruCache
-import helium314.keyboard.keyboard.Keyboard
-import helium314.keyboard.keyboard.emoji.SupportedEmojis
-import helium314.keyboard.latin.DictionaryFacilitator.DictionaryInitializationListener
-import helium314.keyboard.latin.NgramContext.WordInfo
-import helium314.keyboard.latin.SuggestedWords.SuggestedWordInfo
-import helium314.keyboard.latin.common.ComposedData
-import helium314.keyboard.latin.common.Constants
-import helium314.keyboard.latin.common.StringUtils
-import helium314.keyboard.latin.common.decapitalize
-import helium314.keyboard.latin.common.mightBeEmoji
-import helium314.keyboard.latin.common.splitOnWhitespace
-import helium314.keyboard.latin.dictionary.AppsBinaryDictionary
-import helium314.keyboard.latin.dictionary.ContactsBinaryDictionary
-import helium314.keyboard.latin.dictionary.Dictionary
-import helium314.keyboard.latin.dictionary.DictionaryFactory
-import helium314.keyboard.latin.dictionary.DictionaryStats
-import helium314.keyboard.latin.dictionary.ExpandableBinaryDictionary
-import helium314.keyboard.latin.dictionary.UserBinaryDictionary
-import helium314.keyboard.latin.permissions.PermissionsUtil
-import helium314.keyboard.latin.personalization.UserHistoryDictionary
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.settings.SettingsValuesForSuggestion
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.SubtypeSettings
-import helium314.keyboard.latin.utils.SuggestionResults
-import helium314.keyboard.latin.utils.getSecondaryLocales
-import helium314.keyboard.latin.utils.locale
-import helium314.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.keyboard.Keyboard
+import com.xpresstap.keyboard.keyboard.emoji.SupportedEmojis
+import com.xpresstap.keyboard.latin.DictionaryFacilitator.DictionaryInitializationListener
+import com.xpresstap.keyboard.latin.NgramContext.WordInfo
+import com.xpresstap.keyboard.latin.SuggestedWords.SuggestedWordInfo
+import com.xpresstap.keyboard.latin.common.ComposedData
+import com.xpresstap.keyboard.latin.common.Constants
+import com.xpresstap.keyboard.latin.common.StringUtils
+import com.xpresstap.keyboard.latin.common.decapitalize
+import com.xpresstap.keyboard.latin.common.mightBeEmoji
+import com.xpresstap.keyboard.latin.common.splitOnWhitespace
+import com.xpresstap.keyboard.latin.dictionary.AppsBinaryDictionary
+import com.xpresstap.keyboard.latin.dictionary.ContactsBinaryDictionary
+import com.xpresstap.keyboard.latin.dictionary.Dictionary
+import com.xpresstap.keyboard.latin.dictionary.DictionaryFactory
+import com.xpresstap.keyboard.latin.dictionary.DictionaryStats
+import com.xpresstap.keyboard.latin.dictionary.ExpandableBinaryDictionary
+import com.xpresstap.keyboard.latin.dictionary.UserBinaryDictionary
+import com.xpresstap.keyboard.latin.permissions.PermissionsUtil
+import com.xpresstap.keyboard.latin.personalization.UserHistoryDictionary
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.settings.SettingsValuesForSuggestion
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.SubtypeSettings
+import com.xpresstap.keyboard.latin.utils.SuggestionResults
+import com.xpresstap.keyboard.latin.utils.getSecondaryLocales
+import com.xpresstap.keyboard.latin.utils.locale
+import com.xpresstap.keyboard.latin.utils.prefs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -67,14 +67,14 @@ class DictionaryFacilitatorImpl : DictionaryFacilitator {
     // todo: this is awful, find a better solution / workaround
     //  or remove completely? not sure if it's actually an improvement
     //  should be fixed in the library, but that's not feasible with current user-provides-library approach
-    //  added in 12cbd43bda7d0f0cd73925e9cf836de751c32ed0 / https://github.com/HeliBorg/HeliBoard/issues/135
+    //  added in 12cbd43bda7d0f0cd73925e9cf836de751c32ed0 / https://github.com/HeliBorg/xPressTap/issues/135
     private var tryChangingWords = false
     private var changeFrom = ""
     private var changeTo = ""
 
     // todo: write cache never set, and never read (only written)
     //  tried to use read cache for a while, but small performance improvements are not worth the work,
-    //  see https://github.com/HeliBorg/HeliBoard/issues/307
+    //  see https://github.com/HeliBorg/xPressTap/issues/307
     private var mValidSpellingWordReadCache: LruCache<String, Boolean>? = null
     private var mValidSpellingWordWriteCache: LruCache<String, Boolean>? = null
 
@@ -306,7 +306,7 @@ class DictionaryFacilitatorImpl : DictionaryFacilitator {
         // Add word to user dictionary if it is in no other dictionary except user history dictionary (i.e. typed again).
         val sv = Settings.getValues()
         if (sv.mAddToPersonalDictionary // require the opt-in
-            && sv.mAutoCorrectEnabled == sv.mAutoCorrectionEnabledPerUserSettings // don't add if user wants autocorrect but input field does not, see https://github.com/HeliBorg/HeliBoard/issues/427#issuecomment-1905438000
+            && sv.mAutoCorrectEnabled == sv.mAutoCorrectionEnabledPerUserSettings // don't add if user wants autocorrect but input field does not, see https://github.com/HeliBorg/xPressTap/issues/427#issuecomment-1905438000
             && dictionaryGroups[0].hasDict(Dictionary.TYPE_USER_HISTORY) // require personalized suggestions
             && !wasAutoCapitalized // we can't be 100% sure about what the user intended to type, so better don't add it
             && words.size == 1 // only single words

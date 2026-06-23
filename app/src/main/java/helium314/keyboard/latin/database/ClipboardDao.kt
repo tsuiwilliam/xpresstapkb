@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.latin.database
+package com.xpresstap.keyboard.latin.database
 
 import android.content.ClipDescription
 import android.content.ContentValues
@@ -10,13 +10,13 @@ import android.os.SystemClock
 import android.webkit.MimeTypeMap
 import androidx.core.content.FileProvider
 import androidx.core.database.getStringOrNull
-import helium314.keyboard.latin.ClipboardHistoryEntry
-import helium314.keyboard.latin.common.FileUtils
-import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.ChecksumCalculator
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.latin.ClipboardHistoryEntry
+import com.xpresstap.keyboard.latin.common.FileUtils
+import com.xpresstap.keyboard.latin.settings.Defaults
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.ChecksumCalculator
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.prefs
 import java.io.File
 import kotlin.collections.joinToString
 

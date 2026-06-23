@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
 
-package helium314.keyboard.latin.define
+package com.xpresstap.keyboard.latin.define
 
 /**
  * Decoder specific constants for LatinIme.

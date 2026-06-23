@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-package helium314.keyboard.latin
+package com.xpresstap.keyboard.latin
 
 import android.annotation.SuppressLint
 import android.content.ClipDescription
@@ -10,11 +10,11 @@ import android.os.Build
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.FileProvider
-import helium314.keyboard.latin.common.ColorType
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.common.ColorType
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.Log
 import androidx.core.view.inputmethod.InputContentInfoCompat
-import helium314.keyboard.latin.database.ClipboardDao
+import com.xpresstap.keyboard.latin.database.ClipboardDao
 import java.io.File
 
 class ClipboardHistoryEntry(

@@ -1,6 +1,6 @@
-package helium314.keyboard
+package com.xpresstap.keyboard
 
-import helium314.keyboard.latin.utils.LayoutType
+import com.xpresstap.keyboard.latin.utils.LayoutType
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

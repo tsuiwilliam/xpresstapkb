@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
 
-package helium314.keyboard.event
+package com.xpresstap.keyboard.event
 
 import android.view.KeyEvent
 

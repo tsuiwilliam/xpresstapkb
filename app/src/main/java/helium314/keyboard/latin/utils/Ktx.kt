@@ -1,4 +1,4 @@
-package helium314.keyboard.latin.utils
+package com.xpresstap.keyboard.latin.utils
 
 import android.R
 import android.annotation.SuppressLint

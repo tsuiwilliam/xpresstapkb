@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-package helium314.keyboard.latin.common
+package com.xpresstap.keyboard.latin.common
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -22,16 +22,16 @@ import androidx.core.graphics.BlendModeCompat
 import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.graphics.drawable.toBitmap
-import helium314.keyboard.keyboard.KeyboardTheme.Companion.STYLE_HOLO
-import helium314.keyboard.keyboard.KeyboardTheme.Companion.STYLE_MATERIAL
-import helium314.keyboard.latin.common.ColorType.*
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.utils.adjustLuminosityAndKeepAlpha
-import helium314.keyboard.latin.utils.brighten
-import helium314.keyboard.latin.utils.brightenOrDarken
-import helium314.keyboard.latin.utils.darken
-import helium314.keyboard.latin.utils.isBrightColor
-import helium314.keyboard.latin.utils.isDarkColor
+import com.xpresstap.keyboard.keyboard.KeyboardTheme.Companion.STYLE_HOLO
+import com.xpresstap.keyboard.keyboard.KeyboardTheme.Companion.STYLE_MATERIAL
+import com.xpresstap.keyboard.latin.common.ColorType.*
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.utils.adjustLuminosityAndKeepAlpha
+import com.xpresstap.keyboard.latin.utils.brighten
+import com.xpresstap.keyboard.latin.utils.brightenOrDarken
+import com.xpresstap.keyboard.latin.utils.darken
+import com.xpresstap.keyboard.latin.utils.isBrightColor
+import com.xpresstap.keyboard.latin.utils.isDarkColor
 import java.util.EnumMap
 import androidx.core.graphics.drawable.toDrawable
 

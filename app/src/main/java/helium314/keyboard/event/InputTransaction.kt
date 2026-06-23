@@ -3,10 +3,10 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
-package helium314.keyboard.event
+package com.xpresstap.keyboard.event
 
-import helium314.keyboard.latin.CapsMode
-import helium314.keyboard.latin.settings.SettingsValues
+import com.xpresstap.keyboard.latin.CapsMode
+import com.xpresstap.keyboard.latin.settings.SettingsValues
 
 /** An object encapsulating a single transaction for input. */
 class InputTransaction(

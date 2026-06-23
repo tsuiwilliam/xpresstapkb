@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings.screens
+package com.xpresstap.keyboard.settings.screens
 
 import android.content.Context
 import android.media.AudioManager
@@ -9,29 +9,29 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import helium314.keyboard.keyboard.KeyboardLayoutSet
-import helium314.keyboard.keyboard.KeyboardSwitcher
-import helium314.keyboard.latin.AudioAndHapticFeedbackManager
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.database.ClipboardDao
-import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.SubtypeSettings
-import helium314.keyboard.latin.utils.getActivity
-import helium314.keyboard.latin.utils.locale
-import helium314.keyboard.latin.utils.prefs
-import helium314.keyboard.settings.preferences.ListPreference
-import helium314.keyboard.settings.Setting
-import helium314.keyboard.settings.preferences.ReorderSwitchPreference
-import helium314.keyboard.settings.SearchSettingsScreen
-import helium314.keyboard.settings.SettingsActivity
-import helium314.keyboard.settings.preferences.SliderPreference
-import helium314.keyboard.settings.preferences.SwitchPreference
-import helium314.keyboard.latin.utils.Theme
-import helium314.keyboard.settings.initPreview
-import helium314.keyboard.settings.preferences.SwitchPreferenceWithEmojiDictWarning
-import helium314.keyboard.latin.utils.previewDark
+import com.xpresstap.keyboard.keyboard.KeyboardLayoutSet
+import com.xpresstap.keyboard.keyboard.KeyboardSwitcher
+import com.xpresstap.keyboard.latin.AudioAndHapticFeedbackManager
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.database.ClipboardDao
+import com.xpresstap.keyboard.latin.settings.Defaults
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.SubtypeSettings
+import com.xpresstap.keyboard.latin.utils.getActivity
+import com.xpresstap.keyboard.latin.utils.locale
+import com.xpresstap.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.settings.preferences.ListPreference
+import com.xpresstap.keyboard.settings.Setting
+import com.xpresstap.keyboard.settings.preferences.ReorderSwitchPreference
+import com.xpresstap.keyboard.settings.SearchSettingsScreen
+import com.xpresstap.keyboard.settings.SettingsActivity
+import com.xpresstap.keyboard.settings.preferences.SliderPreference
+import com.xpresstap.keyboard.settings.preferences.SwitchPreference
+import com.xpresstap.keyboard.latin.utils.Theme
+import com.xpresstap.keyboard.settings.initPreview
+import com.xpresstap.keyboard.settings.preferences.SwitchPreferenceWithEmojiDictWarning
+import com.xpresstap.keyboard.latin.utils.previewDark
 
 @Composable
 fun PreferencesScreen(

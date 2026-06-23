@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.latin.utils
+package com.xpresstap.keyboard.latin.utils
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
@@ -16,7 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
-import helium314.keyboard.latin.R
+import com.xpresstap.keyboard.latin.R
 
 @Composable
 fun NextScreenIcon() {

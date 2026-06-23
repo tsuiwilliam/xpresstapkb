@@ -4,12 +4,12 @@
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
 
-package helium314.keyboard.compat
+package com.xpresstap.keyboard.compat
 
 import android.os.Build
 import android.text.InputType
 import android.view.inputmethod.EditorInfo
-import helium314.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.Log
 import java.util.*
 
 object EditorInfoCompatUtils {

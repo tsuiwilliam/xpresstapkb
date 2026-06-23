@@ -1,12 +1,12 @@
-package helium314.keyboard.latin.utils
+package com.xpresstap.keyboard.latin.utils
 
 import android.content.Context
-import helium314.keyboard.keyboard.internal.keyboard_parser.LocaleKeyboardInfos
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.SimplePopups
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.settings.Defaults.default
-import helium314.keyboard.latin.utils.LayoutType.Companion.folder
-import helium314.keyboard.latin.utils.ScriptUtils.script
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.LocaleKeyboardInfos
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.SimplePopups
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.settings.Defaults.default
+import com.xpresstap.keyboard.latin.utils.LayoutType.Companion.folder
+import com.xpresstap.keyboard.latin.utils.ScriptUtils.script
 import java.io.File
 import java.util.Locale
 

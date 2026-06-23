@@ -1,28 +1,28 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.keyboard.internal.keyboard_parser
+package com.xpresstap.keyboard.keyboard.internal.keyboard_parser
 
 import android.content.Context
 import android.content.res.Configuration
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.keyboard.Key
-import helium314.keyboard.keyboard.Key.KeyParams
-import helium314.keyboard.keyboard.KeyboardElement
-import helium314.keyboard.keyboard.internal.KeyboardParams
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyData
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyLabel
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyType
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.SimplePopups
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.TextKeyData
-import helium314.keyboard.latin.common.isEmoji
-import helium314.keyboard.latin.define.DebugFlags
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.LayoutType
-import helium314.keyboard.latin.utils.POPUP_KEYS_LAYOUT
-import helium314.keyboard.latin.utils.POPUP_KEYS_NUMBER
-import helium314.keyboard.latin.utils.replaceFirst
-import helium314.keyboard.latin.utils.splitAt
-import helium314.keyboard.latin.utils.sumOf
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.keyboard.Key
+import com.xpresstap.keyboard.keyboard.Key.KeyParams
+import com.xpresstap.keyboard.keyboard.KeyboardElement
+import com.xpresstap.keyboard.keyboard.internal.KeyboardParams
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyData
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyLabel
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyType
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.SimplePopups
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.TextKeyData
+import com.xpresstap.keyboard.latin.common.isEmoji
+import com.xpresstap.keyboard.latin.define.DebugFlags
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.LayoutType
+import com.xpresstap.keyboard.latin.utils.POPUP_KEYS_LAYOUT
+import com.xpresstap.keyboard.latin.utils.POPUP_KEYS_NUMBER
+import com.xpresstap.keyboard.latin.utils.replaceFirst
+import com.xpresstap.keyboard.latin.utils.splitAt
+import com.xpresstap.keyboard.latin.utils.sumOf
 import kotlin.math.roundToInt
 
 /**

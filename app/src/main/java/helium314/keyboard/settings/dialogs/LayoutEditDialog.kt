@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings.dialogs
+package com.xpresstap.keyboard.settings.dialogs
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.WindowInsets
@@ -23,20 +23,20 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
-import helium314.keyboard.keyboard.KeyboardSwitcher
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.utils.LayoutType
-import helium314.keyboard.latin.utils.LayoutUtilsCustom
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.SubtypeSettings
-import helium314.keyboard.latin.utils.getActivity
-import helium314.keyboard.latin.utils.getStringResourceOrName
-import helium314.keyboard.latin.utils.CloseIcon
-import helium314.keyboard.settings.SettingsActivity
-import helium314.keyboard.latin.utils.Theme
-import helium314.keyboard.settings.contentTextDirectionStyle
-import helium314.keyboard.settings.initPreview
-import helium314.keyboard.latin.utils.previewDark
+import com.xpresstap.keyboard.keyboard.KeyboardSwitcher
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.utils.LayoutType
+import com.xpresstap.keyboard.latin.utils.LayoutUtilsCustom
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.SubtypeSettings
+import com.xpresstap.keyboard.latin.utils.getActivity
+import com.xpresstap.keyboard.latin.utils.getStringResourceOrName
+import com.xpresstap.keyboard.latin.utils.CloseIcon
+import com.xpresstap.keyboard.settings.SettingsActivity
+import com.xpresstap.keyboard.latin.utils.Theme
+import com.xpresstap.keyboard.settings.contentTextDirectionStyle
+import com.xpresstap.keyboard.settings.initPreview
+import com.xpresstap.keyboard.latin.utils.previewDark
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay

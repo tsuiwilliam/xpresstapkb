@@ -1,8 +1,8 @@
-package helium314.keyboard.latin.utils
+package com.xpresstap.keyboard.latin.utils
 
 import android.content.Context
 import android.view.ContextThemeWrapper
-import helium314.keyboard.latin.R
+import com.xpresstap.keyboard.latin.R
 
 // todo: ideally the custom InputMethodPicker would be removed / replaced with compose dialog, then this can be removed
 fun getPlatformDialogThemeContext(context: Context): Context {

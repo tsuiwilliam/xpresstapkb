@@ -1,18 +1,18 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.latin
+package com.xpresstap.keyboard.latin
 
 import android.content.Context
 import android.util.LruCache
-import helium314.keyboard.keyboard.Keyboard
-import helium314.keyboard.keyboard.KeyboardSwitcher
-import helium314.keyboard.keyboard.emoji.SupportedEmojis
-import helium314.keyboard.latin.DictionaryFacilitator.DictionaryInitializationListener
-import helium314.keyboard.latin.common.ComposedData
-import helium314.keyboard.latin.dictionary.Dictionary
-import helium314.keyboard.latin.dictionary.DictionaryStats
-import helium314.keyboard.latin.makedict.WordProperty
-import helium314.keyboard.latin.settings.SettingsValuesForSuggestion
-import helium314.keyboard.latin.utils.SuggestionResults
+import com.xpresstap.keyboard.keyboard.Keyboard
+import com.xpresstap.keyboard.keyboard.KeyboardSwitcher
+import com.xpresstap.keyboard.keyboard.emoji.SupportedEmojis
+import com.xpresstap.keyboard.latin.DictionaryFacilitator.DictionaryInitializationListener
+import com.xpresstap.keyboard.latin.common.ComposedData
+import com.xpresstap.keyboard.latin.dictionary.Dictionary
+import com.xpresstap.keyboard.latin.dictionary.DictionaryStats
+import com.xpresstap.keyboard.latin.makedict.WordProperty
+import com.xpresstap.keyboard.latin.settings.SettingsValuesForSuggestion
+import com.xpresstap.keyboard.latin.utils.SuggestionResults
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 

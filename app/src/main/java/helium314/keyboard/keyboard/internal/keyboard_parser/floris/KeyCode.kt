@@ -3,7 +3,7 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0
  */
-package helium314.keyboard.keyboard.internal.keyboard_parser.floris
+package com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris
 
 import android.view.KeyEvent
 
@@ -183,6 +183,7 @@ object KeyCode {
     const val INLINE_EMOJI_SEARCH_DONE =  -10051
     const val BACKGROUND_GATHERING =         -10052 // will be useless after removal of gesture data gathering (keep for compatibility)
     const val BACKGROUND_GATHERING_TEMP_OFF =-10053 // will be useless after removal of gesture data gathering (keep for compatibility)
+    const val NFC_PAY =                      -10054
 
 
     // Intents

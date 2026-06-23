@@ -3,7 +3,7 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
-package helium314.keyboard.latin.common
+package com.xpresstap.keyboard.latin.common
 
 import android.graphics.Outline
 import android.inputmethodservice.InputMethodService

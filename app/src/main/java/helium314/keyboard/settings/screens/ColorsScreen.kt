@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings.screens
+package com.xpresstap.keyboard.settings.screens
 
 import android.app.Activity
 import android.content.ClipData
@@ -43,24 +43,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import helium314.keyboard.keyboard.ColorSetting
-import helium314.keyboard.keyboard.KeyboardTheme
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.ColorType
-import helium314.keyboard.latin.common.default
-import helium314.keyboard.latin.common.encodeBase36
-import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.getActivity
-import helium314.keyboard.latin.utils.prefs
-import helium314.keyboard.latin.utils.CloseIcon
-import helium314.keyboard.settings.SearchScreen
-import helium314.keyboard.settings.SettingsActivity
-import helium314.keyboard.latin.utils.Theme
-import helium314.keyboard.settings.contentTextDirectionStyle
-import helium314.keyboard.settings.dialogs.ColorPickerDialog
-import helium314.keyboard.latin.utils.previewDark
+import com.xpresstap.keyboard.keyboard.ColorSetting
+import com.xpresstap.keyboard.keyboard.KeyboardTheme
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.ColorType
+import com.xpresstap.keyboard.latin.common.default
+import com.xpresstap.keyboard.latin.common.encodeBase36
+import com.xpresstap.keyboard.latin.settings.Defaults
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.getActivity
+import com.xpresstap.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.latin.utils.CloseIcon
+import com.xpresstap.keyboard.settings.SearchScreen
+import com.xpresstap.keyboard.settings.SettingsActivity
+import com.xpresstap.keyboard.latin.utils.Theme
+import com.xpresstap.keyboard.settings.contentTextDirectionStyle
+import com.xpresstap.keyboard.settings.dialogs.ColorPickerDialog
+import com.xpresstap.keyboard.latin.utils.previewDark
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
@@ -161,7 +161,7 @@ fun ColorsScreen(
             },
             stringResource(R.string.copy_to_clipboard) to {
                 val cm = ctx.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                cm.setPrimaryClip(ClipData.newPlainText("HeliBoard theme", getColorString(prefs, newThemeName.text)))
+                cm.setPrimaryClip(ClipData.newPlainText("xPressTap theme", getColorString(prefs, newThemeName.text)))
             },
         ),
         onClickBack = onClickBack,

@@ -4,12 +4,12 @@
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
 
-package helium314.keyboard.event
+package com.xpresstap.keyboard.event
 
 import android.view.KeyCharacterMap
 import android.view.KeyEvent
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
-import helium314.keyboard.latin.common.Constants
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
+import com.xpresstap.keyboard.latin.common.Constants
 
 /**
  * A hardware event decoder for a hardware qwerty-ish keyboard.

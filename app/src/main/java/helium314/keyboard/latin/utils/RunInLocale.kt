@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.latin.utils
+package com.xpresstap.keyboard.latin.utils
 
 import android.annotation.SuppressLint
 import android.content.Context

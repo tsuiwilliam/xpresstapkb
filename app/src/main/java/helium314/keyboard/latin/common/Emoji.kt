@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-package helium314.keyboard.latin.common
+package com.xpresstap.keyboard.latin.common
 
 // from https://github.com/mathiasbynens/emoji-test-regex-pattern
 // matches single emojis only

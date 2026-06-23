@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings.preferences
+package com.xpresstap.keyboard.settings.preferences
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Switch
@@ -14,15 +14,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.core.content.edit
-import helium314.keyboard.keyboard.KeyboardSwitcher
-import helium314.keyboard.keyboard.internal.KeyboardIconsSet
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.Constants.Separators
-import helium314.keyboard.latin.utils.getStringResourceOrName
-import helium314.keyboard.latin.utils.prefs
-import helium314.keyboard.settings.Setting
-import helium314.keyboard.settings.dialogs.ReorderDialog
-import helium314.keyboard.settings.GetIconOrEmpty
+import com.xpresstap.keyboard.keyboard.KeyboardSwitcher
+import com.xpresstap.keyboard.keyboard.internal.KeyboardIconsSet
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.Constants.Separators
+import com.xpresstap.keyboard.latin.utils.getStringResourceOrName
+import com.xpresstap.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.settings.Setting
+import com.xpresstap.keyboard.settings.dialogs.ReorderDialog
+import com.xpresstap.keyboard.settings.GetIconOrEmpty
 
 @Composable
 fun ReorderSwitchPreference(setting: Setting, default: String) {

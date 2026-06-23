@@ -3,7 +3,7 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
-package helium314.keyboard.latin.suggestions
+package com.xpresstap.keyboard.latin.suggestions
 
 import android.content.Context
 import android.util.AttributeSet
@@ -11,17 +11,17 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import helium314.keyboard.accessibility.AccessibilityUtils
-import helium314.keyboard.keyboard.Key
-import helium314.keyboard.keyboard.Keyboard
-import helium314.keyboard.keyboard.KeyboardActionListener
-import helium314.keyboard.keyboard.MainKeyboardView
-import helium314.keyboard.keyboard.PopupKeysKeyboardView
-import helium314.keyboard.keyboard.PopupKeysPanel
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.SuggestedWords
-import helium314.keyboard.latin.suggestions.MoreSuggestions.MoreSuggestionKey
-import helium314.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.accessibility.AccessibilityUtils
+import com.xpresstap.keyboard.keyboard.Key
+import com.xpresstap.keyboard.keyboard.Keyboard
+import com.xpresstap.keyboard.keyboard.KeyboardActionListener
+import com.xpresstap.keyboard.keyboard.MainKeyboardView
+import com.xpresstap.keyboard.keyboard.PopupKeysKeyboardView
+import com.xpresstap.keyboard.keyboard.PopupKeysPanel
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.SuggestedWords
+import com.xpresstap.keyboard.latin.suggestions.MoreSuggestions.MoreSuggestionKey
+import com.xpresstap.keyboard.latin.utils.Log
 import kotlin.math.abs
 
 /**

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-package helium314.keyboard.keyboard.clipboard
+package com.xpresstap.keyboard.keyboard.clipboard
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -13,32 +13,32 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import helium314.keyboard.event.HapticEvent
-import helium314.keyboard.keyboard.KeyboardActionListener
-import helium314.keyboard.keyboard.KeyboardElement
-import helium314.keyboard.keyboard.KeyboardLayoutSet
-import helium314.keyboard.keyboard.KeyboardSwitcher
-import helium314.keyboard.keyboard.KeyboardTypeface
-import helium314.keyboard.keyboard.MainKeyboardView
-import helium314.keyboard.keyboard.PointerTracker
-import helium314.keyboard.keyboard.internal.KeyDrawParams
-import helium314.keyboard.keyboard.internal.KeyVisualAttributes
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
-import helium314.keyboard.latin.AudioAndHapticFeedbackManager
-import helium314.keyboard.latin.ClipboardHistoryManager
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.ColorType
-import helium314.keyboard.latin.common.Constants
-import helium314.keyboard.latin.database.ClipboardDao
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.ResourceUtils
-import helium314.keyboard.latin.utils.ToolbarKey
-import helium314.keyboard.latin.utils.createToolbarKey
-import helium314.keyboard.latin.utils.getCodeForToolbarKey
-import helium314.keyboard.latin.utils.getCodeForToolbarKeyLongClick
-import helium314.keyboard.latin.utils.getEnabledClipboardToolbarKeys
-import helium314.keyboard.latin.utils.prefs
-import helium314.keyboard.latin.utils.setToolbarButtonsActivatedStateOnPrefChange
+import com.xpresstap.keyboard.event.HapticEvent
+import com.xpresstap.keyboard.keyboard.KeyboardActionListener
+import com.xpresstap.keyboard.keyboard.KeyboardElement
+import com.xpresstap.keyboard.keyboard.KeyboardLayoutSet
+import com.xpresstap.keyboard.keyboard.KeyboardSwitcher
+import com.xpresstap.keyboard.keyboard.KeyboardTypeface
+import com.xpresstap.keyboard.keyboard.MainKeyboardView
+import com.xpresstap.keyboard.keyboard.PointerTracker
+import com.xpresstap.keyboard.keyboard.internal.KeyDrawParams
+import com.xpresstap.keyboard.keyboard.internal.KeyVisualAttributes
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
+import com.xpresstap.keyboard.latin.AudioAndHapticFeedbackManager
+import com.xpresstap.keyboard.latin.ClipboardHistoryManager
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.ColorType
+import com.xpresstap.keyboard.latin.common.Constants
+import com.xpresstap.keyboard.latin.database.ClipboardDao
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.ResourceUtils
+import com.xpresstap.keyboard.latin.utils.ToolbarKey
+import com.xpresstap.keyboard.latin.utils.createToolbarKey
+import com.xpresstap.keyboard.latin.utils.getCodeForToolbarKey
+import com.xpresstap.keyboard.latin.utils.getCodeForToolbarKeyLongClick
+import com.xpresstap.keyboard.latin.utils.getEnabledClipboardToolbarKeys
+import com.xpresstap.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.latin.utils.setToolbarButtonsActivatedStateOnPrefChange
 
 @SuppressLint("CustomViewStyleable")
 class ClipboardHistoryView @JvmOverloads constructor(
@@ -260,7 +260,7 @@ class ClipboardHistoryView @JvmOverloads constructor(
     override fun onSharedPreferenceChanged(prefs: SharedPreferences?, key: String?) {
         setToolbarButtonsActivatedStateOnPrefChange(KeyboardSwitcher.getInstance().clipboardStrip, key)
 
-        // The setting can only be changed from a settings screen, but adding it to this listener seems necessary: https://github.com/HeliBorg/HeliBoard/pull/1903#issuecomment-3478424606
+        // The setting can only be changed from a settings screen, but adding it to this listener seems necessary: https://github.com/HeliBorg/xPressTap/pull/1903#issuecomment-3478424606
         if (::clipboardHistoryManager.isInitialized && key == Settings.PREF_CLIPBOARD_HISTORY_PINNED_FIRST) {
             // Ensure settings are reloaded first
             Settings.getInstance().onSharedPreferenceChanged(prefs, key)

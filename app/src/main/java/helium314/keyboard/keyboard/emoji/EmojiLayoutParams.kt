@@ -3,16 +3,16 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
-package helium314.keyboard.keyboard.emoji
+package com.xpresstap.keyboard.keyboard.emoji
 
 import android.content.res.Resources
 import android.view.View
 import android.widget.LinearLayout
 import androidx.viewpager2.widget.ViewPager2
-import helium314.keyboard.keyboard.internal.KeyboardParams
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.ResourceUtils
+import com.xpresstap.keyboard.keyboard.internal.KeyboardParams
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.ResourceUtils
 
 internal class EmojiLayoutParams(res: Resources) {
     private val emojiListBottomMargin: Int

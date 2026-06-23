@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings
+package com.xpresstap.keyboard.settings
 
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.VectorDrawable
@@ -39,9 +39,9 @@ import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
-import helium314.keyboard.keyboard.internal.KeyboardIconsSet
-import helium314.keyboard.latin.utils.ExpandButton
-import helium314.keyboard.latin.utils.dpToPx
+import com.xpresstap.keyboard.keyboard.internal.KeyboardIconsSet
+import com.xpresstap.keyboard.latin.utils.ExpandButton
+import com.xpresstap.keyboard.latin.utils.dpToPx
 
 @Composable
 fun WithSmallTitle(

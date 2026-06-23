@@ -3,7 +3,7 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
-package helium314.keyboard.keyboard
+package com.xpresstap.keyboard.keyboard
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -14,20 +14,20 @@ import android.util.TypedValue
 import android.view.ContextThemeWrapper
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.AllColors
-import helium314.keyboard.latin.common.ColorType
-import helium314.keyboard.latin.common.Colors
-import helium314.keyboard.latin.common.DefaultColors
-import helium314.keyboard.latin.common.DynamicColors
-import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.ResourceUtils
-import helium314.keyboard.latin.utils.brightenOrDarken
-import helium314.keyboard.latin.utils.isBrightColor
-import helium314.keyboard.latin.utils.isGoodContrast
-import helium314.keyboard.latin.utils.prefs
-import helium314.keyboard.settings.SettingsActivity
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.AllColors
+import com.xpresstap.keyboard.latin.common.ColorType
+import com.xpresstap.keyboard.latin.common.Colors
+import com.xpresstap.keyboard.latin.common.DefaultColors
+import com.xpresstap.keyboard.latin.common.DynamicColors
+import com.xpresstap.keyboard.latin.settings.Defaults
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.ResourceUtils
+import com.xpresstap.keyboard.latin.utils.brightenOrDarken
+import com.xpresstap.keyboard.latin.utils.isBrightColor
+import com.xpresstap.keyboard.latin.utils.isGoodContrast
+import com.xpresstap.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.settings.SettingsActivity
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import java.util.EnumMap

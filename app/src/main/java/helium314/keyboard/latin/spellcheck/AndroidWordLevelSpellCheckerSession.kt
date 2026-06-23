@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
 
-package helium314.keyboard.latin.spellcheck
+package com.xpresstap.keyboard.latin.spellcheck
 
 import android.database.ContentObserver
 import android.os.Binder
@@ -17,23 +17,23 @@ import android.view.inputmethod.InputMethodManager
 import android.view.textservice.SuggestionsInfo
 import android.view.textservice.TextInfo
 import com.android.inputmethod.latin.utils.BinaryDictionaryUtils
-import helium314.keyboard.latin.NgramContext
-import helium314.keyboard.latin.WordComposer
-import helium314.keyboard.latin.common.Constants
-import helium314.keyboard.latin.common.LocaleUtils.constructLocale
-import helium314.keyboard.latin.common.StringUtils
-import helium314.keyboard.latin.define.DebugFlags
-import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.ScriptUtils
-import helium314.keyboard.latin.utils.ScriptUtils.isLetterPartOfScript
-import helium314.keyboard.latin.utils.ScriptUtils.script
-import helium314.keyboard.latin.utils.StatsUtils
-import helium314.keyboard.latin.utils.SubtypeLocaleUtils
-import helium314.keyboard.latin.utils.SubtypeSettings.getSelectedSubtype
-import helium314.keyboard.latin.utils.SuggestionResults
-import helium314.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.latin.NgramContext
+import com.xpresstap.keyboard.latin.WordComposer
+import com.xpresstap.keyboard.latin.common.Constants
+import com.xpresstap.keyboard.latin.common.LocaleUtils.constructLocale
+import com.xpresstap.keyboard.latin.common.StringUtils
+import com.xpresstap.keyboard.latin.define.DebugFlags
+import com.xpresstap.keyboard.latin.settings.Defaults
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.ScriptUtils
+import com.xpresstap.keyboard.latin.utils.ScriptUtils.isLetterPartOfScript
+import com.xpresstap.keyboard.latin.utils.ScriptUtils.script
+import com.xpresstap.keyboard.latin.utils.StatsUtils
+import com.xpresstap.keyboard.latin.utils.SubtypeLocaleUtils
+import com.xpresstap.keyboard.latin.utils.SubtypeSettings.getSelectedSubtype
+import com.xpresstap.keyboard.latin.utils.SuggestionResults
+import com.xpresstap.keyboard.latin.utils.prefs
 import java.util.Locale
 import java.util.TreeMap
 import kotlin.math.min

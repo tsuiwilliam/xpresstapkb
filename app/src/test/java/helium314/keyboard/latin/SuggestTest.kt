@@ -1,28 +1,28 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.latin
+package com.xpresstap.keyboard.latin
 
 import androidx.core.content.edit
-import helium314.keyboard.ShadowBinaryDictionaryUtils
-import helium314.keyboard.ShadowInputMethodManager2
-import helium314.keyboard.ShadowLocaleManagerCompat
-import helium314.keyboard.event.Event
-import helium314.keyboard.keyboard.Keyboard
-import helium314.keyboard.keyboard.KeyboardElement
-import helium314.keyboard.keyboard.KeyboardLayoutSet
-import helium314.keyboard.keyboard.internal.KeyboardParams
-import helium314.keyboard.latin.SuggestedWords.SuggestedWordInfo
-import helium314.keyboard.latin.SuggestedWords.SuggestedWordInfo.KIND_FLAG_APPROPRIATE_FOR_AUTO_CORRECTION
-import helium314.keyboard.latin.SuggestedWords.SuggestedWordInfo.KIND_SHORTCUT
-import helium314.keyboard.latin.SuggestedWords.SuggestedWordInfo.KIND_WHITELIST
-import helium314.keyboard.latin.common.ComposedData
-import helium314.keyboard.latin.common.Constants
-import helium314.keyboard.latin.common.InputPointers
-import helium314.keyboard.latin.common.StringUtils
-import helium314.keyboard.latin.dictionary.Dictionary
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.settings.SettingsValuesForSuggestion
-import helium314.keyboard.latin.utils.SuggestionResults
-import helium314.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.ShadowBinaryDictionaryUtils
+import com.xpresstap.keyboard.ShadowInputMethodManager2
+import com.xpresstap.keyboard.ShadowLocaleManagerCompat
+import com.xpresstap.keyboard.event.Event
+import com.xpresstap.keyboard.keyboard.Keyboard
+import com.xpresstap.keyboard.keyboard.KeyboardElement
+import com.xpresstap.keyboard.keyboard.KeyboardLayoutSet
+import com.xpresstap.keyboard.keyboard.internal.KeyboardParams
+import com.xpresstap.keyboard.latin.SuggestedWords.SuggestedWordInfo
+import com.xpresstap.keyboard.latin.SuggestedWords.SuggestedWordInfo.KIND_FLAG_APPROPRIATE_FOR_AUTO_CORRECTION
+import com.xpresstap.keyboard.latin.SuggestedWords.SuggestedWordInfo.KIND_SHORTCUT
+import com.xpresstap.keyboard.latin.SuggestedWords.SuggestedWordInfo.KIND_WHITELIST
+import com.xpresstap.keyboard.latin.common.ComposedData
+import com.xpresstap.keyboard.latin.common.Constants
+import com.xpresstap.keyboard.latin.common.InputPointers
+import com.xpresstap.keyboard.latin.common.StringUtils
+import com.xpresstap.keyboard.latin.dictionary.Dictionary
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.settings.SettingsValuesForSuggestion
+import com.xpresstap.keyboard.latin.utils.SuggestionResults
+import com.xpresstap.keyboard.latin.utils.prefs
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
@@ -466,7 +466,7 @@ class SuggestTest {
     }
 
     @Test fun `suggestions use manual caps modes`() {
-        // added in https://github.com/HeliBorg/HeliBoard/pull/1807 / cb0eae695f0cbd061e5bbcc416d6e14d18d869d8
+        // added in https://github.com/HeliBorg/xPressTap/pull/1807 / cb0eae695f0cbd061e5bbcc416d6e14d18d869d8
         // manual caps mode can be set any time, even if there are already suggestions
         // on the phone this will give different suggestions because there is different proximityInfo (coming from keyboard, which is different when shifted)
         tapTypingSuggestions = suggestionResults(listOf(
@@ -532,7 +532,7 @@ class SuggestTest {
     }
 
     @Test fun `no caps mode autocorrect if word has many uppercase letters`() {
-        // bug report in https://github.com/HeliBorg/HeliBoard/issues/2162
+        // bug report in https://github.com/HeliBorg/xPressTap/issues/2162
         enableAutocorrect(confidenceAggressive)
         tapTypingSuggestions = suggestionResults(listOf(
             suggestion("but", 100),

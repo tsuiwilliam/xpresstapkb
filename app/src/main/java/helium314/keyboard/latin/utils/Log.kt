@@ -1,4 +1,4 @@
-package helium314.keyboard.latin.utils
+package com.xpresstap.keyboard.latin.utils
 
 import android.os.Build
 import java.time.LocalDateTime

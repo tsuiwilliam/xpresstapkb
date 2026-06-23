@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings.screens
+package com.xpresstap.keyboard.settings.screens
 
 import android.content.Context
 import android.content.Intent
@@ -10,22 +10,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import helium314.keyboard.keyboard.KeyboardSwitcher
-import helium314.keyboard.latin.BuildConfig
-import helium314.keyboard.latin.DictionaryDumpBroadcastReceiver
-import helium314.keyboard.latin.DictionaryFacilitator
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.settings.DebugSettings
-import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.utils.prefs
-import helium314.keyboard.settings.Setting
-import helium314.keyboard.settings.preferences.Preference
-import helium314.keyboard.settings.SearchSettingsScreen
-import helium314.keyboard.settings.preferences.SwitchPreference
-import helium314.keyboard.latin.utils.Theme
-import helium314.keyboard.settings.initPreview
-import helium314.keyboard.settings.preferences.PreferenceCategory
-import helium314.keyboard.latin.utils.previewDark
+import com.xpresstap.keyboard.keyboard.KeyboardSwitcher
+import com.xpresstap.keyboard.latin.BuildConfig
+import com.xpresstap.keyboard.latin.DictionaryDumpBroadcastReceiver
+import com.xpresstap.keyboard.latin.DictionaryFacilitator
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.settings.DebugSettings
+import com.xpresstap.keyboard.latin.settings.Defaults
+import com.xpresstap.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.settings.Setting
+import com.xpresstap.keyboard.settings.preferences.Preference
+import com.xpresstap.keyboard.settings.SearchSettingsScreen
+import com.xpresstap.keyboard.settings.preferences.SwitchPreference
+import com.xpresstap.keyboard.latin.utils.Theme
+import com.xpresstap.keyboard.settings.initPreview
+import com.xpresstap.keyboard.settings.preferences.PreferenceCategory
+import com.xpresstap.keyboard.latin.utils.previewDark
 import androidx.core.content.edit
 
 @Composable

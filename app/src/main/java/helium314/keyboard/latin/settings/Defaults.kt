@@ -1,4 +1,4 @@
-package helium314.keyboard.latin.settings
+package com.xpresstap.keyboard.latin.settings
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,17 +6,17 @@ import android.content.SharedPreferences
 import android.os.Build
 import android.util.TypedValue
 import android.view.Gravity
-import helium314.keyboard.keyboard.KeyboardActionListener
-import helium314.keyboard.keyboard.KeyboardTheme
-import helium314.keyboard.latin.BuildConfig
-import helium314.keyboard.latin.common.Constants.Separators
-import helium314.keyboard.latin.common.Constants.Subtype.ExtraValue
-import helium314.keyboard.latin.utils.LayoutType
-import helium314.keyboard.latin.utils.POPUP_KEYS_LABEL_DEFAULT
-import helium314.keyboard.latin.utils.POPUP_KEYS_ORDER_DEFAULT
-import helium314.keyboard.latin.utils.defaultClipboardToolbarPref
-import helium314.keyboard.latin.utils.defaultPinnedToolbarPref
-import helium314.keyboard.latin.utils.defaultToolbarPref
+import com.xpresstap.keyboard.keyboard.KeyboardActionListener
+import com.xpresstap.keyboard.keyboard.KeyboardTheme
+import com.xpresstap.keyboard.latin.BuildConfig
+import com.xpresstap.keyboard.latin.common.Constants.Separators
+import com.xpresstap.keyboard.latin.common.Constants.Subtype.ExtraValue
+import com.xpresstap.keyboard.latin.utils.LayoutType
+import com.xpresstap.keyboard.latin.utils.POPUP_KEYS_LABEL_DEFAULT
+import com.xpresstap.keyboard.latin.utils.POPUP_KEYS_ORDER_DEFAULT
+import com.xpresstap.keyboard.latin.utils.defaultClipboardToolbarPref
+import com.xpresstap.keyboard.latin.utils.defaultPinnedToolbarPref
+import com.xpresstap.keyboard.latin.utils.defaultToolbarPref
 
 object Defaults {
     fun initDynamicDefaults(context: Context) {

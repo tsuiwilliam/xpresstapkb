@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings.dialogs
+package com.xpresstap.keyboard.settings.dialogs
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -31,18 +31,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import helium314.keyboard.keyboard.internal.KeyboardIconsSet
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.settings.customIconNames
-import helium314.keyboard.latin.utils.getStringResourceOrName
-import helium314.keyboard.latin.utils.prefs
-import helium314.keyboard.latin.utils.Theme
-import helium314.keyboard.settings.initPreview
-import helium314.keyboard.latin.utils.previewDark
+import com.xpresstap.keyboard.keyboard.internal.KeyboardIconsSet
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.settings.customIconNames
+import com.xpresstap.keyboard.latin.utils.getStringResourceOrName
+import com.xpresstap.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.latin.utils.Theme
+import com.xpresstap.keyboard.settings.initPreview
+import com.xpresstap.keyboard.latin.utils.previewDark
 import kotlinx.serialization.json.Json
 import androidx.core.content.edit
-import helium314.keyboard.settings.GetIconOrEmpty
-import helium314.keyboard.settings.painterResourceCompat
+import com.xpresstap.keyboard.settings.GetIconOrEmpty
+import com.xpresstap.keyboard.settings.painterResourceCompat
 
 @Composable
 fun CustomizeIconsDialog(

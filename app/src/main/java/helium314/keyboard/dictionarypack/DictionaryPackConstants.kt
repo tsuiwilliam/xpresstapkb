@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
 
-package helium314.keyboard.dictionarypack
+package com.xpresstap.keyboard.dictionarypack
 
 /**
  * A class to group constants for dictionary pack usage.
@@ -18,7 +18,7 @@ object DictionaryPackConstants {
      * The root domain for the dictionary pack, upon which authorities and actions will append
      * their own distinctive strings.
      */
-    private const val DICTIONARY_DOMAIN = "helium314.keyboard.dictionarypack.aosp"
+    private const val DICTIONARY_DOMAIN = "com.xpresstap.keyboard.dictionarypack.aosp"
     /**
      * Authority for the ContentProvider protocol.
      */

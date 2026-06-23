@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings.screens
+package com.xpresstap.keyboard.settings.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,19 +17,19 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.splitOnWhitespace
-import helium314.keyboard.latin.utils.SubtypeLocaleUtils
-import helium314.keyboard.latin.utils.SubtypeSettings.getEnabledSubtypes
-import helium314.keyboard.latin.utils.SubtypeSettings.getSystemLocales
-import helium314.keyboard.latin.utils.getSecondaryLocales
-import helium314.keyboard.latin.utils.locale
-import helium314.keyboard.latin.utils.NextScreenIcon
-import helium314.keyboard.settings.SearchScreen
-import helium314.keyboard.settings.SettingsDestination
-import helium314.keyboard.latin.utils.Theme
-import helium314.keyboard.settings.initPreview
-import helium314.keyboard.latin.utils.previewDark
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.splitOnWhitespace
+import com.xpresstap.keyboard.latin.utils.SubtypeLocaleUtils
+import com.xpresstap.keyboard.latin.utils.SubtypeSettings.getEnabledSubtypes
+import com.xpresstap.keyboard.latin.utils.SubtypeSettings.getSystemLocales
+import com.xpresstap.keyboard.latin.utils.getSecondaryLocales
+import com.xpresstap.keyboard.latin.utils.locale
+import com.xpresstap.keyboard.latin.utils.NextScreenIcon
+import com.xpresstap.keyboard.settings.SearchScreen
+import com.xpresstap.keyboard.settings.SettingsDestination
+import com.xpresstap.keyboard.latin.utils.Theme
+import com.xpresstap.keyboard.settings.initPreview
+import com.xpresstap.keyboard.latin.utils.previewDark
 import java.util.Locale
 import java.util.TreeSet
 

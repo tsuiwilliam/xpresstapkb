@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.latin.utils
+package com.xpresstap.keyboard.latin.utils
 
 import android.content.Context
-import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.settings.Defaults
+import com.xpresstap.keyboard.latin.settings.Settings
 import java.text.SimpleDateFormat
 import java.util.Calendar
 

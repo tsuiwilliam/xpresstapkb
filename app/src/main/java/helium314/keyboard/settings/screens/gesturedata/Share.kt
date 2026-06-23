@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings.screens.gesturedata
+package com.xpresstap.keyboard.settings.screens.gesturedata
 
 import android.content.ClipData
 import android.content.ComponentName
@@ -31,12 +31,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
-import helium314.keyboard.latin.BuildConfig
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.utils.GestureDataDao
-import helium314.keyboard.latin.utils.getActivity
-import helium314.keyboard.settings.dialogs.ConfirmationDialog
-import helium314.keyboard.settings.filePicker
+import com.xpresstap.keyboard.latin.BuildConfig
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.utils.GestureDataDao
+import com.xpresstap.keyboard.latin.utils.getActivity
+import com.xpresstap.keyboard.settings.dialogs.ConfirmationDialog
+import com.xpresstap.keyboard.settings.filePicker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -277,4 +277,4 @@ private var progress: Int = 0
 
 private var zippedDataPath = "" // set after writing the file
 
-private const val MAIL_SUBJECT = "HeliBoard ${BuildConfig.VERSION_NAME} gesture data"
+private const val MAIL_SUBJECT = "xPressTap ${BuildConfig.VERSION_NAME} gesture data"

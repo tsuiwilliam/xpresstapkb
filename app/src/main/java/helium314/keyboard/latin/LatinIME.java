@@ -47,6 +47,9 @@ import helium314.keyboard.keyboard.emoji.EmojiSearchActivity;
 import helium314.keyboard.keyboard.internal.KeyboardIconsSet;
 import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode;
 import helium314.keyboard.latin.common.InsetsOutlineProvider;
+import android.app.Activity;
+import com.xpresstap.keyboard.nfc.NfcReadCoordinator;
+import com.xpresstap.keyboard.nfc.CvvDialogHelper;
 import helium314.keyboard.dictionarypack.DictionaryPackConstants;
 import helium314.keyboard.event.Event;
 import helium314.keyboard.event.InputTransaction;
@@ -111,6 +114,29 @@ public class LatinIME extends InputMethodService implements
         DictionaryFacilitator.DictionaryInitializationListener {
     static final String TAG = LatinIME.class.getSimpleName();
     private static final boolean TRACE = false;
+
+    // Payment field type detection
+    enum PaymentFieldType { CARD_NUMBER, EXPIRY, CVV, UNKNOWN }
+
+    private PaymentFieldType detectFieldType() {
+        android.view.inputmethod.EditorInfo info = getCurrentInputEditorInfo();
+        if (info == null) return PaymentFieldType.UNKNOWN;
+        CharSequence hint = info.hintText;
+        if (hint != null) {
+            String hintStr = hint.toString().toLowerCase(java.util.Locale.ROOT);
+            if (hintStr.contains("card")) return PaymentFieldType.CARD_NUMBER;
+            if (hintStr.contains("cvv")) return PaymentFieldType.CVV;
+            if (hintStr.contains("expir")) return PaymentFieldType.EXPIRY;
+        }
+        android.os.Bundle extras = info.extras;
+        if (extras != null) {
+            String autocomplete = extras.getString("android.inputmethodedit.autocomplete");
+            if ("cc-number".equals(autocomplete)) return PaymentFieldType.CARD_NUMBER;
+            if ("cc-exp".equals(autocomplete)) return PaymentFieldType.EXPIRY;
+            if ("cc-csc".equals(autocomplete)) return PaymentFieldType.CVV;
+        }
+        return PaymentFieldType.UNKNOWN;
+    }
 
     private static final int EXTENDED_TOUCHABLE_REGION_HEIGHT = 100;
     private static final int PERIOD_FOR_AUDIO_AND_HAPTIC_FEEDBACK_IN_KEY_REPEAT = 2;
@@ -1878,5 +1904,52 @@ public class LatinIME extends InputMethodService implements
         }
         GestureDataGatheringSettings.INSTANCE.showEndNotificationIfNecessary(this); // will do nothing for a long time
         mInputLogic.setFacilitator(mDictionaryFacilitator);
+    }
+
+    public void handleNfcToolbarTap() {
+        Activity activity = getActivityFromContext();
+        if (activity == null) {
+            showToast(getString(R.string.nfc_unavailable));
+            return;
+        }
+        NfcReadCoordinator coordinator = new NfcReadCoordinator(
+            activity,
+            cardData -> {
+                CvvDialogHelper.promptIfNeeded(this, cardData, (pan, expiry, cvv) -> {
+                    injectPaymentFields(pan, expiry, cvv);
+                    showToast(getString(R.string.nfc_fill_confirm, cardData.getLast4()));
+                });
+            },
+            msg -> showToast(msg)
+        );
+        showToast(getString(R.string.nfc_reading));
+        coordinator.startReading();
+    }
+
+    public void injectPaymentFields(String pan, String expiry, String cvv) {
+        android.view.inputmethod.InputConnection ic = getCurrentInputConnection();
+        if (ic == null) return;
+        StringBuilder formatted = new StringBuilder();
+        for (int i = 0; i < pan.length(); i++) {
+            if (i > 0 && i % 4 == 0) formatted.append(' ');
+            formatted.append(pan.charAt(i));
+        }
+        ic.commitText(formatted.toString(), 1);
+    }
+
+    public void showToast(String message) {
+        android.widget.Toast.makeText(getApplicationContext(), message, android.widget.Toast.LENGTH_SHORT).show();
+    }
+
+    @Nullable
+    public Activity getActivityFromContext() {
+        try {
+            Object windowManager = getSystemService(WINDOW_SERVICE);
+            java.lang.reflect.Field field = windowManager.getClass().getDeclaredField("mContext");
+            field.setAccessible(true);
+            Object ctx = field.get(windowManager);
+            if (ctx instanceof Activity) return (Activity) ctx;
+        } catch (Exception ignored) {}
+        return null;
     }
 }

@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.keyboard.internal.keyboard_parser
+package com.xpresstap.keyboard.keyboard.internal.keyboard_parser
 
 import android.content.Context
-import helium314.keyboard.keyboard.Key
-import helium314.keyboard.keyboard.KeyboardElement
-import helium314.keyboard.keyboard.KeyboardId
-import helium314.keyboard.keyboard.internal.KeyboardParams
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyData
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.toTextKey
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.splitOnFirstSpacesOnly
-import helium314.keyboard.latin.common.splitOnWhitespace
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.SpacedTokens
-import helium314.keyboard.latin.utils.SubtypeLocaleUtils
+import com.xpresstap.keyboard.keyboard.Key
+import com.xpresstap.keyboard.keyboard.KeyboardElement
+import com.xpresstap.keyboard.keyboard.KeyboardId
+import com.xpresstap.keyboard.keyboard.internal.KeyboardParams
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyData
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.toTextKey
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.splitOnFirstSpacesOnly
+import com.xpresstap.keyboard.latin.common.splitOnWhitespace
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.SpacedTokens
+import com.xpresstap.keyboard.latin.utils.SubtypeLocaleUtils
 import java.io.InputStream
 import java.util.Locale
 

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.latin
+package com.xpresstap.keyboard.latin
 
 import android.inputmethodservice.InputMethodService
 import android.os.Bundle
@@ -9,24 +9,24 @@ import android.text.InputType
 import android.view.KeyEvent
 import android.view.inputmethod.*
 import androidx.core.content.edit
-import helium314.keyboard.ShadowInputMethodManager2
-import helium314.keyboard.ShadowLocaleManagerCompat
-import helium314.keyboard.event.Event
-import helium314.keyboard.keyboard.KeyboardSwitcher
-import helium314.keyboard.keyboard.MainKeyboardView
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
-import helium314.keyboard.latin.ShadowFacilitator2.Companion.lastAddedWord
-import helium314.keyboard.latin.SuggestedWords.SuggestedWordInfo
-import helium314.keyboard.latin.common.Constants
-import helium314.keyboard.latin.common.LocaleUtils.constructLocale
-import helium314.keyboard.latin.common.StringUtils
-import helium314.keyboard.latin.inputlogic.InputLogic
-import helium314.keyboard.latin.inputlogic.SpaceState
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.ScriptUtils
-import helium314.keyboard.latin.utils.SubtypeSettings
-import helium314.keyboard.latin.utils.getTimestampFormatter
-import helium314.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.ShadowInputMethodManager2
+import com.xpresstap.keyboard.ShadowLocaleManagerCompat
+import com.xpresstap.keyboard.event.Event
+import com.xpresstap.keyboard.keyboard.KeyboardSwitcher
+import com.xpresstap.keyboard.keyboard.MainKeyboardView
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
+import com.xpresstap.keyboard.latin.ShadowFacilitator2.Companion.lastAddedWord
+import com.xpresstap.keyboard.latin.SuggestedWords.SuggestedWordInfo
+import com.xpresstap.keyboard.latin.common.Constants
+import com.xpresstap.keyboard.latin.common.LocaleUtils.constructLocale
+import com.xpresstap.keyboard.latin.common.StringUtils
+import com.xpresstap.keyboard.latin.inputlogic.InputLogic
+import com.xpresstap.keyboard.latin.inputlogic.SpaceState
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.ScriptUtils
+import com.xpresstap.keyboard.latin.utils.SubtypeSettings
+import com.xpresstap.keyboard.latin.utils.getTimestampFormatter
+import com.xpresstap.keyboard.latin.utils.prefs
 import org.junit.runner.RunWith
 import org.mockito.Mockito
 import org.robolectric.Robolectric
@@ -158,7 +158,7 @@ class InputLogicTest {
     }
 
     // todo: make it work, but it might not be that simple because adding is done in combiner
-    //  https://github.com/HeliBorg/HeliBoard/issues/214
+    //  https://github.com/HeliBorg/xPressTap/issues/214
     @Test fun insertLetterIntoWordHangulFails() {
         if (BuildConfig.BUILD_TYPE == "runTests") return
         latinIME.switchToSubtype(SubtypeSettings.getResourceSubtypesForLocale("ko".constructLocale()).first())
@@ -485,8 +485,8 @@ class InputLogicTest {
         assertEquals("b", composingText)
     }
 
-    // https://github.com/HeliBorg/HeliBoard/issues/215
-    // https://github.com/HeliBorg/HeliBoard/issues/229
+    // https://github.com/HeliBorg/xPressTap/issues/215
+    // https://github.com/HeliBorg/xPressTap/issues/229
     @Test fun `autospace works in URL field when input isn't URL, also for multiple suggestions`() {
         latinIME.prefs().edit { putBoolean(Settings.PREF_URL_DETECTION, true) }
         setInputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_URI)
@@ -529,7 +529,7 @@ class InputLogicTest {
         assertEquals("hi ${StringUtils.newSingleCodePointString(0x1F36D)}", text)
     }
 
-    // https://github.com/HeliBorg/HeliBoard/issues/230
+    // https://github.com/HeliBorg/xPressTap/issues/230
     @Test fun `no autospace after opening quotes`() {
         chainInput("\"Hi\" \"h")
         assertEquals("\"Hi\" \"h", text)
@@ -629,7 +629,7 @@ class InputLogicTest {
         assertEquals("", text)
     }
 
-    // emoRegex update to unicode 16.0 was required, https://github.com/HeliBorg/HeliBoard/issues/1760
+    // emoRegex update to unicode 16.0 was required, https://github.com/HeliBorg/xPressTap/issues/1760
     @Test fun `emojis deleted one by one`() {
         chainInput("\uD83E\uDEC6\uD83E\uDEC6\uD83E\uDEC6")
         functionalKeyPress(KeyCode.DELETE)

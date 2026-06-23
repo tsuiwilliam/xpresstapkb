@@ -1,11 +1,11 @@
-package helium314.keyboard
+package com.xpresstap.keyboard
 
 import androidx.test.core.app.ApplicationProvider
-import helium314.keyboard.latin.App
-import helium314.keyboard.latin.BuildConfig
-import helium314.keyboard.latin.common.Links
-import helium314.keyboard.latin.common.LocaleUtils.constructLocale
-import helium314.keyboard.latin.utils.getKnownDictionariesForLocale
+import com.xpresstap.keyboard.latin.App
+import com.xpresstap.keyboard.latin.BuildConfig
+import com.xpresstap.keyboard.latin.common.Links
+import com.xpresstap.keyboard.latin.common.LocaleUtils.constructLocale
+import com.xpresstap.keyboard.latin.utils.getKnownDictionariesForLocale
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import java.io.File

@@ -3,14 +3,14 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
-package helium314.keyboard.keyboard.internal.keyboard_parser.floris
+package com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris
 
-import helium314.keyboard.keyboard.KeyboardElement
+import com.xpresstap.keyboard.keyboard.KeyboardElement
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import helium314.keyboard.keyboard.KeyboardId
-import helium314.keyboard.keyboard.KeyboardMode
-import helium314.keyboard.keyboard.internal.KeyboardParams
+import com.xpresstap.keyboard.keyboard.KeyboardId
+import com.xpresstap.keyboard.keyboard.KeyboardMode
+import com.xpresstap.keyboard.keyboard.internal.KeyboardParams
 
 // taken from FlorisBoard, small modifications
 //  popup not nullable (maybe change back, but currently that's necessary for number keys)

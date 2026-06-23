@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.compat
+package com.xpresstap.keyboard.compat
 
 import android.app.KeyguardManager
 import android.content.Context

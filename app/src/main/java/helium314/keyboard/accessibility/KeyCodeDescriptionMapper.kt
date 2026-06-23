@@ -4,21 +4,21 @@
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
 
-package helium314.keyboard.accessibility
+package com.xpresstap.keyboard.accessibility
 
 import android.content.Context
 import android.text.TextUtils
-import helium314.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.Log
 import android.util.SparseIntArray
 import android.view.inputmethod.EditorInfo
-import helium314.keyboard.keyboard.Key
-import helium314.keyboard.keyboard.Keyboard
-import helium314.keyboard.keyboard.KeyboardElement
-import helium314.keyboard.keyboard.KeyboardId
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.Constants
-import helium314.keyboard.latin.common.StringUtils
+import com.xpresstap.keyboard.keyboard.Key
+import com.xpresstap.keyboard.keyboard.Keyboard
+import com.xpresstap.keyboard.keyboard.KeyboardElement
+import com.xpresstap.keyboard.keyboard.KeyboardId
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.Constants
+import com.xpresstap.keyboard.latin.common.StringUtils
 
 internal class KeyCodeDescriptionMapper private constructor() {
     // Sparse array of spoken description resource IDs indexed by key codes

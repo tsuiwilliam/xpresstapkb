@@ -3,18 +3,18 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
-package helium314.keyboard.keyboard.internal
+package com.xpresstap.keyboard.keyboard.internal
 
 import android.text.TextUtils
-import helium314.keyboard.event.Event
-import helium314.keyboard.keyboard.KeyboardSwitcher
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
-import helium314.keyboard.latin.common.Constants
-import helium314.keyboard.latin.define.DebugFlags
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.CapsModeUtils
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.RecapitalizeMode
+import com.xpresstap.keyboard.event.Event
+import com.xpresstap.keyboard.keyboard.KeyboardSwitcher
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
+import com.xpresstap.keyboard.latin.common.Constants
+import com.xpresstap.keyboard.latin.define.DebugFlags
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.CapsModeUtils
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.RecapitalizeMode
 
 /**
  * Keyboard state machine.

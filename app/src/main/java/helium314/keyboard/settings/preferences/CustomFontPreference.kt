@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings.preferences
+package com.xpresstap.keyboard.settings.preferences
 
 import android.app.Activity
 import android.content.Intent
@@ -14,14 +14,14 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import helium314.keyboard.keyboard.KeyboardTypeface
-import helium314.keyboard.keyboard.KeyboardSwitcher
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.FileUtils
-import helium314.keyboard.latin.utils.DeviceProtectedUtils
-import helium314.keyboard.settings.Setting
-import helium314.keyboard.settings.dialogs.ConfirmationDialog
-import helium314.keyboard.settings.dialogs.InfoDialog
+import com.xpresstap.keyboard.keyboard.KeyboardTypeface
+import com.xpresstap.keyboard.keyboard.KeyboardSwitcher
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.FileUtils
+import com.xpresstap.keyboard.latin.utils.DeviceProtectedUtils
+import com.xpresstap.keyboard.settings.Setting
+import com.xpresstap.keyboard.settings.dialogs.ConfirmationDialog
+import com.xpresstap.keyboard.settings.dialogs.InfoDialog
 import java.io.File
 
 @Composable

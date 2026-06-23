@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.latin.utils
+package com.xpresstap.keyboard.latin.utils
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -14,14 +14,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.core.content.edit
-import helium314.keyboard.keyboard.KeyboardSwitcher
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.Constants.Separators
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.settings.SettingsDestination
-import helium314.keyboard.settings.dialogs.ThreeButtonAlertDialog
-import helium314.keyboard.settings.screens.gesturedata.END_DATE_EPOCH_MILLIS
-import helium314.keyboard.settings.screens.gesturedata.TWO_WEEKS_IN_MILLIS
+import com.xpresstap.keyboard.keyboard.KeyboardSwitcher
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.Constants.Separators
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.settings.SettingsDestination
+import com.xpresstap.keyboard.settings.dialogs.ThreeButtonAlertDialog
+import com.xpresstap.keyboard.settings.screens.gesturedata.END_DATE_EPOCH_MILLIS
+import com.xpresstap.keyboard.settings.screens.gesturedata.TWO_WEEKS_IN_MILLIS
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
@@ -177,7 +177,7 @@ object GestureDataGatheringSettings {
         val promotionShowNext = ctx.prefs().getLong(PREF_SHOW_PROMOTION_DIALOG_NEXT, 0)
         val reminderShowNext = ctx.prefs().getLong(PREF_SHOW_REMINDER_DIALOG_NEXT, 0)
         val neverShow = promotionShowNext == Long.MAX_VALUE || reminderShowNext == Long.MAX_VALUE // user selected "don't show again"
-            // we only show the dialog if the use actively loaded the gesture typing library (as opposed to having the lib in the system and HeliBoard as a system app)
+            // we only show the dialog if the use actively loaded the gesture typing library (as opposed to having the lib in the system and xPressTap as a system app)
             || ctx.protectedPrefs().getString(Settings.PREF_LIBRARY_CHECKSUM, "").isNullOrEmpty() || !JniUtils.sHaveGestureLib
         var shouldShowReminder by remember { mutableStateOf(
             !neverShow && reminderShowNext < System.currentTimeMillis() && reminderShowNext > 0L

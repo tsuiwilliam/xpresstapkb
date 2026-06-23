@@ -3,18 +3,18 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
-package helium314.keyboard.latin.utils
+package com.xpresstap.keyboard.latin.utils
 
 import android.content.Context
 import android.content.res.Resources
 import android.view.inputmethod.InputMethodSubtype
-import helium314.keyboard.compat.locale
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.Constants.Subtype.ExtraValue
-import helium314.keyboard.latin.common.LocaleUtils.constructLocale
-import helium314.keyboard.latin.common.LocaleUtils.localizedDisplayName
-import helium314.keyboard.latin.common.StringUtils
-import helium314.keyboard.latin.utils.LayoutType.Companion.getMainLayoutFromExtraValue
+import com.xpresstap.keyboard.compat.locale
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.Constants.Subtype.ExtraValue
+import com.xpresstap.keyboard.latin.common.LocaleUtils.constructLocale
+import com.xpresstap.keyboard.latin.common.LocaleUtils.localizedDisplayName
+import com.xpresstap.keyboard.latin.common.StringUtils
+import com.xpresstap.keyboard.latin.utils.LayoutType.Companion.getMainLayoutFromExtraValue
 import java.util.Locale
 import kotlin.concurrent.Volatile
 

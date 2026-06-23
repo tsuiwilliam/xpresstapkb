@@ -1,14 +1,14 @@
-package helium314.keyboard.latin.utils
+package com.xpresstap.keyboard.latin.utils
 
 import android.content.Context
 import android.content.Intent
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
-import helium314.keyboard.latin.inputlogic.InputLogic
-import helium314.keyboard.latin.utils.Log.i
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
+import com.xpresstap.keyboard.latin.inputlogic.InputLogic
+import com.xpresstap.keyboard.latin.utils.Log.i
 
 object IntentUtils {
     val TAG: String = InputLogic::class.java.simpleName
-    private const val ACTION_SEND_INTENT = "helium314.keyboard.latin.ACTION_SEND_INTENT"
+    private const val ACTION_SEND_INTENT = "com.xpresstap.keyboard.latin.ACTION_SEND_INTENT"
     private const val EXTRA_NUMBER = "EXTRA_NUMBER"
 
     @JvmStatic

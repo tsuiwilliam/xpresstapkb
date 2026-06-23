@@ -1,4 +1,4 @@
-package helium314.keyboard.compat
+package com.xpresstap.keyboard.compat
 
 import android.content.res.Configuration
 import android.os.Build

@@ -3,21 +3,21 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
-package helium314.keyboard.keyboard.emoji
+package com.xpresstap.keyboard.keyboard.emoji
 
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Paint
 import androidx.core.graphics.PaintCompat
-import helium314.keyboard.keyboard.Key
-import helium314.keyboard.keyboard.KeyboardElement
-import helium314.keyboard.keyboard.KeyboardLayoutSet
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.ResourceUtils
-import helium314.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.keyboard.Key
+import com.xpresstap.keyboard.keyboard.KeyboardElement
+import com.xpresstap.keyboard.keyboard.KeyboardLayoutSet
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.settings.Defaults
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.ResourceUtils
+import com.xpresstap.keyboard.latin.utils.prefs
 import java.util.Collections
 import java.util.concurrent.ConcurrentHashMap
 import androidx.core.content.edit

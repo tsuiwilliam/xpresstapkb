@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings.screens
+package com.xpresstap.keyboard.settings.screens
 
 import android.content.ContentResolver
 import android.content.Context
@@ -35,11 +35,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.LocaleUtils.localizedDisplayName
-import helium314.keyboard.settings.DropDownField
-import helium314.keyboard.settings.SearchScreen
-import helium314.keyboard.settings.dialogs.ThreeButtonAlertDialog
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.LocaleUtils.localizedDisplayName
+import com.xpresstap.keyboard.settings.DropDownField
+import com.xpresstap.keyboard.settings.SearchScreen
+import com.xpresstap.keyboard.settings.dialogs.ThreeButtonAlertDialog
 import java.util.Locale
 
 @Composable

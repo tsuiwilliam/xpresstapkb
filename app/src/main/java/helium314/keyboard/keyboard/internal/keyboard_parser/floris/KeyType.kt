@@ -3,7 +3,7 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0
  */
-package helium314.keyboard.keyboard.internal.keyboard_parser.floris
+package com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable

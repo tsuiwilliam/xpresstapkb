@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
 
-package helium314.keyboard.latin.makedict
+package com.xpresstap.keyboard.latin.makedict
 
-import helium314.keyboard.latin.common.LocaleUtils.constructLocale
-import helium314.keyboard.latin.makedict.FormatSpec.DictionaryOptions
+import com.xpresstap.keyboard.latin.common.LocaleUtils.constructLocale
+import com.xpresstap.keyboard.latin.makedict.FormatSpec.DictionaryOptions
 import java.text.DateFormat
 import java.util.Date
 import java.util.Locale

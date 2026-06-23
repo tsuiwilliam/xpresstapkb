@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings
+package com.xpresstap.keyboard.settings
 
 import android.content.Context
-import helium314.keyboard.keyboard.internal.KeyboardIconsSet
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.SubtypeSettings
+import com.xpresstap.keyboard.keyboard.internal.KeyboardIconsSet
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.SubtypeSettings
 
 // file is meant for making compose previews work
 

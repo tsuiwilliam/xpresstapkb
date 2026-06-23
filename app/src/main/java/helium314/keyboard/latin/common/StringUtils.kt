@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-package helium314.keyboard.latin.common
+package com.xpresstap.keyboard.latin.common
 
-import helium314.keyboard.latin.common.StringUtils.mightBeEmoji
-import helium314.keyboard.latin.common.StringUtils.newSingleCodePointString
-import helium314.keyboard.latin.settings.SpacingAndPunctuations
-import helium314.keyboard.latin.utils.ScriptUtils
-import helium314.keyboard.latin.utils.SpacedTokens
-import helium314.keyboard.latin.utils.SpannableStringUtils
-import helium314.keyboard.latin.utils.TextRange
+import com.xpresstap.keyboard.latin.common.StringUtils.mightBeEmoji
+import com.xpresstap.keyboard.latin.common.StringUtils.newSingleCodePointString
+import com.xpresstap.keyboard.latin.settings.SpacingAndPunctuations
+import com.xpresstap.keyboard.latin.utils.ScriptUtils
+import com.xpresstap.keyboard.latin.utils.SpacedTokens
+import com.xpresstap.keyboard.latin.utils.SpannableStringUtils
+import com.xpresstap.keyboard.latin.utils.TextRange
 import java.math.BigInteger
 import java.text.BreakIterator
 import java.util.Locale

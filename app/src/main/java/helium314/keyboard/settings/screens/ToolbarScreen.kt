@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings.screens
+package com.xpresstap.keyboard.settings.screens
 
 import android.content.Context
 import androidx.compose.material3.Surface
@@ -12,27 +12,27 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import helium314.keyboard.keyboard.KeyboardSwitcher
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.GestureDataGatheringSettings.filterBackgroundGatheringToolbarKeys
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.ToolbarMode
-import helium314.keyboard.latin.utils.getActivity
-import helium314.keyboard.latin.utils.getStringResourceOrName
-import helium314.keyboard.latin.utils.prefs
-import helium314.keyboard.settings.SearchSettingsScreen
-import helium314.keyboard.settings.Setting
-import helium314.keyboard.settings.SettingsActivity
-import helium314.keyboard.latin.utils.Theme
-import helium314.keyboard.settings.dialogs.ToolbarKeysCustomizer
-import helium314.keyboard.settings.initPreview
-import helium314.keyboard.settings.preferences.ListPreference
-import helium314.keyboard.settings.preferences.Preference
-import helium314.keyboard.settings.preferences.ReorderSwitchPreference
-import helium314.keyboard.settings.preferences.SwitchPreference
-import helium314.keyboard.latin.utils.previewDark
+import com.xpresstap.keyboard.keyboard.KeyboardSwitcher
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.settings.Defaults
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.GestureDataGatheringSettings.filterBackgroundGatheringToolbarKeys
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.ToolbarMode
+import com.xpresstap.keyboard.latin.utils.getActivity
+import com.xpresstap.keyboard.latin.utils.getStringResourceOrName
+import com.xpresstap.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.settings.SearchSettingsScreen
+import com.xpresstap.keyboard.settings.Setting
+import com.xpresstap.keyboard.settings.SettingsActivity
+import com.xpresstap.keyboard.latin.utils.Theme
+import com.xpresstap.keyboard.settings.dialogs.ToolbarKeysCustomizer
+import com.xpresstap.keyboard.settings.initPreview
+import com.xpresstap.keyboard.settings.preferences.ListPreference
+import com.xpresstap.keyboard.settings.preferences.Preference
+import com.xpresstap.keyboard.settings.preferences.ReorderSwitchPreference
+import com.xpresstap.keyboard.settings.preferences.SwitchPreference
+import com.xpresstap.keyboard.latin.utils.previewDark
 
 @Composable
 fun ToolbarScreen(

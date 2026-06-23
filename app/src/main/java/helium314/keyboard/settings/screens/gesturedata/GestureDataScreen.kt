@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings.screens.gesturedata
+package com.xpresstap.keyboard.settings.screens.gesturedata
 
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
@@ -73,46 +73,46 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.inputmethod.latin.BinaryDictionary
-import helium314.keyboard.compat.locale
-import helium314.keyboard.keyboard.Keyboard
-import helium314.keyboard.latin.NgramContext
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.SingleDictionaryFacilitator
-import helium314.keyboard.latin.SuggestedWords
-import helium314.keyboard.latin.common.ComposedData
-import helium314.keyboard.latin.common.Links
-import helium314.keyboard.latin.common.LocaleUtils
-import helium314.keyboard.latin.common.LocaleUtils.constructLocale
-import helium314.keyboard.latin.dictionary.Dictionary
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.ChecksumCalculator
-import helium314.keyboard.latin.utils.DictionaryInfoUtils
-import helium314.keyboard.latin.utils.GestureDataDao
-import helium314.keyboard.latin.utils.GestureDataGatheringSettings
-import helium314.keyboard.latin.utils.NextScreenIcon
-import helium314.keyboard.latin.utils.ScriptUtils
-import helium314.keyboard.latin.utils.SubtypeLocaleUtils
-import helium314.keyboard.latin.utils.SubtypeSettings
-import helium314.keyboard.latin.utils.SuggestionResults
-import helium314.keyboard.latin.utils.Theme
-import helium314.keyboard.latin.utils.UncachedInputMethodManagerUtils
-import helium314.keyboard.latin.utils.WordData
-import helium314.keyboard.latin.utils.dictTestImeOption
-import helium314.keyboard.latin.utils.gestureDataActiveFacilitator
-import helium314.keyboard.latin.utils.getSecondaryLocales
-import helium314.keyboard.latin.utils.locale
-import helium314.keyboard.settings.DropDownField
-import helium314.keyboard.latin.utils.appendLink
-import helium314.keyboard.latin.utils.getKnownDictHashes
-import helium314.keyboard.latin.utils.htmlToAnnotated
-import helium314.keyboard.settings.SettingsDestination
-import helium314.keyboard.settings.dialogs.ConfirmationDialog
-import helium314.keyboard.settings.dialogs.InfoDialog
-import helium314.keyboard.settings.dialogs.ThreeButtonAlertDialog
-import helium314.keyboard.settings.initPreview
-import helium314.keyboard.settings.isWideScreen
-import helium314.keyboard.latin.utils.previewDark
-import helium314.keyboard.settings.WithSmallTitle
+import com.xpresstap.keyboard.compat.locale
+import com.xpresstap.keyboard.keyboard.Keyboard
+import com.xpresstap.keyboard.latin.NgramContext
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.SingleDictionaryFacilitator
+import com.xpresstap.keyboard.latin.SuggestedWords
+import com.xpresstap.keyboard.latin.common.ComposedData
+import com.xpresstap.keyboard.latin.common.Links
+import com.xpresstap.keyboard.latin.common.LocaleUtils
+import com.xpresstap.keyboard.latin.common.LocaleUtils.constructLocale
+import com.xpresstap.keyboard.latin.dictionary.Dictionary
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.ChecksumCalculator
+import com.xpresstap.keyboard.latin.utils.DictionaryInfoUtils
+import com.xpresstap.keyboard.latin.utils.GestureDataDao
+import com.xpresstap.keyboard.latin.utils.GestureDataGatheringSettings
+import com.xpresstap.keyboard.latin.utils.NextScreenIcon
+import com.xpresstap.keyboard.latin.utils.ScriptUtils
+import com.xpresstap.keyboard.latin.utils.SubtypeLocaleUtils
+import com.xpresstap.keyboard.latin.utils.SubtypeSettings
+import com.xpresstap.keyboard.latin.utils.SuggestionResults
+import com.xpresstap.keyboard.latin.utils.Theme
+import com.xpresstap.keyboard.latin.utils.UncachedInputMethodManagerUtils
+import com.xpresstap.keyboard.latin.utils.WordData
+import com.xpresstap.keyboard.latin.utils.dictTestImeOption
+import com.xpresstap.keyboard.latin.utils.gestureDataActiveFacilitator
+import com.xpresstap.keyboard.latin.utils.getSecondaryLocales
+import com.xpresstap.keyboard.latin.utils.locale
+import com.xpresstap.keyboard.settings.DropDownField
+import com.xpresstap.keyboard.latin.utils.appendLink
+import com.xpresstap.keyboard.latin.utils.getKnownDictHashes
+import com.xpresstap.keyboard.latin.utils.htmlToAnnotated
+import com.xpresstap.keyboard.settings.SettingsDestination
+import com.xpresstap.keyboard.settings.dialogs.ConfirmationDialog
+import com.xpresstap.keyboard.settings.dialogs.InfoDialog
+import com.xpresstap.keyboard.settings.dialogs.ThreeButtonAlertDialog
+import com.xpresstap.keyboard.settings.initPreview
+import com.xpresstap.keyboard.settings.isWideScreen
+import com.xpresstap.keyboard.latin.utils.previewDark
+import com.xpresstap.keyboard.settings.WithSmallTitle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -613,7 +613,7 @@ private fun BottomBar(hasWords: Boolean, onDeleted: () -> Unit) {
             appendLink("YouTube", Links.GESTURE_DATA_VIDEO_YOUTUBE)
             appendLine()
             append("• ")
-            appendLink("HeliBoard wiki", Links.GESTURE_DATA_WIKI)
+            appendLink("xPressTap wiki", Links.GESTURE_DATA_WIKI)
             appendLine()
             appendLine()
 
@@ -625,7 +625,7 @@ private fun BottomBar(hasWords: Boolean, onDeleted: () -> Unit) {
             appendLink("YouTube", Links.BACKGROUND_GESTURE_DATA_VIDEO_YOUTUBE)
             appendLine()
             append("• ")
-            appendLink("HeliBoard wiki", Links.BACKGROUND_GESTURE_DATA_WIKI)
+            appendLink("xPressTap wiki", Links.BACKGROUND_GESTURE_DATA_WIKI)
             appendLine()
             appendLine()
 

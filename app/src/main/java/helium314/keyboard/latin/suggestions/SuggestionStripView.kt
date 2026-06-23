@@ -3,7 +3,7 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
-package helium314.keyboard.latin.suggestions
+package com.xpresstap.keyboard.latin.suggestions
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -29,36 +29,36 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.view.doOnNextLayout
 import androidx.core.view.isVisible
-import helium314.keyboard.event.HapticEvent
-import helium314.keyboard.keyboard.KeyboardSwitcher
-import helium314.keyboard.keyboard.internal.KeyboardIconsSet
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
-import helium314.keyboard.latin.AudioAndHapticFeedbackManager
-import helium314.keyboard.latin.dictionary.Dictionary
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.SuggestedWords
-import helium314.keyboard.latin.SuggestedWords.SuggestedWordInfo
-import helium314.keyboard.latin.common.ColorType
-import helium314.keyboard.latin.common.Colors
-import helium314.keyboard.latin.common.Constants
-import helium314.keyboard.latin.define.DebugFlags
-import helium314.keyboard.latin.settings.DebugSettings
-import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.ToolbarKey
-import helium314.keyboard.latin.utils.ToolbarMode
-import helium314.keyboard.latin.utils.addPinnedKey
-import helium314.keyboard.latin.utils.createToolbarKey
-import helium314.keyboard.latin.utils.dpToPx
-import helium314.keyboard.latin.utils.getCodeForToolbarKey
-import helium314.keyboard.latin.utils.getCodeForToolbarKeyLongClick
-import helium314.keyboard.latin.utils.getEnabledToolbarKeys
-import helium314.keyboard.latin.utils.getPinnedToolbarKeys
-import helium314.keyboard.latin.utils.prefs
-import helium314.keyboard.latin.utils.removeFirst
-import helium314.keyboard.latin.utils.removePinnedKey
-import helium314.keyboard.latin.utils.setToolbarButtonsActivatedStateOnPrefChange
+import com.xpresstap.keyboard.event.HapticEvent
+import com.xpresstap.keyboard.keyboard.KeyboardSwitcher
+import com.xpresstap.keyboard.keyboard.internal.KeyboardIconsSet
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
+import com.xpresstap.keyboard.latin.AudioAndHapticFeedbackManager
+import com.xpresstap.keyboard.latin.dictionary.Dictionary
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.SuggestedWords
+import com.xpresstap.keyboard.latin.SuggestedWords.SuggestedWordInfo
+import com.xpresstap.keyboard.latin.common.ColorType
+import com.xpresstap.keyboard.latin.common.Colors
+import com.xpresstap.keyboard.latin.common.Constants
+import com.xpresstap.keyboard.latin.define.DebugFlags
+import com.xpresstap.keyboard.latin.settings.DebugSettings
+import com.xpresstap.keyboard.latin.settings.Defaults
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.ToolbarKey
+import com.xpresstap.keyboard.latin.utils.ToolbarMode
+import com.xpresstap.keyboard.latin.utils.addPinnedKey
+import com.xpresstap.keyboard.latin.utils.createToolbarKey
+import com.xpresstap.keyboard.latin.utils.dpToPx
+import com.xpresstap.keyboard.latin.utils.getCodeForToolbarKey
+import com.xpresstap.keyboard.latin.utils.getCodeForToolbarKeyLongClick
+import com.xpresstap.keyboard.latin.utils.getEnabledToolbarKeys
+import com.xpresstap.keyboard.latin.utils.getPinnedToolbarKeys
+import com.xpresstap.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.latin.utils.removeFirst
+import com.xpresstap.keyboard.latin.utils.removePinnedKey
+import com.xpresstap.keyboard.latin.utils.setToolbarButtonsActivatedStateOnPrefChange
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.math.abs
 import kotlin.math.min
@@ -302,7 +302,7 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
 
     override fun onVisibilityChanged(view: View, visibility: Int) {
         super.onVisibilityChanged(view, visibility)
-        // workaround for a bug with inline suggestions views that just keep showing up otherwise, https://github.com/HeliBorg/HeliBoard/pull/386
+        // workaround for a bug with inline suggestions views that just keep showing up otherwise, https://github.com/HeliBorg/xPressTap/pull/386
         if (view === this)
             suggestionsStrip.visibility = visibility
     }

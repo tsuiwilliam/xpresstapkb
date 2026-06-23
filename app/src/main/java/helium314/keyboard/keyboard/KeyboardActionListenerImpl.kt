@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.keyboard
+package com.xpresstap.keyboard.keyboard
 
 import android.text.InputType
 import android.util.SparseArray
@@ -8,27 +8,27 @@ import android.view.inputmethod.InputMethodSubtype
 import androidx.core.util.forEach
 import androidx.core.view.inputmethod.EditorInfoCompat
 import androidx.core.view.inputmethod.InputContentInfoCompat
-import helium314.keyboard.event.Event
-import helium314.keyboard.event.HangulEventDecoder
-import helium314.keyboard.event.HapticEvent
-import helium314.keyboard.event.HardwareEventDecoder
-import helium314.keyboard.event.HardwareKeyboardEventDecoder
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
-import helium314.keyboard.latin.AudioAndHapticFeedbackManager
-import helium314.keyboard.latin.EmojiAltPhysicalKeyDetector
-import helium314.keyboard.latin.LatinIME
-import helium314.keyboard.latin.RichInputMethodManager
-import helium314.keyboard.latin.common.Constants
-import helium314.keyboard.latin.common.InputPointers
-import helium314.keyboard.latin.common.combiningRange
-import helium314.keyboard.latin.common.moveStepsToCharCount
-import helium314.keyboard.latin.define.ProductionFlags
-import helium314.keyboard.latin.inputlogic.InputLogic
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.GestureDataGatheringSettings
-import helium314.keyboard.latin.utils.BackgroundGatheringCache
-import helium314.keyboard.latin.utils.SubtypeSettings
-import helium314.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.event.Event
+import com.xpresstap.keyboard.event.HangulEventDecoder
+import com.xpresstap.keyboard.event.HapticEvent
+import com.xpresstap.keyboard.event.HardwareEventDecoder
+import com.xpresstap.keyboard.event.HardwareKeyboardEventDecoder
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
+import com.xpresstap.keyboard.latin.AudioAndHapticFeedbackManager
+import com.xpresstap.keyboard.latin.EmojiAltPhysicalKeyDetector
+import com.xpresstap.keyboard.latin.LatinIME
+import com.xpresstap.keyboard.latin.RichInputMethodManager
+import com.xpresstap.keyboard.latin.common.Constants
+import com.xpresstap.keyboard.latin.common.InputPointers
+import com.xpresstap.keyboard.latin.common.combiningRange
+import com.xpresstap.keyboard.latin.common.moveStepsToCharCount
+import com.xpresstap.keyboard.latin.define.ProductionFlags
+import com.xpresstap.keyboard.latin.inputlogic.InputLogic
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.GestureDataGatheringSettings
+import com.xpresstap.keyboard.latin.utils.BackgroundGatheringCache
+import com.xpresstap.keyboard.latin.utils.SubtypeSettings
+import com.xpresstap.keyboard.latin.utils.prefs
 import kotlin.math.abs
 
 class KeyboardActionListenerImpl(private val latinIME: LatinIME, private val inputLogic: InputLogic) : KeyboardActionListener {
@@ -103,6 +103,7 @@ class KeyboardActionListenerImpl(private val latinIME: LatinIME, private val inp
 
     override fun onCodeInput(primaryCode: Int, x: Int, y: Int, isKeyRepeat: Boolean) {
         when (primaryCode) {
+            KeyCode.NFC_PAY -> { latinIME.handleNfcToolbarTap(); return }
             KeyCode.TOGGLE_AUTOCORRECT -> return settings.toggleAutoCorrect()
             KeyCode.TOGGLE_INCOGNITO_MODE -> {
                 settings.toggleAlwaysIncognitoMode()
@@ -344,7 +345,7 @@ class KeyboardActionListenerImpl(private val latinIME: LatinIME, private val inp
         // issues:
         //  * setSelection "will cause the editor to call onUpdateSelection", see: https://developer.android.com/reference/android/view/inputmethod/InputConnection#setSelection(int,%20int)
         //     but Firefox is simply not doing this within the same word... WTF?
-        //     https://github.com/HeliBorg/HeliBoard/issues/1139#issuecomment-2588169384
+        //     https://github.com/HeliBorg/xPressTap/issues/1139#issuecomment-2588169384
         //  * inputType is NOT of variant InputType.TYPE_TEXT_VARIATION_WEB_EDIT_TEXT (variant appears to always be 0)
         //     -> this is "fixed" now using AppWorkarounds.adjustInputType
         val variation = InputType.TYPE_MASK_VARIATION and Settings.getValues().mInputAttributes.mInputType
@@ -406,7 +407,7 @@ class KeyboardActionListenerImpl(private val latinIME: LatinIME, private val inp
     /** actual Android metaState like in KeyEvent */
     private var metaState = 0
 
-    /** keeps track of the state of meta keys by (HeliBoard) KeyCodes */
+    /** keeps track of the state of meta keys by (xPressTap) KeyCodes */
     private val metaPressStates = SparseArray<MetaPressState>(4)
 
     // todo: lock and non-lock versions interact badly: when any of them is released, the meta state is removed

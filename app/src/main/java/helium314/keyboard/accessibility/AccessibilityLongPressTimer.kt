@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
 
-package helium314.keyboard.accessibility
+package com.xpresstap.keyboard.accessibility
 
 import android.content.Context
 import android.os.Handler
 import android.os.Message
-import helium314.keyboard.keyboard.Key
-import helium314.keyboard.latin.R
+import com.xpresstap.keyboard.keyboard.Key
+import com.xpresstap.keyboard.latin.R
 
 // Handling long press timer to show a popup keys keyboard.
 internal class AccessibilityLongPressTimer(

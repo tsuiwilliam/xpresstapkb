@@ -1,21 +1,21 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.keyboard.internal.keyboard_parser
+package com.xpresstap.keyboard.keyboard.internal.keyboard_parser
 
 import android.content.Context
-import helium314.keyboard.keyboard.Key
-import helium314.keyboard.keyboard.Key.KeyParams
-import helium314.keyboard.keyboard.KeyboardElement
-import helium314.keyboard.keyboard.emoji.SupportedEmojis
-import helium314.keyboard.keyboard.internal.KeyboardParams
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.Constants
-import helium314.keyboard.latin.common.StringUtils
-import helium314.keyboard.latin.common.splitOnWhitespace
-import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.ResourceUtils
-import helium314.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.keyboard.Key
+import com.xpresstap.keyboard.keyboard.Key.KeyParams
+import com.xpresstap.keyboard.keyboard.KeyboardElement
+import com.xpresstap.keyboard.keyboard.emoji.SupportedEmojis
+import com.xpresstap.keyboard.keyboard.internal.KeyboardParams
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.Constants
+import com.xpresstap.keyboard.latin.common.StringUtils
+import com.xpresstap.keyboard.latin.common.splitOnWhitespace
+import com.xpresstap.keyboard.latin.settings.Defaults
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.ResourceUtils
+import com.xpresstap.keyboard.latin.utils.prefs
 import java.util.Collections
 import kotlin.let
 import kotlin.math.sqrt

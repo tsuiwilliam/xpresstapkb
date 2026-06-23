@@ -1,18 +1,18 @@
 // SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
-package helium314.keyboard.latin
+package com.xpresstap.keyboard.latin
 
 import android.app.Application
 import android.os.Build
-import helium314.keyboard.keyboard.emoji.SupportedEmojis
-import helium314.keyboard.latin.define.DebugFlags
-import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.FoldableUtils
-import helium314.keyboard.latin.utils.LayoutUtilsCustom
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.SubtypeSettings
-import helium314.keyboard.latin.utils.prefs
-import helium314.keyboard.latin.utils.upgradeToolbarPrefs
+import com.xpresstap.keyboard.keyboard.emoji.SupportedEmojis
+import com.xpresstap.keyboard.latin.define.DebugFlags
+import com.xpresstap.keyboard.latin.settings.Defaults
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.FoldableUtils
+import com.xpresstap.keyboard.latin.utils.LayoutUtilsCustom
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.SubtypeSettings
+import com.xpresstap.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.latin.utils.upgradeToolbarPrefs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

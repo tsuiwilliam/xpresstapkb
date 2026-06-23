@@ -3,29 +3,29 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
-package helium314.keyboard.keyboard
+package com.xpresstap.keyboard.keyboard
 
 import android.content.Context
 import android.text.InputType
 import android.view.inputmethod.EditorInfo
-import helium314.keyboard.keyboard.internal.KeyboardBuilder
-import helium314.keyboard.keyboard.internal.KeyboardIconsSet.Companion.needsReload
-import helium314.keyboard.keyboard.internal.KeyboardParams
-import helium314.keyboard.keyboard.internal.UniqueKeysCache
-import helium314.keyboard.keyboard.internal.keyboard_parser.LayoutParser
-import helium314.keyboard.keyboard.internal.keyboard_parser.LocaleKeyboardInfos
-import helium314.keyboard.latin.RichInputMethodManager.Companion.getInstance
-import helium314.keyboard.latin.RichInputMethodSubtype
-import helium314.keyboard.latin.RichInputMethodSubtype.Companion.emojiSubtype
-import helium314.keyboard.latin.RichInputMethodSubtype.Companion.noLanguageSubtype
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.DictionaryInfoUtils.getLocalesWithEmojiDicts
-import helium314.keyboard.latin.utils.InputTypeUtils
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.ResourceUtils
-import helium314.keyboard.latin.utils.ScriptUtils
-import helium314.keyboard.latin.utils.ScriptUtils.script
-import helium314.keyboard.latin.utils.SubtypeLocaleUtils.clearSubtypeDisplayNameCache
+import com.xpresstap.keyboard.keyboard.internal.KeyboardBuilder
+import com.xpresstap.keyboard.keyboard.internal.KeyboardIconsSet.Companion.needsReload
+import com.xpresstap.keyboard.keyboard.internal.KeyboardParams
+import com.xpresstap.keyboard.keyboard.internal.UniqueKeysCache
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.LayoutParser
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.LocaleKeyboardInfos
+import com.xpresstap.keyboard.latin.RichInputMethodManager.Companion.getInstance
+import com.xpresstap.keyboard.latin.RichInputMethodSubtype
+import com.xpresstap.keyboard.latin.RichInputMethodSubtype.Companion.emojiSubtype
+import com.xpresstap.keyboard.latin.RichInputMethodSubtype.Companion.noLanguageSubtype
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.DictionaryInfoUtils.getLocalesWithEmojiDicts
+import com.xpresstap.keyboard.latin.utils.InputTypeUtils
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.ResourceUtils
+import com.xpresstap.keyboard.latin.utils.ScriptUtils
+import com.xpresstap.keyboard.latin.utils.ScriptUtils.script
+import com.xpresstap.keyboard.latin.utils.SubtypeLocaleUtils.clearSubtypeDisplayNameCache
 import java.lang.ref.SoftReference
 
 /**

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.keyboard.emoji
+package com.xpresstap.keyboard.keyboard.emoji
 
 import android.R.string.cancel
 import android.content.Context
@@ -74,38 +74,38 @@ import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import helium314.keyboard.keyboard.Key
-import helium314.keyboard.keyboard.KeyboardElement
-import helium314.keyboard.keyboard.KeyboardLayoutSet
-import helium314.keyboard.keyboard.KeyboardSwitcher
-import helium314.keyboard.keyboard.KeyboardTheme
-import helium314.keyboard.keyboard.KeyboardTypeface
-import helium314.keyboard.keyboard.internal.KeyboardBuilder
-import helium314.keyboard.keyboard.internal.KeyboardParams
-import helium314.keyboard.keyboard.internal.keyboard_parser.EMOJI_HINT_LABEL
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
-import helium314.keyboard.keyboard.internal.keyboard_parser.getCode
-import helium314.keyboard.keyboard.internal.keyboard_parser.getEmojiDefaultVersion
-import helium314.keyboard.keyboard.internal.keyboard_parser.getEmojiKeyDimensions
-import helium314.keyboard.keyboard.internal.keyboard_parser.getEmojiNeutralVersion
-import helium314.keyboard.keyboard.internal.keyboard_parser.getEmojiPopupSpec
-import helium314.keyboard.keyboard.internal.keyboard_parser.loadEmojiDefaultVersionsAndPopupSpecs
-import helium314.keyboard.latin.LatinIME
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.RichInputMethodManager
-import helium314.keyboard.latin.RichInputMethodSubtype
-import helium314.keyboard.latin.SingleDictionaryFacilitator
-import helium314.keyboard.latin.common.ColorType
-import helium314.keyboard.latin.common.splitOnWhitespace
-import helium314.keyboard.latin.dictionary.Dictionary
-import helium314.keyboard.latin.dictionary.DictionaryFactory
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.CloseIcon
-import helium314.keyboard.latin.utils.DictionaryInfoUtils
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.ResourceUtils
-import helium314.keyboard.latin.utils.SearchIcon
-import helium314.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.keyboard.Key
+import com.xpresstap.keyboard.keyboard.KeyboardElement
+import com.xpresstap.keyboard.keyboard.KeyboardLayoutSet
+import com.xpresstap.keyboard.keyboard.KeyboardSwitcher
+import com.xpresstap.keyboard.keyboard.KeyboardTheme
+import com.xpresstap.keyboard.keyboard.KeyboardTypeface
+import com.xpresstap.keyboard.keyboard.internal.KeyboardBuilder
+import com.xpresstap.keyboard.keyboard.internal.KeyboardParams
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.EMOJI_HINT_LABEL
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.getCode
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.getEmojiDefaultVersion
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.getEmojiKeyDimensions
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.getEmojiNeutralVersion
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.getEmojiPopupSpec
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.loadEmojiDefaultVersionsAndPopupSpecs
+import com.xpresstap.keyboard.latin.LatinIME
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.RichInputMethodManager
+import com.xpresstap.keyboard.latin.RichInputMethodSubtype
+import com.xpresstap.keyboard.latin.SingleDictionaryFacilitator
+import com.xpresstap.keyboard.latin.common.ColorType
+import com.xpresstap.keyboard.latin.common.splitOnWhitespace
+import com.xpresstap.keyboard.latin.dictionary.Dictionary
+import com.xpresstap.keyboard.latin.dictionary.DictionaryFactory
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.CloseIcon
+import com.xpresstap.keyboard.latin.utils.DictionaryInfoUtils
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.ResourceUtils
+import com.xpresstap.keyboard.latin.utils.SearchIcon
+import com.xpresstap.keyboard.latin.utils.prefs
 import kotlin.properties.Delegates
 
 private const val TAG = "emoji-search"
@@ -382,7 +382,7 @@ class EmojiSearchActivity : ComponentActivity() {
         const val EMOJI_SEARCH_DONE_ACTION: String = "EMOJI_SEARCH_DONE"
         const val IME_CLOSED_KEY: String = "IME_CLOSED"
         const val EMOJI_KEY: String = "EMOJI"
-        private const val PRIVATE_IME_OPTIONS_PREFIX: String = "helium314.keyboard.keyboard.emoji.search"
+        private const val PRIVATE_IME_OPTIONS_PREFIX: String = "com.xpresstap.keyboard.keyboard.emoji.search"
         private var dictionaryFacilitator: SingleDictionaryFacilitator? = null
         private var searchText: String = ""
 

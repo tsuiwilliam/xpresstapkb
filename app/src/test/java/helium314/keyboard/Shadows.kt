@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard
+package com.xpresstap.keyboard
 
 import android.content.Context
 import android.view.KeyEvent
@@ -9,9 +9,9 @@ import android.view.inputmethod.InputMethodSubtype
 import androidx.core.app.LocaleManagerCompat
 import androidx.core.os.LocaleListCompat
 import com.android.inputmethod.latin.utils.BinaryDictionaryUtils
-import helium314.keyboard.latin.BuildConfig
-import helium314.keyboard.latin.DictionaryFacilitatorImpl
-import helium314.keyboard.latin.common.StringUtils
+import com.xpresstap.keyboard.latin.BuildConfig
+import com.xpresstap.keyboard.latin.DictionaryFacilitatorImpl
+import com.xpresstap.keyboard.latin.common.StringUtils
 import org.robolectric.annotation.Implementation
 import org.robolectric.annotation.Implements
 import org.robolectric.shadows.ShadowInputMethodManager
@@ -30,8 +30,8 @@ class ShadowInputMethodManager2 : ShadowInputMethodManager() {
     @Implementation
     override fun getInputMethodList() = listOf(
         if (BuildConfig.BUILD_TYPE == "debug" || BuildConfig.BUILD_TYPE == "debugNoMinify")
-            InputMethodInfo("helium314.keyboard.debug", "LatinIME", "HeliBoard debug", null)
-        else InputMethodInfo("helium314.keyboard", "LatinIME", "HeliBoard", null),
+            InputMethodInfo("com.xpresstap.keyboard.debug", "LatinIME", "xPressTap debug", null)
+        else InputMethodInfo("com.xpresstap.keyboard", "LatinIME", "xPressTap", null),
     )
     @Implementation
     fun getShortcutInputMethodsAndSubtypes() = emptyMap<InputMethodInfo, List<InputMethodSubtype>>()

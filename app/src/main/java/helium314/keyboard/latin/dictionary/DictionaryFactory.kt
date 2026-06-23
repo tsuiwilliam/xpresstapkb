@@ -3,12 +3,12 @@
 * modified
 * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
 */
-package helium314.keyboard.latin.dictionary
+package com.xpresstap.keyboard.latin.dictionary
 
 import android.content.Context
-import helium314.keyboard.latin.common.LocaleUtils
-import helium314.keyboard.latin.utils.DictionaryInfoUtils
-import helium314.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.common.LocaleUtils
+import com.xpresstap.keyboard.latin.utils.DictionaryInfoUtils
+import com.xpresstap.keyboard.latin.utils.Log
 import java.io.File
 import java.util.LinkedList
 import java.util.Locale

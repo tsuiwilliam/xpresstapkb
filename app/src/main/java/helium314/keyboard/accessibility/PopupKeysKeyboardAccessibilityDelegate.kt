@@ -4,14 +4,14 @@
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
 
-package helium314.keyboard.accessibility
+package com.xpresstap.keyboard.accessibility
 
 import android.graphics.Rect
-import helium314.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.Log
 import android.view.MotionEvent
-import helium314.keyboard.keyboard.KeyDetector
-import helium314.keyboard.keyboard.PopupKeysKeyboardView
-import helium314.keyboard.keyboard.PointerTracker
+import com.xpresstap.keyboard.keyboard.KeyDetector
+import com.xpresstap.keyboard.keyboard.PopupKeysKeyboardView
+import com.xpresstap.keyboard.keyboard.PointerTracker
 
 /**
  * This class represents a delegate that can be registered in [PopupKeysKeyboardView] to

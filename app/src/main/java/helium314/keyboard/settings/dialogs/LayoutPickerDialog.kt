@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings.dialogs
+package com.xpresstap.keyboard.settings.dialogs
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -32,28 +32,28 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import helium314.keyboard.keyboard.KeyboardSwitcher
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.Constants.Subtype.ExtraValue
-import helium314.keyboard.latin.settings.Defaults.default
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.LayoutType
-import helium314.keyboard.latin.utils.LayoutUtils
-import helium314.keyboard.latin.utils.LayoutUtilsCustom
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.SubtypeSettings
-import helium314.keyboard.latin.utils.getActivity
-import helium314.keyboard.latin.utils.getStringResourceOrName
-import helium314.keyboard.latin.utils.prefs
-import helium314.keyboard.latin.utils.DeleteButton
-import helium314.keyboard.latin.utils.EditButton
-import helium314.keyboard.settings.Setting
-import helium314.keyboard.settings.SettingsActivity
-import helium314.keyboard.latin.utils.Theme
-import helium314.keyboard.settings.contentTextDirectionStyle
-import helium314.keyboard.settings.layoutFilePicker
-import helium314.keyboard.settings.layoutIntent
-import helium314.keyboard.latin.utils.previewDark
+import com.xpresstap.keyboard.keyboard.KeyboardSwitcher
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.Constants.Subtype.ExtraValue
+import com.xpresstap.keyboard.latin.settings.Defaults.default
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.LayoutType
+import com.xpresstap.keyboard.latin.utils.LayoutUtils
+import com.xpresstap.keyboard.latin.utils.LayoutUtilsCustom
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.SubtypeSettings
+import com.xpresstap.keyboard.latin.utils.getActivity
+import com.xpresstap.keyboard.latin.utils.getStringResourceOrName
+import com.xpresstap.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.latin.utils.DeleteButton
+import com.xpresstap.keyboard.latin.utils.EditButton
+import com.xpresstap.keyboard.settings.Setting
+import com.xpresstap.keyboard.settings.SettingsActivity
+import com.xpresstap.keyboard.latin.utils.Theme
+import com.xpresstap.keyboard.settings.contentTextDirectionStyle
+import com.xpresstap.keyboard.settings.layoutFilePicker
+import com.xpresstap.keyboard.settings.layoutIntent
+import com.xpresstap.keyboard.latin.utils.previewDark
 
 @Composable
 fun LayoutPickerDialog(

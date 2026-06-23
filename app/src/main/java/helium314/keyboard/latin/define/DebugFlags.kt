@@ -4,16 +4,16 @@
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
 
-package helium314.keyboard.latin.define
+package com.xpresstap.keyboard.latin.define
 
 import android.content.Context
 import android.os.Build
-import helium314.keyboard.latin.BuildConfig
-import helium314.keyboard.latin.settings.DebugSettings
-import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.utils.DeviceProtectedUtils
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.latin.BuildConfig
+import com.xpresstap.keyboard.latin.settings.DebugSettings
+import com.xpresstap.keyboard.latin.settings.Defaults
+import com.xpresstap.keyboard.latin.utils.DeviceProtectedUtils
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.prefs
 import java.io.File
 import java.io.PrintWriter
 import java.io.StringWriter

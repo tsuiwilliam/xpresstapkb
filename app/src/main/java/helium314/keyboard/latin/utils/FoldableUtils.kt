@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.latin.utils
+package com.xpresstap.keyboard.latin.utils
 
 import android.content.Context
 import android.content.pm.PackageManager
@@ -13,7 +13,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
-import helium314.keyboard.latin.define.DebugFlags
+import com.xpresstap.keyboard.latin.define.DebugFlags
 import java.util.regex.Pattern
 import kotlin.text.split
 
@@ -27,7 +27,7 @@ object FoldableUtils {
         private set(value) {
             if (field == value) return
             // we could reload the keyboard at this point, but according to a user this is not necessary
-            // https://github.com/HeliBorg/HeliBoard/issues/1063#issuecomment-4178571414
+            // https://github.com/HeliBorg/xPressTap/issues/1063#issuecomment-4178571414
             Log.v(TAG, "set isFolded to $value")
             field = value
         }

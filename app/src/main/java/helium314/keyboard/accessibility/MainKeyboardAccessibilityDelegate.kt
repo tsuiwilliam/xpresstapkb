@@ -4,17 +4,17 @@
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
 
-package helium314.keyboard.accessibility
+package com.xpresstap.keyboard.accessibility
 
 import android.graphics.Rect
 import android.os.SystemClock
-import helium314.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.Log
 import android.util.SparseIntArray
 import android.view.MotionEvent
-import helium314.keyboard.accessibility.AccessibilityLongPressTimer.LongPressTimerCallback
-import helium314.keyboard.keyboard.*
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.utils.SubtypeLocaleUtils.displayName
+import com.xpresstap.keyboard.accessibility.AccessibilityLongPressTimer.LongPressTimerCallback
+import com.xpresstap.keyboard.keyboard.*
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.utils.SubtypeLocaleUtils.displayName
 
 /**
  * This class represents a delegate that can be registered in [MainKeyboardView] to enhance

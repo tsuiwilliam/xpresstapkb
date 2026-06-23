@@ -1,4 +1,4 @@
-package helium314.keyboard.latin.utils
+package com.xpresstap.keyboard.latin.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,11 +11,11 @@ import android.widget.ImageView
 import androidx.core.content.edit
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import helium314.keyboard.keyboard.KeyboardSwitcher
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.define.DebugFlags
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.settings.setFloatingSize
+import com.xpresstap.keyboard.keyboard.KeyboardSwitcher
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.define.DebugFlags
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.settings.setFloatingSize
 
 // todo: add a frame around the keyboard (because other people care more about optics than I do)
 object FloatingKeyboardUtils {

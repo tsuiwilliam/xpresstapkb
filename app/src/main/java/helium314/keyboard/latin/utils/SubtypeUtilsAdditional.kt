@@ -1,21 +1,21 @@
-package helium314.keyboard.latin.utils
+package com.xpresstap.keyboard.latin.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.view.inputmethod.InputMethodSubtype
 import android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.Constants
-import helium314.keyboard.latin.common.Constants.Separators
-import helium314.keyboard.latin.common.Constants.Subtype.ExtraValue
-import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.settings.Defaults.default
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.settings.SettingsSubtype
-import helium314.keyboard.latin.settings.SettingsSubtype.Companion.toSettingsSubtype
-import helium314.keyboard.latin.utils.LayoutType.Companion.toExtraValue
-import helium314.keyboard.latin.utils.ScriptUtils.script
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.Constants
+import com.xpresstap.keyboard.latin.common.Constants.Separators
+import com.xpresstap.keyboard.latin.common.Constants.Subtype.ExtraValue
+import com.xpresstap.keyboard.latin.settings.Defaults
+import com.xpresstap.keyboard.latin.settings.Defaults.default
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.settings.SettingsSubtype
+import com.xpresstap.keyboard.latin.settings.SettingsSubtype.Companion.toSettingsSubtype
+import com.xpresstap.keyboard.latin.utils.LayoutType.Companion.toExtraValue
+import com.xpresstap.keyboard.latin.utils.ScriptUtils.script
 import java.util.Locale
 import androidx.core.content.edit
 

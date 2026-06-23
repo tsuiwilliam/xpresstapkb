@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.compat
+package com.xpresstap.keyboard.compat
 
 import android.text.InputType
 import android.view.inputmethod.EditorInfo
-import helium314.keyboard.latin.utils.InputTypeUtils
+import com.xpresstap.keyboard.latin.utils.InputTypeUtils
 
 object AppWorkarounds {
     fun adjustInputType(inputType: Int, packageName: String?): Int {
@@ -32,7 +32,7 @@ object AppWorkarounds {
         return when (packageName) {
             // Looks like Google decided to set inputType multiline and imeOptions no_enter_action
             // on their search bar in Pixel launcher, and all keyboards ignore the flags because otherwise
-            // they would actually not perform the search action on action key. See https://github.com/HeliBorg/HeliBoard/issues/1989
+            // they would actually not perform the search action on action key. See https://github.com/HeliBorg/xPressTap/issues/1989
             "com.google.android.apps.nexuslauncher" -> if (imeOptions and EditorInfo.IME_FLAG_NO_ENTER_ACTION != 0) imeOptions - EditorInfo.IME_FLAG_NO_ENTER_ACTION else imeOptions
             else -> imeOptions
         }

@@ -3,16 +3,16 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
-package helium314.keyboard.latin.common
+package com.xpresstap.keyboard.latin.common
 
 import android.content.res.Resources
-import helium314.keyboard.compat.locale
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.RichInputMethodSubtype
-import helium314.keyboard.latin.utils.ScriptUtils.script
-import helium314.keyboard.latin.utils.SubtypeLocaleUtils
-import helium314.keyboard.latin.utils.getSecondaryLocales
-import helium314.keyboard.latin.utils.runInLocale
+import com.xpresstap.keyboard.compat.locale
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.RichInputMethodSubtype
+import com.xpresstap.keyboard.latin.utils.ScriptUtils.script
+import com.xpresstap.keyboard.latin.utils.SubtypeLocaleUtils
+import com.xpresstap.keyboard.latin.utils.getSecondaryLocales
+import com.xpresstap.keyboard.latin.utils.runInLocale
 import java.util.Locale
 
 /**
@@ -204,7 +204,7 @@ object LocaleUtils {
 
         val localeDisplayName = getDisplayName(displayLocale ?: resources.configuration.locale())
         return if (localeDisplayName == languageTag) {
-            getDisplayName(Locale.US) // try fallback to English name, relevant e.g. fpr pms, see https://github.com/HeliBorg/HeliBoard/pull/748
+            getDisplayName(Locale.US) // try fallback to English name, relevant e.g. fpr pms, see https://github.com/HeliBorg/xPressTap/pull/748
         } else {
             localeDisplayName
         }

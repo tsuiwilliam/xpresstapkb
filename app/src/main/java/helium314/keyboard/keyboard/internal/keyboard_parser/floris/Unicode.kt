@@ -3,7 +3,7 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
-package helium314.keyboard.keyboard.internal.keyboard_parser.floris
+package com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris
 
 import android.icu.lang.UCharacter
 import android.icu.lang.UCharacterCategory

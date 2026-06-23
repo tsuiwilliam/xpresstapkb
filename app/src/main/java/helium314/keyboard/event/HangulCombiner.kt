@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-package helium314.keyboard.event
+package com.xpresstap.keyboard.event
 
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
-import helium314.keyboard.latin.common.Constants
-import helium314.keyboard.latin.common.isEmoji
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
+import com.xpresstap.keyboard.latin.common.Constants
+import com.xpresstap.keyboard.latin.common.isEmoji
 import java.lang.StringBuilder
 import java.util.ArrayList
 

@@ -3,27 +3,27 @@
  * modified
  * SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
  */
-package helium314.keyboard.keyboard.internal
+package com.xpresstap.keyboard.keyboard.internal
 
 import android.content.Context
 import android.content.res.Resources
 import android.util.Xml
 import androidx.annotation.XmlRes
-import helium314.keyboard.keyboard.Key
-import helium314.keyboard.keyboard.Key.KeyParams
-import helium314.keyboard.keyboard.Keyboard
-import helium314.keyboard.keyboard.KeyboardElement
-import helium314.keyboard.keyboard.KeyboardId
-import helium314.keyboard.keyboard.internal.keyboard_parser.EmojiParser
-import helium314.keyboard.keyboard.internal.keyboard_parser.KeyboardParser
-import helium314.keyboard.keyboard.internal.keyboard_parser.LocaleKeyboardInfos
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.Constants
-import helium314.keyboard.latin.define.DebugFlags
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.sumOf
+import com.xpresstap.keyboard.keyboard.Key
+import com.xpresstap.keyboard.keyboard.Key.KeyParams
+import com.xpresstap.keyboard.keyboard.Keyboard
+import com.xpresstap.keyboard.keyboard.KeyboardElement
+import com.xpresstap.keyboard.keyboard.KeyboardId
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.EmojiParser
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.KeyboardParser
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.LocaleKeyboardInfos
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.Constants
+import com.xpresstap.keyboard.latin.define.DebugFlags
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.sumOf
 import org.xmlpull.v1.XmlPullParser
 
 open class KeyboardBuilder<KP : KeyboardParams>(protected val mContext: Context, @JvmField val mParams: KP) {

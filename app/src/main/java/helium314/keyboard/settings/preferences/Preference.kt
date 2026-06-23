@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings.preferences
+package com.xpresstap.keyboard.settings.preferences
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.clickable
@@ -27,10 +27,10 @@ import androidx.compose.ui.text.style.Hyphens
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import helium314.keyboard.latin.R
-import helium314.keyboard.settings.IconOrImage
-import helium314.keyboard.latin.utils.Theme
-import helium314.keyboard.latin.utils.previewDark
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.settings.IconOrImage
+import com.xpresstap.keyboard.latin.utils.Theme
+import com.xpresstap.keyboard.latin.utils.previewDark
 
 // partially taken from StreetComplete / SCEE
 

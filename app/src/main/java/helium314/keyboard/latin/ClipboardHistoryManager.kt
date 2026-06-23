@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-package helium314.keyboard.latin
+package com.xpresstap.keyboard.latin
 
 import android.content.ClipData
 import android.content.ClipDescription
@@ -17,22 +17,22 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.view.inputmethod.InputContentInfoCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import helium314.keyboard.keyboard.KeyboardTypeface
-import helium314.keyboard.compat.ClipboardManagerCompat
-import helium314.keyboard.event.Event
-import helium314.keyboard.event.HapticEvent
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
-import helium314.keyboard.latin.common.ColorType
-import helium314.keyboard.latin.common.Constants
-import helium314.keyboard.latin.common.isValidNumber
-import helium314.keyboard.latin.database.ClipboardDao
-import helium314.keyboard.latin.databinding.ClipboardSuggestionBinding
-import helium314.keyboard.latin.settings.Defaults
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.InputTypeUtils
-import helium314.keyboard.latin.utils.Log
-import helium314.keyboard.latin.utils.ToolbarKey
-import helium314.keyboard.latin.utils.prefs
+import com.xpresstap.keyboard.keyboard.KeyboardTypeface
+import com.xpresstap.keyboard.compat.ClipboardManagerCompat
+import com.xpresstap.keyboard.event.Event
+import com.xpresstap.keyboard.event.HapticEvent
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode
+import com.xpresstap.keyboard.latin.common.ColorType
+import com.xpresstap.keyboard.latin.common.Constants
+import com.xpresstap.keyboard.latin.common.isValidNumber
+import com.xpresstap.keyboard.latin.database.ClipboardDao
+import com.xpresstap.keyboard.latin.databinding.ClipboardSuggestionBinding
+import com.xpresstap.keyboard.latin.settings.Defaults
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.InputTypeUtils
+import com.xpresstap.keyboard.latin.utils.Log
+import com.xpresstap.keyboard.latin.utils.ToolbarKey
+import com.xpresstap.keyboard.latin.utils.prefs
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-package helium314.keyboard.latin
+package com.xpresstap.keyboard.latin
 
 import android.content.BroadcastReceiver
 import android.content.Context

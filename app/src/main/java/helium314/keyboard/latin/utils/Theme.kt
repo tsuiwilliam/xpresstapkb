@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.latin.utils
+package com.xpresstap.keyboard.latin.utils
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
-import helium314.keyboard.latin.R
+import com.xpresstap.keyboard.latin.R
 
 @Composable
 fun Theme(dark: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {

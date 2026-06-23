@@ -1,16 +1,16 @@
-package helium314.keyboard.keyboard.internal.keyboard_parser.floris
+package com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris
 
 import android.view.inputmethod.EditorInfo
-import helium314.keyboard.keyboard.KeyboardElement
-import helium314.keyboard.keyboard.internal.KeyboardCodesSet
-import helium314.keyboard.keyboard.internal.KeyboardIconsSet
-import helium314.keyboard.keyboard.internal.KeyboardParams
-import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyData.Companion.replaceIconWithLabelIfNoDrawable
-import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.InputTypeUtils
-import helium314.keyboard.latin.utils.ToolbarKey
-import helium314.keyboard.latin.utils.getCodeForToolbarKey
-import helium314.keyboard.latin.utils.toolbarKeyStrings
+import com.xpresstap.keyboard.keyboard.KeyboardElement
+import com.xpresstap.keyboard.keyboard.internal.KeyboardCodesSet
+import com.xpresstap.keyboard.keyboard.internal.KeyboardIconsSet
+import com.xpresstap.keyboard.keyboard.internal.KeyboardParams
+import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyData.Companion.replaceIconWithLabelIfNoDrawable
+import com.xpresstap.keyboard.latin.settings.Settings
+import com.xpresstap.keyboard.latin.utils.InputTypeUtils
+import com.xpresstap.keyboard.latin.utils.ToolbarKey
+import com.xpresstap.keyboard.latin.utils.getCodeForToolbarKey
+import com.xpresstap.keyboard.latin.utils.toolbarKeyStrings
 import java.util.Locale
 
 /** labels for functional / special keys */

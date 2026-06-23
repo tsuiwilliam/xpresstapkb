@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-package helium314.keyboard.settings.screens.gesturedata
+package com.xpresstap.keyboard.settings.screens.gesturedata
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -66,18 +66,18 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
-import helium314.keyboard.latin.R
-import helium314.keyboard.latin.common.Links
-import helium314.keyboard.latin.common.decapitalize
-import helium314.keyboard.latin.utils.GestureData
-import helium314.keyboard.latin.utils.GestureDataDao
-import helium314.keyboard.latin.utils.GestureDataGatheringSettings
-import helium314.keyboard.latin.utils.GestureDataInfo
-import helium314.keyboard.latin.utils.Theme
-import helium314.keyboard.latin.utils.previewDark
-import helium314.keyboard.settings.dialogs.ConfirmationDialog
-import helium314.keyboard.settings.dialogs.InfoDialog
-import helium314.keyboard.settings.dialogs.ThreeButtonAlertDialog
+import com.xpresstap.keyboard.latin.R
+import com.xpresstap.keyboard.latin.common.Links
+import com.xpresstap.keyboard.latin.common.decapitalize
+import com.xpresstap.keyboard.latin.utils.GestureData
+import com.xpresstap.keyboard.latin.utils.GestureDataDao
+import com.xpresstap.keyboard.latin.utils.GestureDataGatheringSettings
+import com.xpresstap.keyboard.latin.utils.GestureDataInfo
+import com.xpresstap.keyboard.latin.utils.Theme
+import com.xpresstap.keyboard.latin.utils.previewDark
+import com.xpresstap.keyboard.settings.dialogs.ConfirmationDialog
+import com.xpresstap.keyboard.settings.dialogs.InfoDialog
+import com.xpresstap.keyboard.settings.dialogs.ThreeButtonAlertDialog
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

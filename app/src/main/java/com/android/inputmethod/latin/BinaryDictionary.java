@@ -7,27 +7,27 @@
 package com.android.inputmethod.latin;
 
 import android.text.TextUtils;
-import helium314.keyboard.latin.utils.ChecksumCalculator;
-import helium314.keyboard.latin.utils.Log;
+import com.xpresstap.keyboard.latin.utils.ChecksumCalculator;
+import com.xpresstap.keyboard.latin.utils.Log;
 import android.util.SparseArray;
 
 import androidx.annotation.NonNull;
 
-import helium314.keyboard.latin.dictionary.Dictionary;
-import helium314.keyboard.latin.NgramContext;
-import helium314.keyboard.latin.SuggestedWords.SuggestedWordInfo;
-import helium314.keyboard.latin.common.ComposedData;
-import helium314.keyboard.latin.common.Constants;
-import helium314.keyboard.latin.common.FileUtils;
-import helium314.keyboard.latin.common.InputPointers;
-import helium314.keyboard.latin.common.StringUtils;
-import helium314.keyboard.latin.makedict.DictionaryHeader;
-import helium314.keyboard.latin.makedict.FormatSpec.DictionaryOptions;
-import helium314.keyboard.latin.makedict.UnsupportedFormatException;
-import helium314.keyboard.latin.makedict.WordProperty;
-import helium314.keyboard.latin.settings.SettingsValuesForSuggestion;
+import com.xpresstap.keyboard.latin.dictionary.Dictionary;
+import com.xpresstap.keyboard.latin.NgramContext;
+import com.xpresstap.keyboard.latin.SuggestedWords.SuggestedWordInfo;
+import com.xpresstap.keyboard.latin.common.ComposedData;
+import com.xpresstap.keyboard.latin.common.Constants;
+import com.xpresstap.keyboard.latin.common.FileUtils;
+import com.xpresstap.keyboard.latin.common.InputPointers;
+import com.xpresstap.keyboard.latin.common.StringUtils;
+import com.xpresstap.keyboard.latin.makedict.DictionaryHeader;
+import com.xpresstap.keyboard.latin.makedict.FormatSpec.DictionaryOptions;
+import com.xpresstap.keyboard.latin.makedict.UnsupportedFormatException;
+import com.xpresstap.keyboard.latin.makedict.WordProperty;
+import com.xpresstap.keyboard.latin.settings.SettingsValuesForSuggestion;
 import com.android.inputmethod.latin.utils.BinaryDictionaryUtils;
-import helium314.keyboard.latin.utils.JniUtils;
+import com.xpresstap.keyboard.latin.utils.JniUtils;
 import com.android.inputmethod.latin.utils.WordInputEventForPersonalization;
 
 import java.io.File;

@@ -6,9 +6,9 @@
 
 package com.android.inputmethod.latin;
 
-import helium314.keyboard.latin.common.NativeSuggestOptions;
-import helium314.keyboard.latin.define.DecoderSpecificConstants;
-import helium314.keyboard.latin.utils.JniUtils;
+import com.xpresstap.keyboard.latin.common.NativeSuggestOptions;
+import com.xpresstap.keyboard.latin.define.DecoderSpecificConstants;
+import com.xpresstap.keyboard.latin.utils.JniUtils;
 
 import java.util.Locale;
 

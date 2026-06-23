@@ -1915,12 +1915,17 @@ public class LatinIME extends InputMethodService implements
         NfcReadCoordinator coordinator = new NfcReadCoordinator(
             activity,
             cardData -> {
-                CvvDialogHelper.promptIfNeeded(this, cardData, (pan, expiry, cvv) -> {
+                CvvDialogHelper.INSTANCE.promptIfNeeded(this, cardData, (pan, expiry, cvv) -> {
                     injectPaymentFields(pan, expiry, cvv);
                     showToast(getString(R.string.nfc_fill_confirm, cardData.getLast4()));
+                    return kotlin.Unit.INSTANCE;
                 });
+                return kotlin.Unit.INSTANCE;
             },
-            msg -> showToast(msg)
+            msg -> {
+                showToast(msg);
+                return kotlin.Unit.INSTANCE;
+            }
         );
         showToast(getString(R.string.nfc_reading));
         coordinator.startReading();

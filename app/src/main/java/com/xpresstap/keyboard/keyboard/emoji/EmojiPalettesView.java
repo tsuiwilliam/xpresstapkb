@@ -54,7 +54,7 @@ import com.xpresstap.keyboard.latin.settings.SettingsValues;
 import com.xpresstap.keyboard.latin.utils.DictionaryInfoUtils;
 import com.xpresstap.keyboard.latin.utils.ResourceUtils;
 
-import static helium314.keyboard.latin.common.Constants.NOT_A_COORDINATE;
+import static com.xpresstap.keyboard.latin.common.Constants.NOT_A_COORDINATE;
 
 /**
  * View class to implement Emoji palettes.

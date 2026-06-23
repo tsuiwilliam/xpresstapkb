@@ -14,7 +14,7 @@ import com.xpresstap.keyboard.latin.utils.Log;
 public class DictionaryDumpBroadcastReceiver extends BroadcastReceiver {
   private static final String TAG = DictionaryDumpBroadcastReceiver.class.getSimpleName();
 
-    private static final String DOMAIN = "helium314.keyboard.latin";
+    private static final String DOMAIN = "com.xpresstap.keyboard.latin";
     public static final String DICTIONARY_DUMP_INTENT_ACTION = DOMAIN + ".DICT_DUMP";
     public static final String DICTIONARY_NAME_KEY = "dictName";
 

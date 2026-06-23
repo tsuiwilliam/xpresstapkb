@@ -6,7 +6,7 @@
 
 package com.xpresstap.keyboard.keyboard;
 
-import static helium314.keyboard.keyboard.KeyboardTheme.STYLE_ROUNDED;
+import static com.xpresstap.keyboard.keyboard.KeyboardTheme.STYLE_ROUNDED;
 
 import android.content.Context;
 import android.content.res.TypedArray;

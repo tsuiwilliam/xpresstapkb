@@ -31,7 +31,7 @@ public final class Constants {
         /**
          * The private IME option used to suppress the floating gesture preview for a given text
          * field. This overrides the corresponding keyboard settings preference.
-         * {@link helium314.keyboard.latin.settings.SettingsValues#mGestureFloatingPreviewTextEnabled}
+         * {@link com.xpresstap.keyboard.latin.settings.SettingsValues#mGestureFloatingPreviewTextEnabled}
          */
         public static final String NO_FLOATING_GESTURE_PREVIEW = "noGestureFloatingPreview";
 
@@ -237,7 +237,7 @@ public final class Constants {
 
     /**
      * Screen metrics (a.k.a. Device form factor) constants of
-     * {@link helium314.keyboard.latin.R.integer#config_screen_metrics}.
+     * {@link com.xpresstap.keyboard.latin.R.integer#config_screen_metrics}.
      */
     public static final int SCREEN_METRICS_SMALL_PHONE = 0;
     public static final int SCREEN_METRICS_LARGE_PHONE = 1;
@@ -246,7 +246,7 @@ public final class Constants {
 
     /**
      * Default capacity of gesture points container.
-     * This constant is used by {@link helium314.keyboard.keyboard.internal.BatchInputArbiter}
+     * This constant is used by {@link com.xpresstap.keyboard.keyboard.internal.BatchInputArbiter}
      * and etc. to preallocate regions that contain gesture event points.
      */
     public static final int DEFAULT_GESTURE_POINTS_CAPACITY = 128;

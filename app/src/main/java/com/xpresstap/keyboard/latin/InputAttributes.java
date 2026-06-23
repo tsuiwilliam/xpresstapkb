@@ -18,8 +18,8 @@ import com.xpresstap.keyboard.latin.utils.InputTypeUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static helium314.keyboard.latin.common.Constants.ImeOption.NO_FLOATING_GESTURE_PREVIEW;
-import static helium314.keyboard.latin.common.Constants.ImeOption.NO_MICROPHONE;
+import static com.xpresstap.keyboard.latin.common.Constants.ImeOption.NO_FLOATING_GESTURE_PREVIEW;
+import static com.xpresstap.keyboard.latin.common.Constants.ImeOption.NO_MICROPHONE;
 
 import androidx.annotation.NonNull;
 
@@ -41,7 +41,7 @@ public final class InputAttributes {
     /**
      * Whether the floating gesture preview should be disabled. If true, this should override the
      * corresponding keyboard settings preference, always suppressing the floating preview text.
-     * {@link helium314.keyboard.latin.settings.SettingsValues#mGestureFloatingPreviewTextEnabled}
+     * {@link com.xpresstap.keyboard.latin.settings.SettingsValues#mGestureFloatingPreviewTextEnabled}
      */
     final public boolean mDisableGestureFloatingPreviewText;
     final public boolean mIsGeneralTextInput;

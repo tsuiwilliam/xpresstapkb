@@ -42,7 +42,7 @@ import java.util.Locale;
 
 /**
  * When you call the constructor of this class, you may want to change the current system locale by
- * using {@link helium314.keyboard.latin.utils.RunInLocaleKt}.
+ * using {@link com.xpresstap.keyboard.latin.utils.RunInLocaleKt}.
  */
 // Non-final for testing via mock library.
 public class SettingsValues {

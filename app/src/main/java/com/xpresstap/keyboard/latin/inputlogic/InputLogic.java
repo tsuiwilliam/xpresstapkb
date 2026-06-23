@@ -6,7 +6,7 @@
 
 package com.xpresstap.keyboard.latin.inputlogic;
 
-import static helium314.keyboard.latin.common.SuggestionSpanUtilsKt.getTextWithSuggestionSpan;
+import static com.xpresstap.keyboard.latin.common.SuggestionSpanUtilsKt.getTextWithSuggestionSpan;
 
 import android.graphics.Color;
 import android.os.SystemClock;
@@ -276,7 +276,7 @@ public final class InputLogic {
      * @param settingsValues the current values of the settings.
      * @param suggestionInfo the suggestion info.
      * @param keyboardCapsMode the shift state of the keyboard, as returned by
-     *     {@link helium314.keyboard.keyboard.KeyboardSwitcher#getKeyboardCapsMode()}
+     *     {@link com.xpresstap.keyboard.keyboard.KeyboardSwitcher#getKeyboardCapsMode()}
      * @return the complete transaction object
      */
     // Called from {@link SuggestionStripView} through the {@link SuggestionStripView#Listener}
@@ -460,7 +460,7 @@ public final class InputLogic {
      * @param settingsValues the current settings values.
      * @param event the event to handle.
      * @param keyboardCapsMode the current shift mode of the keyboard, as returned by
-     *     {@link helium314.keyboard.keyboard.KeyboardSwitcher#getKeyboardCapsMode()}
+     *     {@link com.xpresstap.keyboard.keyboard.KeyboardSwitcher#getKeyboardCapsMode()}
      * @return the complete transaction object
      */
     public InputTransaction onCodeInput(SettingsValues settingsValues, @NonNull Event event,
@@ -2162,10 +2162,10 @@ public final class InputLogic {
     }
 
     /**
-     * Make a {@link helium314.keyboard.latin.SuggestedWords} object containing a typed word
+     * Make a {@link com.xpresstap.keyboard.latin.SuggestedWords} object containing a typed word
      * and obsolete suggestions.
-     * See {@link helium314.keyboard.latin.SuggestedWords#getTypedWordAndPreviousSuggestions(
-     *      SuggestedWordInfo, helium314.keyboard.latin.SuggestedWords)}.
+     * See {@link com.xpresstap.keyboard.latin.SuggestedWords#getTypedWordAndPreviousSuggestions(
+     *      SuggestedWordInfo, com.xpresstap.keyboard.latin.SuggestedWords)}.
      * @param typedWordInfo The typed word as a SuggestedWordInfo.
      * @param previousSuggestedWords The previously suggested words.
      * @return Obsolete suggestions with the newly typed word.

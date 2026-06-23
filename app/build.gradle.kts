@@ -12,7 +12,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "helium314.keyboard"
+        applicationId = "com.xpresstap.keyboard"
         minSdk = 21
         targetSdk = 36
         versionCode = 4002
@@ -67,7 +67,7 @@ android {
             }
             variant.outputs.forEach { output ->
                 if (output is com.android.build.api.variant.impl.VariantOutputImpl) {
-                    output.outputFileName = "HeliBoard_${defaultConfig.versionName}-${variant.buildType}.apk"
+                    output.outputFileName = "xPressTap_${defaultConfig.versionName}-${variant.buildType}.apk"
                 }
             }
         }
@@ -118,7 +118,7 @@ android {
         includeInBundle = false
     }
 
-    namespace = "helium314.keyboard.latin"
+    namespace = "com.xpresstap.keyboard.latin"
     lint {
         abortOnError = true
     }
@@ -127,6 +127,7 @@ android {
 dependencies {
     // androidx
     implementation("androidx.core:core-ktx:1.17.0") // 1.18.0 requires minSdk 23
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
     implementation("androidx.recyclerview:recyclerview:1.4.0")
     implementation("androidx.autofill:autofill:1.3.0")
     implementation("androidx.viewpager2:viewpager2:1.1.0")

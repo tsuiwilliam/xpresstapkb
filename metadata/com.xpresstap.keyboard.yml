@@ -1,0 +1,11 @@
+Categories:
+  - Writing
+License: GPL-3.0-only
+AuthorName: xPressTap
+SourceCode: https://github.com/tsuiwilliam/xpresstapkb
+IssueTracker: https://github.com/tsuiwilliam/xpresstapkb/issues
+Summary: Privacy keyboard with NFC payment card autofill
+Description: |
+  xPressTap is a fork of HeliBoard adding contactless payment card reading.
+  Tap your physical card to fill card number and expiry in any browser or app.
+  CVV is stored encrypted in Android Keystore. No internet permission. 100% offline.

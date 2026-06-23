@@ -134,7 +134,7 @@ android {
         includeInBundle = false
     }
 
-    namespace = "com.xpresstap.keyboard.latin"
+    namespace = "helium314.keyboard.latin"
     lint {
         abortOnError = true
     }

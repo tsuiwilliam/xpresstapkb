@@ -1,6 +1,7 @@
 package com.xpresstap.keyboard.nfc
 
 import android.app.Activity
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -21,10 +22,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
- * Full-screen opaque Activity that exclusively holds NFC reader mode.
- * Must NOT use a translucent theme — windowIsTranslucent=true prevents
- * enableReaderMode from claiming exclusive NFC dispatch, letting the
- * system fall through to the global intent chooser (competing apps).
+ * Full-screen Activity that claims NFC foreground dispatch so competing apps
+ * cannot intercept card taps. Uses enableForegroundDispatch (Intent-based)
+ * rather than enableReaderMode because the IME window layer can prevent
+ * enableReaderMode from receiving focus-based foreground ownership.
  */
 class NfcForegroundActivity : Activity() {
 
@@ -34,25 +35,25 @@ class NfcForegroundActivity : Activity() {
     private lateinit var statusText: TextView
 
     private val timeoutRunnable: Runnable = Runnable {
-        if (::statusText.isInitialized) statusText.text = "Timed out — tap your card to retry"
+        if (::statusText.isInitialized) statusText.text = "Timed out — tap card to retry"
         handler.postDelayed(timeoutRunnable, TIMEOUT_MS)
     }
 
     companion object {
-        const val ACTION_STOP      = "com.xpresstap.keyboard.NFC_STOP"
-        const val ACTION_CARD_READ = "com.xpresstap.keyboard.NFC_CARD_READ"
-        const val EXTRA_PAN        = "pan"
-        const val EXTRA_EXPIRY     = "expiry"
-        const val EXTRA_LAST4      = "last4"
-        const val EXTRA_CARD_KEY   = "cardKey"
-        const val EXTRA_ERROR      = "error"
+        const val ACTION_STOP       = "com.xpresstap.keyboard.NFC_STOP"
+        const val ACTION_CARD_READ  = "com.xpresstap.keyboard.NFC_CARD_READ"
+        const val EXTRA_PAN         = "pan"
+        const val EXTRA_EXPIRY      = "expiry"
+        const val EXTRA_LAST4       = "last4"
+        const val EXTRA_CARD_KEY    = "cardKey"
+        const val EXTRA_ERROR       = "error"
         private const val TIMEOUT_MS = 20_000L
 
         @JvmStatic
         fun start(context: Context) {
             context.startActivity(
                 Intent(context, NfcForegroundActivity::class.java)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             )
         }
 
@@ -69,9 +70,8 @@ class NfcForegroundActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Dark full-screen overlay with instructions
         val root = FrameLayout(this)
-        root.setBackgroundColor(Color.argb(220, 0, 0, 0))
+        root.setBackgroundColor(Color.argb(230, 0, 0, 0))
 
         statusText = TextView(this).apply {
             text = "Tap your payment card"
@@ -80,23 +80,20 @@ class NfcForegroundActivity : Activity() {
             gravity = Gravity.CENTER
             setPadding(48, 0, 48, 0)
         }
-        val lp = FrameLayout.LayoutParams(
+        root.addView(statusText, FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT,
             FrameLayout.LayoutParams.WRAP_CONTENT
-        ).apply { gravity = Gravity.CENTER }
-        root.addView(statusText, lp)
+        ).apply { gravity = Gravity.CENTER })
 
-        val hint = TextView(this).apply {
+        root.addView(TextView(this).apply {
             text = "Tap anywhere to cancel"
-            setTextColor(Color.argb(160, 255, 255, 255))
+            setTextColor(Color.argb(140, 255, 255, 255))
             textSize = 14f
             gravity = Gravity.CENTER
-        }
-        val hintLp = FrameLayout.LayoutParams(
+        }, FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT,
             FrameLayout.LayoutParams.WRAP_CONTENT
-        ).apply { gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL; bottomMargin = 80 }
-        root.addView(hint, hintLp)
+        ).apply { gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL; bottomMargin = 80 })
 
         root.setOnClickListener { finish() }
         setContentView(root)
@@ -110,24 +107,27 @@ class NfcForegroundActivity : Activity() {
         super.onResume()
         val adapter = nfcAdapter
         if (adapter == null || !adapter.isEnabled) {
-            sendBroadcast(Intent(ACTION_CARD_READ).putExtra(EXTRA_ERROR, "NFC unavailable on this device"))
+            sendBroadcast(Intent(ACTION_CARD_READ).putExtra(EXTRA_ERROR, "NFC unavailable"))
             finish()
             return
         }
-        adapter.enableReaderMode(
-            this,
-            ::handleTag,
-            NfcAdapter.FLAG_READER_NFC_A or
-            NfcAdapter.FLAG_READER_NFC_B or
-            NfcAdapter.FLAG_READER_SKIP_NDEF_CHECK,
-            null
+
+        // enableForegroundDispatch routes NFC intents to onNewIntent BEFORE global dispatch,
+        // bypassing the app chooser regardless of which window layer has keyboard focus.
+        val selfIntent = Intent(this, NfcForegroundActivity::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        val pendingIntent = PendingIntent.getActivity(
+            this, 0, selfIntent,
+            PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
-        statusText.text = "Tap your payment card"
+        // Accept any ISO-DEP (payment card) tag
+        val techLists = arrayOf(arrayOf(IsoDep::class.java.name))
+        adapter.enableForegroundDispatch(this, pendingIntent, null, techLists)
     }
 
     override fun onPause() {
         super.onPause()
-        try { nfcAdapter?.disableReaderMode(this) } catch (_: Exception) {}
+        try { nfcAdapter?.disableForegroundDispatch(this) } catch (_: Exception) {}
     }
 
     override fun onDestroy() {
@@ -136,20 +136,34 @@ class NfcForegroundActivity : Activity() {
         try { unregisterReceiver(stopReceiver) } catch (_: Exception) {}
     }
 
+    // NFC tag arrives here via foreground dispatch
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        val action = intent.action
+        if (action == NfcAdapter.ACTION_TECH_DISCOVERED ||
+            action == NfcAdapter.ACTION_TAG_DISCOVERED ||
+            action == NfcAdapter.ACTION_NDEF_DISCOVERED) {
+            @Suppress("DEPRECATION")
+            val tag = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
+            if (tag != null) handleTag(tag)
+        }
+    }
+
     private fun handleTag(tag: Tag) {
         handler.removeCallbacks(timeoutRunnable)
-        handler.post { statusText.text = "Reading card..." }
+        statusText.text = "Reading card..."
         scope.launch {
             val isoDep = IsoDep.get(tag)
             val cardData = if (isoDep != null) EmvCardReader.read(isoDep) else null
             withContext(Dispatchers.Main) {
                 if (cardData != null) {
-                    val intent = Intent(ACTION_CARD_READ)
-                    intent.putExtra(EXTRA_PAN, cardData.pan)
-                    intent.putExtra(EXTRA_EXPIRY, cardData.expiry)
-                    intent.putExtra(EXTRA_LAST4, cardData.last4)
-                    intent.putExtra(EXTRA_CARD_KEY, cardData.cardKey)
-                    sendBroadcast(intent, null)
+                    val out = Intent(ACTION_CARD_READ).apply {
+                        putExtra(EXTRA_PAN, cardData.pan)
+                        putExtra(EXTRA_EXPIRY, cardData.expiry)
+                        putExtra(EXTRA_LAST4, cardData.last4)
+                        putExtra(EXTRA_CARD_KEY, cardData.cardKey)
+                    }
+                    sendBroadcast(out, null)
                     finish()
                 } else {
                     statusText.text = "Could not read card — tap again, slower"

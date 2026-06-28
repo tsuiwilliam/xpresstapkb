@@ -93,13 +93,12 @@ SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
             android:theme="@style/TransparentActivityTheme" android:excludeFromRecents="true" android:noHistory="true"
             android:windowSoftInputMode="adjustResize|stateAlwaysVisible" android:configChanges="orientation|screenSize"/>
 
-        <!-- NFC foreground reader: opaque dark screen — translucent themes break enableReaderMode -->
+        <!-- NFC foreground reader: singleTop so onNewIntent fires on existing instance -->
         <activity android:name="com.xpresstap.keyboard.nfc.NfcForegroundActivity"
             android:theme="@style/Theme.NfcOverlay"
             android:exported="false"
             android:excludeFromRecents="true"
-            android:launchMode="singleTask"
-            android:taskAffinity=""
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden|adjustNothing"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
 

@@ -33,8 +33,8 @@ class NfcForegroundActivity : Activity() {
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var statusText: TextView
 
-    private val timeoutRunnable = Runnable {
-        statusText.text = "Timed out — tap your card to retry"
+    private val timeoutRunnable: Runnable = Runnable {
+        if (::statusText.isInitialized) statusText.text = "Timed out — tap your card to retry"
         handler.postDelayed(timeoutRunnable, TIMEOUT_MS)
     }
 

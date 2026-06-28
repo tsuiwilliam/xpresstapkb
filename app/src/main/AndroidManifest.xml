@@ -93,14 +93,14 @@ SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
             android:theme="@style/TransparentActivityTheme" android:excludeFromRecents="true" android:noHistory="true"
             android:windowSoftInputMode="adjustResize|stateAlwaysVisible" android:configChanges="orientation|screenSize"/>
 
-        <!-- NFC foreground reader: transparent, non-interactive, holds enableReaderMode exclusively -->
+        <!-- NFC foreground reader: opaque dark screen — translucent themes break enableReaderMode -->
         <activity android:name="com.xpresstap.keyboard.nfc.NfcForegroundActivity"
-            android:theme="@style/TransparentActivityTheme"
+            android:theme="@style/Theme.NfcOverlay"
             android:exported="false"
             android:excludeFromRecents="true"
             android:launchMode="singleTask"
             android:taskAffinity=""
-            android:windowSoftInputMode="stateUnchanged|adjustNothing"
+            android:windowSoftInputMode="stateHidden|adjustNothing"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
 
         <!-- Accessibility service for hunting payment fields in browsers and apps -->

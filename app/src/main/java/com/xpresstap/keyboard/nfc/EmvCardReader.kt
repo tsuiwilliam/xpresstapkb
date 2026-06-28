@@ -23,11 +23,23 @@ object EmvCardReader {
         }
     }
 
+    // Well-known payment AIDs tried in priority order when PPSE/PSE yield nothing
+    private val FALLBACK_AIDS = listOf(
+        "A0000000031010", // Visa Credit/Debit
+        "A0000000032010", // Visa Electron
+        "A0000000033010", // Visa Classic
+        "A0000000041010", // Mastercard Credit/Debit
+        "A0000000043060", // Mastercard Maestro
+        "A000000025010402", // Amex
+        "A0000001523010", // Discover
+        "A000000065", // JCB
+    ).map { hex -> hex.chunked(2).map { it.toInt(16).toByte() }.toByteArray() }
+
     private fun readCard(isoDep: IsoDep): CardData? {
-        // Try PPSE first (contactless), fall back to PSE (contact)
+        // Try PPSE (contactless) → PSE (contact) → known AIDs
         val aids = selectPaymentEnvironment(isoDep, ppse = true)
             ?: selectPaymentEnvironment(isoDep, ppse = false)
-            ?: return null
+            ?: FALLBACK_AIDS
 
         for (aid in aids) {
             val result = readWithAid(isoDep, aid)
@@ -45,21 +57,27 @@ object EmvCardReader {
 
     private fun parseAidsFromFci(fci: ByteArray): List<ByteArray> {
         val aids = mutableListOf<ByteArray>()
-        // Walk TLV tree looking for 0x61 Application Templates containing 0x4F AIDs
-        forEachTlv(fci) { tag, value ->
-            if (tag == 0x61) {
-                forEachTlv(value) { t, v ->
-                    if (t == 0x4F && v.size in 5..16) aids.add(v)
-                }
-            } else if (tag == 0xBF0C) {
-                forEachTlv(value) { t, v ->
-                    if (t == 0x61) forEachTlv(v) { t2, v2 ->
-                        if (t2 == 0x4F && v2.size in 5..16) aids.add(v2)
-                    }
-                }
+        // Recursively find all Application Templates (tag 0x61) anywhere in the FCI tree,
+        // then extract the AID (tag 0x4F) from each. PPSE response nests these 4 levels deep:
+        // 6F → A5 → BF0C → 61 → 4F, so a flat walk misses them.
+        findAllTags(fci, 0x61) { appTemplate ->
+            findTag(appTemplate, 0x4F)?.let { aid ->
+                if (aid.size in 5..16) aids.add(aid)
             }
         }
         return aids
+    }
+
+    /** Find every occurrence of [target] in [data], recursively descending constructed TLVs. */
+    private fun findAllTags(data: ByteArray, target: Int, action: (ByteArray) -> Unit) {
+        forEachTlv(data) { tag, value ->
+            if (tag == target) {
+                action(value)
+            }
+            // Always recurse into constructed containers (bit 6 of first byte set)
+            val firstByte = if (tag > 0xFF) (tag shr 8) and 0xFF else tag and 0xFF
+            if (firstByte and 0x20 != 0) findAllTags(value, target, action)
+        }
     }
 
     private fun readWithAid(isoDep: IsoDep, aid: ByteArray): CardData? {

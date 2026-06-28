@@ -24,6 +24,13 @@ android {
                 this.keyPassword = keyPassword
             }
         }
+        // Committed keystore so all CI debug builds are signed identically → APK upgrades in place
+        getByName("debug") {
+            storeFile = file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
     }
 
     defaultConfig {

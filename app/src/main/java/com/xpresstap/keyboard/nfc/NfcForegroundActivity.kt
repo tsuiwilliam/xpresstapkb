@@ -107,18 +107,21 @@ class NfcForegroundActivity : Activity() {
             val isoDep = IsoDep.get(tag)
             val cardData = if (isoDep != null) EmvCardReader.read(isoDep) else null
             withContext(Dispatchers.Main) {
-                val intent = Intent(ACTION_CARD_READ)
                 if (cardData != null) {
+                    val intent = Intent(ACTION_CARD_READ)
                     intent.putExtra(EXTRA_PAN, cardData.pan)
                     intent.putExtra(EXTRA_EXPIRY, cardData.expiry)
                     intent.putExtra(EXTRA_LAST4, cardData.last4)
                     intent.putExtra(EXTRA_CARD_KEY, cardData.cardKey)
+                    sendBroadcast(intent, null)
+                    finish()
                 } else {
-                    intent.putExtra(EXTRA_ERROR, "Could not read card — try again")
+                    // Stay open so user can tap again — do NOT finish() on error
+                    Toast.makeText(this@NfcForegroundActivity,
+                        "Could not read card — tap again, slower", Toast.LENGTH_SHORT).show()
+                    // Reset the timeout for another attempt
+                    handler.postDelayed(timeoutRunnable, TIMEOUT_MS)
                 }
-                sendBroadcast(intent, null)
-                // Finish first so previous app regains focus before accessibility service fills
-                finish()
             }
         }
     }

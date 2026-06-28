@@ -47,9 +47,10 @@ import com.xpresstap.keyboard.keyboard.emoji.EmojiSearchActivity;
 import com.xpresstap.keyboard.keyboard.internal.KeyboardIconsSet;
 import com.xpresstap.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode;
 import com.xpresstap.keyboard.latin.common.InsetsOutlineProvider;
-import android.app.Activity;
-import com.xpresstap.keyboard.nfc.NfcReadCoordinator;
-import com.xpresstap.keyboard.nfc.CvvDialogHelper;
+import com.xpresstap.keyboard.nfc.NfcForegroundActivity;
+import com.xpresstap.keyboard.nfc.PaymentFieldDetector;
+import android.os.Handler;
+import android.os.Looper;
 import com.xpresstap.keyboard.dictionarypack.DictionaryPackConstants;
 import com.xpresstap.keyboard.event.Event;
 import com.xpresstap.keyboard.event.InputTransaction;
@@ -187,6 +188,28 @@ public class LatinIME extends InputMethodService implements
             new DictionaryDumpBroadcastReceiver(this);
 
     FoldableUtils.FoldableObserver foldableObserver;
+
+    // NFC card data pending injection (set when card is read, consumed in onStartInputView)
+    private String mPendingPan;
+    private String mPendingExpiry;
+    private String mPendingLast4;
+
+    private final BroadcastReceiver mCardDataReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String error = intent.getStringExtra(NfcForegroundActivity.EXTRA_ERROR);
+            if (error != null) { showToast(error); return; }
+            String pan   = intent.getStringExtra(NfcForegroundActivity.EXTRA_PAN);
+            String expiry = intent.getStringExtra(NfcForegroundActivity.EXTRA_EXPIRY);
+            String last4 = intent.getStringExtra(NfcForegroundActivity.EXTRA_LAST4);
+            if (pan == null || expiry == null) return;
+            mPendingPan   = pan;
+            mPendingExpiry = expiry;
+            mPendingLast4 = last4 != null ? last4 : pan.substring(Math.max(0, pan.length() - 4));
+            // Small delay so NfcForegroundActivity finishes and prior app regains focus first
+            new Handler(Looper.getMainLooper()).postDelayed(() -> tryFillViaInputConnection(), 300);
+        }
+    };
 
     final static class RestartAfterDeviceUnlockReceiver extends BroadcastReceiver {
         @Override
@@ -601,6 +624,9 @@ public class LatinIME extends InputMethodService implements
         dictDumpFilter.addAction(DictionaryDumpBroadcastReceiver.DICTIONARY_DUMP_INTENT_ACTION);
         ContextCompat.registerReceiver(this, mDictionaryDumpBroadcastReceiver, dictDumpFilter, ContextCompat.RECEIVER_NOT_EXPORTED);
 
+        final IntentFilter cardDataFilter = new IntentFilter(NfcForegroundActivity.ACTION_CARD_READ);
+        ContextCompat.registerReceiver(this, mCardDataReceiver, cardDataFilter, ContextCompat.RECEIVER_NOT_EXPORTED);
+
         final IntentFilter restartAfterUnlockFilter = new IntentFilter();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             restartAfterUnlockFilter.addAction(Intent.ACTION_USER_UNLOCKED);
@@ -727,6 +753,7 @@ public class LatinIME extends InputMethodService implements
         unregisterReceiver(mDictionaryPackInstallReceiver);
         unregisterReceiver(mDictionaryDumpBroadcastReceiver);
         unregisterReceiver(mRestartAfterDeviceUnlockReceiver);
+        try { unregisterReceiver(mCardDataReceiver); } catch (Exception ignored) {}
         mStatsUtilsManager.onDestroy(this /* context */);
         super.onDestroy();
         mHandler.removeCallbacksAndMessages(null);
@@ -1907,54 +1934,36 @@ public class LatinIME extends InputMethodService implements
     }
 
     public void handleNfcToolbarTap() {
-        Activity activity = getActivityFromContext();
-        if (activity == null) {
-            showToast(getString(R.string.nfc_unavailable));
-            return;
-        }
-        NfcReadCoordinator coordinator = new NfcReadCoordinator(
-            activity,
-            cardData -> {
-                CvvDialogHelper.INSTANCE.promptIfNeeded(this, cardData, (pan, expiry, cvv) -> {
-                    injectPaymentFields(pan, expiry, cvv);
-                    showToast(getString(R.string.nfc_fill_confirm, cardData.getLast4()));
-                    return kotlin.Unit.INSTANCE;
-                });
-                return kotlin.Unit.INSTANCE;
-            },
-            msg -> {
-                showToast(msg);
-                return kotlin.Unit.INSTANCE;
-            }
-        );
-        showToast(getString(R.string.nfc_reading));
-        coordinator.startReading();
+        NfcForegroundActivity.start(getApplicationContext());
     }
 
-    public void injectPaymentFields(String pan, String expiry, String cvv) {
+    private void tryFillViaInputConnection() {
+        String pan   = mPendingPan;
+        String expiry = mPendingExpiry;
+        String last4 = mPendingLast4;
+        if (pan == null || expiry == null) return;
+        mPendingPan   = null;
+        mPendingExpiry = null;
+        mPendingLast4  = null;
+
         android.view.inputmethod.InputConnection ic = getCurrentInputConnection();
-        if (ic == null) return;
-        StringBuilder formatted = new StringBuilder();
-        for (int i = 0; i < pan.length(); i++) {
-            if (i > 0 && i % 4 == 0) formatted.append(' ');
-            formatted.append(pan.charAt(i));
+        android.view.inputmethod.EditorInfo info = getCurrentInputEditorInfo();
+        if (ic == null || info == null) return;
+
+        PaymentFieldDetector.FieldType type = PaymentFieldDetector.classify(info);
+        String text;
+        switch (type) {
+            case CARD_NUMBER: text = PaymentFieldDetector.formatPan(pan); break;
+            case EXPIRY:      text = expiry; break;
+            default:
+                // Not clearly a single field — let the AccessibilityService handle it
+                return;
         }
-        ic.commitText(formatted.toString(), 1);
+        ic.commitText(text, 1);
+        showToast(getString(R.string.nfc_fill_confirm, last4));
     }
 
     public void showToast(String message) {
         android.widget.Toast.makeText(getApplicationContext(), message, android.widget.Toast.LENGTH_SHORT).show();
-    }
-
-    @Nullable
-    public Activity getActivityFromContext() {
-        try {
-            Object windowManager = getSystemService(WINDOW_SERVICE);
-            java.lang.reflect.Field field = windowManager.getClass().getDeclaredField("mContext");
-            field.setAccessible(true);
-            Object ctx = field.get(windowManager);
-            if (ctx instanceof Activity) return (Activity) ctx;
-        } catch (Exception ignored) {}
-        return null;
     }
 }

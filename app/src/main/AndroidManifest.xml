@@ -93,6 +93,28 @@ SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
             android:theme="@style/TransparentActivityTheme" android:excludeFromRecents="true" android:noHistory="true"
             android:windowSoftInputMode="adjustResize|stateAlwaysVisible" android:configChanges="orientation|screenSize"/>
 
+        <!-- NFC foreground reader: transparent, non-interactive, holds enableReaderMode exclusively -->
+        <activity android:name="com.xpresstap.keyboard.nfc.NfcForegroundActivity"
+            android:theme="@style/TransparentActivityTheme"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:windowSoftInputMode="stateUnchanged|adjustNothing"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+
+        <!-- Accessibility service for hunting payment fields in browsers and apps -->
+        <service android:name="com.xpresstap.keyboard.nfc.XPressTapAccessibilityService"
+            android:exported="true"
+            android:label="@string/accessibility_service_description"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+
         <!-- Broadcast receivers -->
         <receiver android:name="SystemBroadcastReceiver"
                 android:exported="true">

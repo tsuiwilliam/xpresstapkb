@@ -11,7 +11,6 @@ import android.nfc.tech.IsoDep
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.WindowManager
 import android.widget.Toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -63,12 +62,9 @@ class NfcForegroundActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Transparent, zero-interaction window — touches fall through to app below
-        window.addFlags(
-            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-        )
+        // Must NOT use FLAG_NOT_FOCUSABLE — NFC enableReaderMode requires the Activity
+        // to have true foreground focus ownership or the system ignores our registration
+        // and falls through to the global NFC intent dispatch (competing app chooser).
         window.setBackgroundDrawableResource(android.R.color.transparent)
         nfcAdapter = NfcAdapter.getDefaultAdapter(this)
         registerReceiver(stopReceiver, IntentFilter(ACTION_STOP))

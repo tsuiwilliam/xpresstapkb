@@ -40,6 +40,7 @@ public final class JniUtils {
     }
 
     public static boolean sHaveGestureLib = false;
+    public static boolean sUsingGoogleLib = false; // true when Google gesture decoder is active
     static {
         // hardcoded default path, may not work on all phones
         @SuppressLint("SdCardPath") String filesDir = "/data/data/" + BuildConfig.APPLICATION_ID + "/files";
@@ -76,7 +77,9 @@ public final class JniUtils {
                 if (TextUtils.equals(wantedChecksum, checksum)) {
                     // try loading the library
                     System.load(userSuppliedLibrary.getAbsolutePath());
-                    sHaveGestureLib = true; // this is an assumption, any way to actually check?
+                    sHaveGestureLib = true;
+                    sUsingGoogleLib = true;
+                    Log.i(TAG, "xPressTap: using Google gesture lib (full swipe quality)");
                 } else {
                     // delete if checksum doesn't match
                     // this is bad if we can't get the application and the user has a different library than expected...
@@ -108,6 +111,7 @@ public final class JniUtils {
             try {
                 System.loadLibrary(JNI_LIB_NAME);
                 sHaveGestureLib = true;
+                Log.i(TAG, "xPressTap: using built-in gesture lib (Java fallback active, Google lib not yet extracted)");
             } catch (UnsatisfiedLinkError ul) {
                 Log.w(TAG, "Could not load native library " + JNI_LIB_NAME, ul);
             }

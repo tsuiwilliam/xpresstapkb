@@ -1964,11 +1964,21 @@ public class LatinIME extends InputMethodService implements
 
         PaymentFieldDetector.FieldType type = PaymentFieldDetector.classify(info);
 
-        // Web-based payment forms (Stripe in Chrome) pass generic EditorInfo with no hint text,
-        // so classify() returns UNKNOWN for the expiry field. If we just filled PAN, treat the
-        // next UNKNOWN field as expiry rather than pasting PAN again.
-        if (mPanWasFilled && type == PaymentFieldDetector.FieldType.UNKNOWN) {
-            type = PaymentFieldDetector.FieldType.EXPIRY;
+        // Chrome web forms (Stripe, etc.) expose no hint/label/fieldName in EditorInfo,
+        // so classify() returns UNKNOWN for both card number AND expiry fields.
+        // Disambiguate using inputType and fill sequence:
+        //   - non-numeric UNKNOWN (Keep notes, plain text) → stays UNKNOWN → paste both
+        //   - numeric UNKNOWN + PAN not yet filled → treat as card number
+        //   - numeric UNKNOWN + PAN already filled → treat as expiry
+        if (type == PaymentFieldDetector.FieldType.UNKNOWN) {
+            int inputClass = info.inputType & android.text.InputType.TYPE_MASK_CLASS;
+            boolean isNumeric = inputClass == android.text.InputType.TYPE_CLASS_NUMBER
+                    || inputClass == android.text.InputType.TYPE_CLASS_PHONE;
+            if (mPanWasFilled) {
+                type = PaymentFieldDetector.FieldType.EXPIRY;
+            } else if (isNumeric) {
+                type = PaymentFieldDetector.FieldType.CARD_NUMBER;
+            }
         }
 
         switch (type) {

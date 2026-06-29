@@ -206,8 +206,8 @@ public class LatinIME extends InputMethodService implements
             mPendingPan   = pan;
             mPendingExpiry = expiry;
             mPendingLast4 = last4 != null ? last4 : pan.substring(Math.max(0, pan.length() - 4));
-            // Small delay so NfcForegroundActivity finishes and prior app regains focus first
-            new Handler(Looper.getMainLooper()).postDelayed(() -> tryFillViaInputConnection(), 300);
+            // Delay so NfcForegroundActivity finishes and prior app's EditText re-establishes IC
+            new Handler(Looper.getMainLooper()).postDelayed(() -> tryFillViaInputConnection(), 600);
         }
     };
 
@@ -1955,9 +1955,11 @@ public class LatinIME extends InputMethodService implements
         switch (type) {
             case CARD_NUMBER: text = PaymentFieldDetector.formatPan(pan); break;
             case EXPIRY:      text = expiry; break;
+            case CVV:         return; // CVV is not on the card chip — skip
             default:
-                // Not clearly a single field — let the AccessibilityService handle it
-                return;
+                // Unknown field: paste PAN so any text field works as a test target
+                text = PaymentFieldDetector.formatPan(pan);
+                break;
         }
         ic.commitText(text, 1);
         showToast(getString(R.string.nfc_fill_confirm, last4));

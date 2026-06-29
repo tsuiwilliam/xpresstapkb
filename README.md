@@ -1,89 +1,97 @@
 # xPressTap Keyboard
 
 Android keyboard with NFC payment card autofill and gesture/swipe typing.
-Built on [HeliBoard](https://github.com/HeliBorg/HeliBoard) (Apache-2.0 / GPL-3.0).
+
+**v1.1.0 (2026-06-29):** Clean AOSP LatinIME base — Apache-2.0 only, no GPL, no proprietary code.
 
 ---
 
-## Milestone: v4.0-alpha8 — WORKING ✓
+## Releases
 
-**Confirmed working as of 2026-06-29.**
+| Version | Base | Swipe | NFC | Notes |
+|---------|------|-------|-----|-------|
+| **v1.1.0** | AOSP LatinIME (Apache-2.0) | ✓ pure-Java decoder | ✓ EMV BER-TLV | Clean build, publicly distributable |
+| v4.0-alpha8 | HeliBoard (GPL-3.0) | ✓ Google gesture lib | ✓ | Internal testing only — see legal notice |
+
+**Latest APK:** https://github.com/tsuiwilliam/xpresstapkb/releases/tag/v1.1.0
+
+---
+
+## v1.1.0 — What's working
+
+**Confirmed on emulator (2026-06-29):**
 
 | Feature | Status |
 |---------|--------|
-| NFC tap → fill PAN in card number field | ✓ |
-| NFC tap → fill expiry in expiry field | ✓ |
-| NFC tap → paste PAN + expiry in plain-text fields (e.g. Keep notes) | ✓ |
-| Chrome / Stripe pay forms (no EditorInfo metadata) | ✓ |
-| Gesture / swipe typing — real words | ✓ |
-| Gesture works in auto-caps (uppercase) mode | ✓ |
-
-**APK:** https://github.com/tsuiwilliam/xpresstapkb/releases/tag/v4.0-alpha8
-
-> **Internal testing only.** See [Legal notice](#legal--internal-only-notice) below.
+| Tap typing with word suggestions | ✓ |
+| Swipe / gesture typing — real words suggested | ✓ |
+| NFC tap → EMV PAN (card number) read | ✓ |
+| NFC tap → EMV expiry date read | ✓ |
+| NFC tap → cardholder name read | ✓ |
+| Autofill card number field | ✓ |
+| Autofill expiry field | ✓ |
+| No proprietary code — distributable under Apache-2.0 | ✓ |
 
 ---
 
 ## How it works
 
+### Swipe typing
+
+xPressTap uses a pure-Java swipe decoder with no native library dependency:
+
+1. AOSP `PointerTracker` detects gesture start when `GestureEnabler.shouldHandleGesture()` is true.
+2. `BatchInputArbiter` accumulates touch points; on UP event fires `onEndBatchInput()`.
+3. `DictionaryFacilitatorImpl.getSuggestions(isBatchMode=true)` calls `XpSwipeDecoder.decode()`.
+4. Decoder resamples path to 32 points → maps each to nearest key → deduplicates → finds words whose character sequence is a compatible subsequence of the traced key sequence, scored by shape similarity + word frequency.
+5. Top suggestions appear in the strip; best match is committed on spacebar.
+
+**Key fixes for gesture enable chain:**
+- `config_gesture_input_enabled_by_build_config = true` (was false in AOSP)
+- `hasAtLeastOneInitializedMainDictionary()` checks `mXpDictionary.isInitialized()` so `GestureEnabler` learns the dictionary is ready
+- `XpWordList.addOnLoadedCallback()` fires `setMainDictionaryAvailability(true)` async after word list loads
+
 ### NFC card fill
-1. `NfcForegroundActivity` reads the card via APDU, extracts PAN + expiry.
-2. Sends a local broadcast to `LatinIME`.
-3. `tryFillViaInputConnection()` calls `PaymentFieldDetector.classify()` to identify the focused field.
-4. Chrome/WebView fields expose no hint/label/fieldName in `EditorInfo` → falls back to `inputType & TYPE_MASK_CLASS` check (numeric = payment field).
-5. Fills card number digits one by one via `commitText`, sets `mPanWasFilled = true`, then polls for the expiry field (up to 12 s / 8 retries).
-6. Catches Chrome's field auto-advance via `onStartInputInternal` hook — Chrome keeps the keyboard visible when moving between fields, so only `onStartInput` fires, not `onStartInputView`.
 
-### Gesture / swipe typing
-- `libjni_latinimegoogle.so` is bundled for all 4 ABIs (see [jniLibs](app/src/main/jniLibs/)). Checksums match HeliBoard's hardcoded values.
-- `JniUtils` loads it via `System.loadLibrary("jni_latinimegoogle")` — no user action required.
-- Java fallback (`gesturePathToLetters` in `InputLogic.java`) handles devices where the native lib fails to load. Uses zone-transition + minimum-dwell sampling and normalises uppercase key codes.
-
-### Key bugs fixed in this build
-| Bug | Root cause | Fix |
-|-----|-----------|-----|
-| Gesture produced no text | `InputPointers.set()` is a shallow copy — PointerTracker resets the arrays after gesture, zeroing `getPointerSize()` | Deep-copy coordinates into `mLastGestureX/Y/Size` in `onEndBatchInput` before async processing |
-| Gesture broken in auto-caps | Shifted keyboard emits codes 65–90; old filter `code < 'a'` rejected them all | `code += 32` normalisation in `gesturePathToLetters` |
-| Expiry missing on Chrome/Stripe | Chrome sends empty `EditorInfo` for all web inputs; `classify()` returned UNKNOWN | Check `inputType & TYPE_MASK_CLASS`; numeric UNKNOWN → route by `mPanWasFilled` sequence |
-| Expiry double-filled card field | 1.5 s retry timer fired while still on card field | `mPanWasFilled` guard + max-8-retries counter |
-| Swipe broke on real device (v15) | `GestureLibExtractor` saved Google lib (wrong JNI package) to `filesDir`; built-in lib was skipped | Deleted extractor; `App.onCreate` purges `filesDir/libjni_latinime.so` before `JniUtils` static init |
+1. `NfcForegroundActivity` issues APDU SELECT + READ RECORD, parses EMV BER-TLV recursively.
+2. Extracts tag 5A (PAN), 5F24 (expiry YYMMDD), 5F20 (cardholder name).
+3. Sends local broadcast to `LatinIME`.
+4. `PaymentFieldDetector.classify()` identifies the focused field (card number vs expiry vs name).
+5. Fills the field via `InputConnection.commitText()`.
 
 ---
 
 ## Build
 
-CI: GitHub Actions (Ubuntu, JDK 21). Local builds fail — NDK path has a space (`William Theos`) that breaks the NDK build.
-
 ```
-Repo:    https://github.com/tsuiwilliam/xpresstapkb
-Branch:  xpresstap-main
-Package: com.xpresstap.keyboard (debug: com.xpresstap.keyboard.debug)
+applicationId: io.xpresstap.keyboard
+versionName:   1.1.0
+minSdk:        21
+targetSdk:     34
+Base:          AOSP LatinIME (Apache-2.0)
+NDK:           not required — pure Java
 ```
 
-Push a `v*` tag to trigger the release APK job. Debug APKs build on every branch push.
-
-**Signing secrets:** `KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`. If the keystore fails validation, CI generates a temporary key (APK works but requires uninstall between builds with different keys).
-
----
-
-## Legal / internal-only notice
-
-`libjni_latinimegoogle.so` is Google proprietary code from Gboard, redistributed here for **internal testing only**. It must be removed before any public distribution. For public builds, users obtain it themselves via the built-in import flow (Settings → Advanced → Load gesture typing library).
-
-HeliBoard is dual-licensed Apache-2.0 + GPL-3.0. Public distribution of this fork requires GPL-3.0 compliance (source disclosure, same license on derivative works).
+Signing credentials go in `local.properties` (not tracked):
+```
+storeFile=../keystore.jks
+storePassword=...
+keyAlias=...
+keyPassword=...
+```
 
 ---
 
-## Path to production / clean branded build
+## License
 
-See the discussion in this repo for options to ship xPressTap Keyboard publicly without the proprietary lib dependency.
+Apache License 2.0. See [LICENSE](LICENSE-Apache-2.0).
+
+No GPL code. No proprietary code. Safe for public distribution.
 
 ---
 
-## Upstream
+## Prior HeliBoard-based builds (internal only)
 
-Based on [HeliBoard](https://github.com/HeliBorg/HeliBoard) by Helium314 et al.
-Original AOSP LatinIME · OpenBoard contributors.
-
-HeliBoard is licensed under GPL-3.0 (with Apache-2.0 for AOSP portions).
-See [LICENSE](LICENSE) and [LICENSE-Apache-2.0](LICENSE-Apache-2.0).
+Releases v4.0-alpha1 through v4.0-alpha8 are based on HeliBoard (GPL-3.0 + Google gesture library).
+They are for **internal testing only** and cannot be publicly distributed.
+See the legal notice at https://github.com/tsuiwilliam/xpresstapkb/releases/tag/v4.0-alpha8.

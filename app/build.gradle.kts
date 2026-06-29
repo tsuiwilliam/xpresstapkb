@@ -22,7 +22,6 @@ android {
                 this.storePassword = storePassword
                 this.keyAlias = keyAlias
                 this.keyPassword = keyPassword
-                this.storeType = "PKCS12"
             }
         }
         // Committed keystore so all CI debug builds are signed identically → APK upgrades in place

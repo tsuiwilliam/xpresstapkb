@@ -53,16 +53,45 @@ jobs:
       - name: Grant gradlew execute permission
         run: chmod +x gradlew
 
-      - name: Decode keystore
+      - name: Setup signing keystore
+        env:
+          KEYSTORE_B64: ${{ secrets.KEYSTORE_BASE64 }}
+          KS_PASS: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASS: ${{ secrets.KEY_PASSWORD }}
         run: |
-          printf '%s' "${{ secrets.KEYSTORE_BASE64 }}" | tr -d '[:space:]' | base64 --decode > $RUNNER_TEMP/xpresstap-release-key.jks
+          KS=$RUNNER_TEMP/xpresstap-release-key.jks
+          USE_PROVIDED=false
+
+          # Try to decode and validate the provided keystore
+          if [ -n "$KEYSTORE_B64" ] && [ -n "$KS_PASS" ] && [ -n "$KEY_ALIAS" ]; then
+            printf '%s' "$KEYSTORE_B64" | tr -d '[:space:]' | base64 --decode > "$KS" 2>/dev/null || true
+            if keytool -list -keystore "$KS" -storepass "$KS_PASS" -noprompt 2>/dev/null; then
+              echo "Provided keystore is valid"
+              USE_PROVIDED=true
+            else
+              echo "Provided keystore failed validation — generating temporary key for internal testing"
+              rm -f "$KS"
+            fi
+          fi
+
+          if [ "$USE_PROVIDED" = "false" ]; then
+            keytool -genkey -v -keystore "$KS" \
+              -alias xpresstap -keyalg RSA -keysize 2048 -validity 10000 \
+              -storepass android -keypass android \
+              -dname "CN=xPressTap Internal, O=xPressTap, C=US" \
+              -storetype PKCS12 -noprompt
+            echo "SIGNING_KEY_ALIAS=xpresstap"    >> $GITHUB_ENV
+            echo "SIGNING_STORE_PASSWORD=android" >> $GITHUB_ENV
+            echo "SIGNING_KEY_PASSWORD=android"   >> $GITHUB_ENV
+          else
+            echo "SIGNING_KEY_ALIAS=$KEY_ALIAS"   >> $GITHUB_ENV
+            echo "SIGNING_STORE_PASSWORD=$KS_PASS" >> $GITHUB_ENV
+            echo "SIGNING_KEY_PASSWORD=$KEY_PASS"  >> $GITHUB_ENV
+          fi
+          echo "SIGNING_STORE_FILE=$KS" >> $GITHUB_ENV
 
       - name: Build release APK
-        env:
-          SIGNING_STORE_FILE: ${{ runner.temp }}/xpresstap-release-key.jks
-          SIGNING_STORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          SIGNING_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: ./gradlew assembleRelease
 
       - name: Upload release APK

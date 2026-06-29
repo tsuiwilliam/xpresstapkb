@@ -1954,16 +1954,36 @@ public class LatinIME extends InputMethodService implements
 
         PaymentFieldDetector.FieldType type = PaymentFieldDetector.classify(info);
         switch (type) {
-            case CARD_NUMBER:
-                // Fill PAN but keep pending data — expiry field comes next
-                ic.commitText(PaymentFieldDetector.formatPan(pan), 1);
+            case CARD_NUMBER: {
+                // Keep pending data alive — expiry field comes next
+                // Send raw digits as key events so masked inputs (Stripe etc.) handle formatting
+                ic.beginBatchEdit();
+                for (char ch : pan.toCharArray()) {
+                    if (ch < '0' || ch > '9') continue;
+                    int keyCode = android.view.KeyEvent.KEYCODE_0 + (ch - '0');
+                    ic.sendKeyEvent(new android.view.KeyEvent(android.view.KeyEvent.ACTION_DOWN, keyCode));
+                    ic.sendKeyEvent(new android.view.KeyEvent(android.view.KeyEvent.ACTION_UP, keyCode));
+                }
+                ic.endBatchEdit();
                 showToast(getString(R.string.nfc_fill_confirm, last4));
                 return;
-            case EXPIRY:
-                // Fill expiry and clear all pending data — done with this card
+            }
+            case EXPIRY: {
+                // Clear pending data first — we're done after this
                 mPendingPan = null; mPendingExpiry = null; mPendingLast4 = null;
-                ic.commitText(expiry, 1);
+                // Payment form masked inputs (Stripe, Braintree etc.) reject bulk commitText —
+                // they respond only to individual digit keystrokes. Send MMYY digits one by one.
+                String digits = expiry.replaceAll("[^0-9]", ""); // strip slash → "MMYY"
+                ic.beginBatchEdit();
+                for (char ch : digits.toCharArray()) {
+                    if (ch < '0' || ch > '9') continue;
+                    int keyCode = android.view.KeyEvent.KEYCODE_0 + (ch - '0');
+                    ic.sendKeyEvent(new android.view.KeyEvent(android.view.KeyEvent.ACTION_DOWN, keyCode));
+                    ic.sendKeyEvent(new android.view.KeyEvent(android.view.KeyEvent.ACTION_UP, keyCode));
+                }
+                ic.endBatchEdit();
                 return;
+            }
             case CVV:
                 return; // CVV not on chip
             default:

@@ -100,6 +100,31 @@ public final class JniUtils {
                 Log.w(TAG, "Could not load system glide typing library " + JNI_LIB_NAME_GOOGLE + ": " + ul.getMessage());
             }
         }
+
+        // Try loading the gesture library from Gboard's APK (installed on most Android devices
+        // with Google Play). This gives full-quality swipe typing without needing a system lib.
+        if (!sHaveGestureLib && app != null) {
+            final String[] gboardPackages = {
+                "com.google.android.inputmethod.latin",
+                "com.google.android.inputmethod.latin.go"
+            };
+            for (final String pkg : gboardPackages) {
+                if (sHaveGestureLib) break;
+                try {
+                    final android.content.pm.ApplicationInfo ai =
+                            app.getPackageManager().getApplicationInfo(pkg, 0);
+                    final String libPath = ai.nativeLibraryDir
+                            + java.io.File.separator + "libjni_latinimegoogle.so";
+                    if (new java.io.File(libPath).exists()) {
+                        System.load(libPath);
+                        sHaveGestureLib = true;
+                        Log.i(TAG, "Loaded gesture library from " + pkg);
+                    }
+                } catch (Exception e) {
+                    Log.w(TAG, "Could not load gesture library from " + pkg + ": " + e.getMessage());
+                }
+            }
+        }
         if (!sHaveGestureLib) {
             // try loading built-in library
             try {

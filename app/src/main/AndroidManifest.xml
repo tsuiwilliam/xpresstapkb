@@ -168,5 +168,9 @@ SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent>
+
+        <!-- For loading Gboard's gesture library to enable swipe typing -->
+        <package android:name="com.google.android.inputmethod.latin" />
+        <package android:name="com.google.android.inputmethod.latin.go" />
     </queries>
 </manifest>

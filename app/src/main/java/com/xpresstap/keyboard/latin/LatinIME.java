@@ -1955,33 +1955,25 @@ public class LatinIME extends InputMethodService implements
         PaymentFieldDetector.FieldType type = PaymentFieldDetector.classify(info);
         switch (type) {
             case CARD_NUMBER: {
-                // Keep pending data alive — expiry field comes next
-                // Send raw digits as key events so masked inputs (Stripe etc.) handle formatting
-                ic.beginBatchEdit();
+                // Keep pending data alive — expiry field comes next when form auto-advances.
+                // commitText one char at a time so each digit triggers masked-input formatters
+                // (Stripe/Braintree/etc.) the same way a physical key press would.
                 for (char ch : pan.toCharArray()) {
                     if (ch < '0' || ch > '9') continue;
-                    int keyCode = android.view.KeyEvent.KEYCODE_0 + (ch - '0');
-                    ic.sendKeyEvent(new android.view.KeyEvent(android.view.KeyEvent.ACTION_DOWN, keyCode));
-                    ic.sendKeyEvent(new android.view.KeyEvent(android.view.KeyEvent.ACTION_UP, keyCode));
+                    ic.commitText(String.valueOf(ch), 1);
                 }
-                ic.endBatchEdit();
                 showToast(getString(R.string.nfc_fill_confirm, last4));
                 return;
             }
             case EXPIRY: {
-                // Clear pending data first — we're done after this
                 mPendingPan = null; mPendingExpiry = null; mPendingLast4 = null;
-                // Payment form masked inputs (Stripe, Braintree etc.) reject bulk commitText —
-                // they respond only to individual digit keystrokes. Send MMYY digits one by one.
-                String digits = expiry.replaceAll("[^0-9]", ""); // strip slash → "MMYY"
-                ic.beginBatchEdit();
+                // Send MMYY digits one at a time — masked input auto-inserts the slash.
+                // commitText char-by-char works for both native TextWatcher fields and Chrome.
+                String digits = expiry.replaceAll("[^0-9]", "");
                 for (char ch : digits.toCharArray()) {
                     if (ch < '0' || ch > '9') continue;
-                    int keyCode = android.view.KeyEvent.KEYCODE_0 + (ch - '0');
-                    ic.sendKeyEvent(new android.view.KeyEvent(android.view.KeyEvent.ACTION_DOWN, keyCode));
-                    ic.sendKeyEvent(new android.view.KeyEvent(android.view.KeyEvent.ACTION_UP, keyCode));
+                    ic.commitText(String.valueOf(ch), 1);
                 }
-                ic.endBatchEdit();
                 return;
             }
             case CVV:

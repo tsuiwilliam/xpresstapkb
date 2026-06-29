@@ -101,10 +101,9 @@ public final class JniUtils {
             }
         }
         if (!sHaveGestureLib) {
-            // try loading built-in library — it includes gesture support
+            // try loading built-in library
             try {
                 System.loadLibrary(JNI_LIB_NAME);
-                sHaveGestureLib = true; // built-in lib has gesture recognition
             } catch (UnsatisfiedLinkError ul) {
                 Log.w(TAG, "Could not load native library " + JNI_LIB_NAME, ul);
             }

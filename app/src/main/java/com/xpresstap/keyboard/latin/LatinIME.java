@@ -192,6 +192,7 @@ public class LatinIME extends InputMethodService implements
     // NFC card data pending injection (set when card is read, consumed in onStartInputView)
     private String mPendingPan;
     private String mPendingExpiry;
+    private boolean mPanWasFilled = false; // true after PAN filled; next UNKNOWN field → expiry
     private String mPendingLast4;
 
     private final BroadcastReceiver mCardDataReceiver = new BroadcastReceiver() {
@@ -1953,22 +1954,34 @@ public class LatinIME extends InputMethodService implements
         if (ic == null || info == null) return;
 
         PaymentFieldDetector.FieldType type = PaymentFieldDetector.classify(info);
+
+        // Web-based payment forms (Stripe in Chrome) pass generic EditorInfo with no hint text,
+        // so classify() returns UNKNOWN for the expiry field. If we just filled PAN, treat the
+        // next UNKNOWN field as expiry rather than pasting PAN again.
+        if (mPanWasFilled && type == PaymentFieldDetector.FieldType.UNKNOWN) {
+            type = PaymentFieldDetector.FieldType.EXPIRY;
+        }
+
         switch (type) {
             case CARD_NUMBER: {
+                mPanWasFilled = false;
                 // Keep pending data alive — expiry field comes next when form auto-advances.
-                // commitText one char at a time so each digit triggers masked-input formatters
-                // (Stripe/Braintree/etc.) the same way a physical key press would.
+                // commitText one char at a time so each digit triggers masked-input formatters.
                 for (char ch : pan.toCharArray()) {
                     if (ch < '0' || ch > '9') continue;
                     ic.commitText(String.valueOf(ch), 1);
                 }
+                mPanWasFilled = true;
                 showToast(getString(R.string.nfc_fill_confirm, last4));
+                // Fallback: if onStartInputViewInternal doesn't fire for the expiry field
+                // (e.g. WebView manages focus internally), retry in 1.5s.
+                new Handler(Looper.getMainLooper()).postDelayed(this::tryFillViaInputConnection, 1500);
                 return;
             }
             case EXPIRY: {
+                mPanWasFilled = false;
                 mPendingPan = null; mPendingExpiry = null; mPendingLast4 = null;
                 // Send MMYY digits one at a time — masked input auto-inserts the slash.
-                // commitText char-by-char works for both native TextWatcher fields and Chrome.
                 String digits = expiry.replaceAll("[^0-9]", "");
                 for (char ch : digits.toCharArray()) {
                     if (ch < '0' || ch > '9') continue;
@@ -1979,7 +1992,8 @@ public class LatinIME extends InputMethodService implements
             case CVV:
                 return; // CVV not on chip
             default:
-                // Unknown field (Keep, any text box): paste PAN and clear
+                // Unknown field (Keep, any text box) and PAN not yet filled: paste PAN and clear.
+                mPanWasFilled = false;
                 mPendingPan = null; mPendingExpiry = null; mPendingLast4 = null;
                 ic.commitText(PaymentFieldDetector.formatPan(pan), 1);
                 showToast(getString(R.string.nfc_fill_confirm, last4));

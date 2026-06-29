@@ -2315,26 +2315,36 @@ public final class InputLogic {
         final int size = mLastGestureSize;
         if (size == 0) return null;
 
-        final int[] xs = mLastGestureX;
-        final int[] ys = mLastGestureY;
-
-        // Sample at most 64 points evenly across the gesture to avoid key repetition bias
-        final int step = Math.max(1, size / 64);
-        final StringBuilder sb = new StringBuilder();
-        char lastChar = 0;
-
-        for (int i = 0; i < size; i += step) {
+        // Map every sample to a lowercase letter (or 0 if non-letter).
+        // Normalise uppercase codes so gestures work regardless of shift state.
+        final char[] mapped = new char[size];
+        int mappedCount = 0;
+        for (int i = 0; i < size; i++) {
             final java.util.List<com.xpresstap.keyboard.keyboard.Key> near =
-                    keyboard.getNearestKeys(xs[i], ys[i]);
+                    keyboard.getNearestKeys(mLastGestureX[i], mLastGestureY[i]);
             if (near.isEmpty()) continue;
-            final com.xpresstap.keyboard.keyboard.Key key = near.get(0);
-            final int code = key.getCode();
-            if (code < 'a' || code > 'z') continue; // letters only
-            final char ch = (char) code;
-            if (ch != lastChar) { // deduplicate consecutive same-key samples
+            int code = near.get(0).getCode();
+            if (code >= 'A' && code <= 'Z') code += 32; // shift → lowercase
+            if (code < 'a' || code > 'z') continue;
+            mapped[mappedCount++] = (char) code;
+        }
+
+        // Walk runs of identical keys; commit a letter only if its run is long enough
+        // to be intentional (≥3 samples), except at the very start/end of the gesture.
+        final int MIN_DWELL = 3;
+        final StringBuilder sb = new StringBuilder();
+        char lastAdded = 0;
+        int pos = 0;
+        while (pos < mappedCount) {
+            final char ch = mapped[pos];
+            int run = 1;
+            while (pos + run < mappedCount && mapped[pos + run] == ch) run++;
+            final boolean isEdge = (pos == 0 || pos + run == mappedCount);
+            if ((run >= MIN_DWELL || isEdge) && ch != lastAdded) {
                 sb.append(ch);
-                lastChar = ch;
+                lastAdded = ch;
             }
+            pos += run;
         }
         return sb.length() >= 2 ? sb.toString() : null;
     }

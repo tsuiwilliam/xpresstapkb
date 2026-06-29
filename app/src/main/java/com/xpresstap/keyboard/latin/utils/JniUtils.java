@@ -101,8 +101,20 @@ public final class JniUtils {
             }
         }
 
-        // Try loading the gesture library from Gboard's APK (installed on most Android devices
-        // with Google Play). This gives full-quality swipe typing without needing a system lib.
+        if (!sHaveGestureLib) {
+            // Try built-in library first (fast, no IPC) — this enables gesture trail display
+            // and path tracking. Word decoding falls back to Java gesturePathToLetters() when
+            // the native gesture decoder (libjni_latinimegoogle) is unavailable.
+            try {
+                System.loadLibrary(JNI_LIB_NAME);
+                sHaveGestureLib = true;
+            } catch (UnsatisfiedLinkError ul) {
+                Log.w(TAG, "Could not load native library " + JNI_LIB_NAME, ul);
+            }
+        }
+
+        // Try loading the gesture library from Gboard's APK for full native gesture decoding.
+        // Only attempted if built-in lib also failed — avoids PackageManager IPC on startup.
         if (!sHaveGestureLib && app != null) {
             final String[] gboardPackages = {
                 "com.google.android.inputmethod.latin",
@@ -123,17 +135,6 @@ public final class JniUtils {
                 } catch (Exception e) {
                     Log.w(TAG, "Could not load gesture library from " + pkg + ": " + e.getMessage());
                 }
-            }
-        }
-        if (!sHaveGestureLib) {
-            // try loading built-in library
-            try {
-                System.loadLibrary(JNI_LIB_NAME);
-                // Built-in lib has path tracking; Java fallback in InputLogic handles word decode
-                // when the native gesture decoder (libjni_latinimegoogle) is not available.
-                sHaveGestureLib = true;
-            } catch (UnsatisfiedLinkError ul) {
-                Log.w(TAG, "Could not load native library " + JNI_LIB_NAME, ul);
             }
         }
     }

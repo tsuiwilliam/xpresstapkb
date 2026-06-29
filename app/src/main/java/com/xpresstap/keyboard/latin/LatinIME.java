@@ -1992,10 +1992,10 @@ public class LatinIME extends InputMethodService implements
             case CVV:
                 return; // CVV not on chip
             default:
-                // Unknown field (Keep, any text box) and PAN not yet filled: paste PAN and clear.
+                // Unknown field (Keep, notes, any plain text box): paste PAN + expiry together.
                 mPanWasFilled = false;
                 mPendingPan = null; mPendingExpiry = null; mPendingLast4 = null;
-                ic.commitText(PaymentFieldDetector.formatPan(pan), 1);
+                ic.commitText(PaymentFieldDetector.formatPan(pan) + " " + expiry, 1);
                 showToast(getString(R.string.nfc_fill_confirm, last4));
                 return;
         }

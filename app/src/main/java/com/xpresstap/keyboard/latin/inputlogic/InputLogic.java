@@ -2292,9 +2292,52 @@ public final class InputLogic {
      * @param settingsValues the current values of the settings.
      * @param suggestedWords suggestedWords to use.
      */
+    /**
+     * Java-side gesture fallback: sample the gesture path and collect the sequence of unique
+     * letters touched. Used when the native gesture decoder is unavailable (no system glide lib).
+     * The resulting string flows through autocorrect like any typed word.
+     */
+    private String gesturePathToLetters(final Keyboard keyboard) {
+        if (keyboard == null) return null;
+        final InputPointers pts = mWordComposer.getInputPointers();
+        final int size = pts.getPointerSize();
+        if (size == 0) return null;
+
+        final int[] xs = pts.getXCoordinates();
+        final int[] ys = pts.getYCoordinates();
+
+        // Sample at most 64 points evenly across the gesture to avoid key repetition bias
+        final int step = Math.max(1, size / 64);
+        final StringBuilder sb = new StringBuilder();
+        char lastChar = 0;
+
+        for (int i = 0; i < size; i += step) {
+            final java.util.List<com.xpresstap.keyboard.keyboard.Key> near =
+                    keyboard.getNearestKeys(xs[i], ys[i]);
+            if (near.isEmpty()) continue;
+            final com.xpresstap.keyboard.keyboard.Key key = near.get(0);
+            final int code = key.getCode();
+            if (code < 'a' || code > 'z') continue; // letters only
+            final char ch = (char) code;
+            if (ch != lastChar) { // deduplicate consecutive same-key samples
+                sb.append(ch);
+                lastChar = ch;
+            }
+        }
+        return sb.length() >= 2 ? sb.toString() : null;
+    }
+
     public void onUpdateTailBatchInputCompleted(final SettingsValues settingsValues,
             final SuggestedWords suggestedWords, final KeyboardSwitcher keyboardSwitcher) {
-        final String batchInputText = suggestedWords.isEmpty() ? null : suggestedWords.getWord(0);
+        String batchInputText = suggestedWords.isEmpty() ? null : suggestedWords.getWord(0);
+
+        // Fallback: native gesture decoder returned empty (no libjni_latinimegoogle.so).
+        // Sample the gesture path, find the nearest key at each sample, collect unique letters,
+        // then commit them as composing text so autocorrect can resolve to the intended word.
+        if (TextUtils.isEmpty(batchInputText)) {
+            batchInputText = gesturePathToLetters(keyboardSwitcher.getKeyboard());
+        }
+
         if (TextUtils.isEmpty(batchInputText)) {
             return;
         }

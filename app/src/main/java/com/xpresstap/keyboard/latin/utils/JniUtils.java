@@ -104,6 +104,9 @@ public final class JniUtils {
             // try loading built-in library
             try {
                 System.loadLibrary(JNI_LIB_NAME);
+                // Built-in lib has path tracking; Java fallback in InputLogic handles word decode
+                // when the native gesture decoder (libjni_latinimegoogle) is not available.
+                sHaveGestureLib = true;
             } catch (UnsatisfiedLinkError ul) {
                 Log.w(TAG, "Could not load native library " + JNI_LIB_NAME, ul);
             }

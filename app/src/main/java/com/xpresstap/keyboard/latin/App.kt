@@ -8,7 +8,7 @@ import com.xpresstap.keyboard.latin.define.DebugFlags
 import com.xpresstap.keyboard.latin.settings.Defaults
 import com.xpresstap.keyboard.latin.settings.Settings
 import com.xpresstap.keyboard.latin.utils.FoldableUtils
-import com.xpresstap.keyboard.latin.utils.GestureLibExtractor
+import com.xpresstap.keyboard.latin.utils.JniUtils
 import com.xpresstap.keyboard.latin.utils.LayoutUtilsCustom
 import com.xpresstap.keyboard.latin.utils.Log
 import com.xpresstap.keyboard.latin.utils.SubtypeSettings
@@ -17,10 +17,16 @@ import com.xpresstap.keyboard.latin.utils.upgradeToolbarPrefs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.File
 
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
+        // Purge any previously-extracted Gboard lib. The Google lib is compiled for
+        // com.google.android.inputmethod.latin — its JNI bindings don't match our package,
+        // so loading it silently breaks all native calls. Must run before JniUtils initialises.
+        File(filesDir, JniUtils.JNI_LIB_IMPORT_FILE_NAME).delete()
+
         DebugFlags.init(this)
         FoldableUtils.init(this)
         Settings.init(this)
@@ -28,7 +34,6 @@ class App : Application() {
 
         val scope = CoroutineScope(Dispatchers.Default)
         scope.launch { // do some uncritical work in background for faster startup
-            GestureLibExtractor.extractIfNeeded(this@App)
             SupportedEmojis.load(this@App)
             LayoutUtilsCustom.removeMissingLayouts(this@App)
             val packageInfo = packageManager.getPackageInfo(packageName, 0)

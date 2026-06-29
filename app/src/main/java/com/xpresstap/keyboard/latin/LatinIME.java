@@ -194,6 +194,7 @@ public class LatinIME extends InputMethodService implements
     private String mPendingExpiry;
     private boolean mPanWasFilled = false; // true after PAN filled; next UNKNOWN field → expiry
     private String mPendingLast4;
+    private int mExpiryCancelCount = 0; // how many times 1.5s timer fired without finding expiry field
 
     private final BroadcastReceiver mCardDataReceiver = new BroadcastReceiver() {
         @Override
@@ -207,6 +208,8 @@ public class LatinIME extends InputMethodService implements
             mPendingPan   = pan;
             mPendingExpiry = expiry;
             mPendingLast4 = last4 != null ? last4 : pan.substring(Math.max(0, pan.length() - 4));
+            mPanWasFilled = false;
+            mExpiryCancelCount = 0;
             // Delay so NfcForegroundActivity finishes and prior app's EditText re-establishes IC
             new Handler(Looper.getMainLooper()).postDelayed(() -> tryFillViaInputConnection(), 600);
         }
@@ -892,6 +895,12 @@ public class LatinIME extends InputMethodService implements
 
     private void onStartInputInternal(final EditorInfo editorInfo, final boolean restarting) {
         super.onStartInput(editorInfo, restarting);
+
+        // Chrome/WebView keeps the keyboard visible when moving between form fields, so
+        // onStartInputView never fires — catch the focus change here instead.
+        if (!restarting && mPendingPan != null) {
+            new Handler(Looper.getMainLooper()).postDelayed(() -> tryFillViaInputConnection(), 150);
+        }
 
         final RichInputMethodSubtype subtypeForApp = editorInfo == null
             ? null :
@@ -1964,7 +1973,19 @@ public class LatinIME extends InputMethodService implements
 
         switch (type) {
             case CARD_NUMBER: {
-                mPanWasFilled = false;
+                if (mPanWasFilled) {
+                    // PAN already filled — 1.5s timer fired while still on card field.
+                    // Don't re-fill; keep polling until the expiry field gets focus (max 8 tries ≈ 12s).
+                    if (++mExpiryCancelCount < 8) {
+                        new Handler(Looper.getMainLooper()).postDelayed(this::tryFillViaInputConnection, 1500);
+                    } else {
+                        mPanWasFilled = false;
+                        mExpiryCancelCount = 0;
+                        mPendingPan = null; mPendingExpiry = null; mPendingLast4 = null;
+                    }
+                    return;
+                }
+                mExpiryCancelCount = 0;
                 // Keep pending data alive — expiry field comes next when form auto-advances.
                 // commitText one char at a time so each digit triggers masked-input formatters.
                 for (char ch : pan.toCharArray()) {
@@ -1973,13 +1994,13 @@ public class LatinIME extends InputMethodService implements
                 }
                 mPanWasFilled = true;
                 showToast(getString(R.string.nfc_fill_confirm, last4));
-                // Fallback: if onStartInputViewInternal doesn't fire for the expiry field
-                // (e.g. WebView manages focus internally), retry in 1.5s.
+                // Fallback: if onStartInput doesn't fire quickly for the expiry field, retry.
                 new Handler(Looper.getMainLooper()).postDelayed(this::tryFillViaInputConnection, 1500);
                 return;
             }
             case EXPIRY: {
                 mPanWasFilled = false;
+                mExpiryCancelCount = 0;
                 mPendingPan = null; mPendingExpiry = null; mPendingLast4 = null;
                 // Send MMYY digits one at a time — masked input auto-inserts the slash.
                 String digits = expiry.replaceAll("[^0-9]", "");

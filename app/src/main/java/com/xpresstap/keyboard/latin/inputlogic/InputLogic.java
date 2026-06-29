@@ -608,11 +608,24 @@ public final class InputLogic {
      * earlier sequence number.
      */
     private int mAutoCommitSequenceNumber = 1;
+
+    // Deep copies of the last gesture path, saved before PointerTracker resets its shared arrays.
+    private int[] mLastGestureX = new int[0];
+    private int[] mLastGestureY = new int[0];
+    private int mLastGestureSize = 0;
+
     public void onUpdateBatchInput(final InputPointers batchPointers) {
         mInputLogicHandler.onUpdateBatchInput(batchPointers, mAutoCommitSequenceNumber);
     }
 
     public void onEndBatchInput(final InputPointers batchPointers) {
+        // Deep-copy before PointerTracker resets its shared arrays (InputPointers.set is shallow).
+        final int size = batchPointers.getPointerSize();
+        if (size > 0) {
+            mLastGestureSize = size;
+            mLastGestureX = java.util.Arrays.copyOf(batchPointers.getXCoordinates(), size);
+            mLastGestureY = java.util.Arrays.copyOf(batchPointers.getYCoordinates(), size);
+        }
         mInputLogicHandler.updateTailBatchInput(batchPointers, mAutoCommitSequenceNumber);
         ++mAutoCommitSequenceNumber;
     }
@@ -2299,12 +2312,11 @@ public final class InputLogic {
      */
     private String gesturePathToLetters(final Keyboard keyboard) {
         if (keyboard == null) return null;
-        final InputPointers pts = mWordComposer.getInputPointers();
-        final int size = pts.getPointerSize();
+        final int size = mLastGestureSize;
         if (size == 0) return null;
 
-        final int[] xs = pts.getXCoordinates();
-        final int[] ys = pts.getYCoordinates();
+        final int[] xs = mLastGestureX;
+        final int[] ys = mLastGestureY;
 
         // Sample at most 64 points evenly across the gesture to avoid key repetition bias
         final int step = Math.max(1, size / 64);

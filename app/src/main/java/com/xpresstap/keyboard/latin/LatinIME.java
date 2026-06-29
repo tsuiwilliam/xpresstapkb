@@ -906,6 +906,11 @@ public class LatinIME extends InputMethodService implements
     void onStartInputViewInternal(final EditorInfo editorInfo, final boolean restarting) {
         super.onStartInputView(editorInfo, restarting);
 
+        // Auto-fill pending NFC card data as focus moves through payment form fields
+        if (mPendingPan != null) {
+            new Handler(Looper.getMainLooper()).postDelayed(() -> tryFillViaInputConnection(), 150);
+        }
+
         setGestureDataGatheringMode(editorInfo, restarting);
 
         mDictionaryFacilitator.onStartInput();
@@ -1942,27 +1947,32 @@ public class LatinIME extends InputMethodService implements
         String expiry = mPendingExpiry;
         String last4 = mPendingLast4;
         if (pan == null || expiry == null) return;
-        mPendingPan   = null;
-        mPendingExpiry = null;
-        mPendingLast4  = null;
 
         android.view.inputmethod.InputConnection ic = getCurrentInputConnection();
         android.view.inputmethod.EditorInfo info = getCurrentInputEditorInfo();
         if (ic == null || info == null) return;
 
         PaymentFieldDetector.FieldType type = PaymentFieldDetector.classify(info);
-        String text;
         switch (type) {
-            case CARD_NUMBER: text = PaymentFieldDetector.formatPan(pan); break;
-            case EXPIRY:      text = expiry; break;
-            case CVV:         return; // CVV is not on the card chip — skip
+            case CARD_NUMBER:
+                // Fill PAN but keep pending data — expiry field comes next
+                ic.commitText(PaymentFieldDetector.formatPan(pan), 1);
+                showToast(getString(R.string.nfc_fill_confirm, last4));
+                return;
+            case EXPIRY:
+                // Fill expiry and clear all pending data — done with this card
+                mPendingPan = null; mPendingExpiry = null; mPendingLast4 = null;
+                ic.commitText(expiry, 1);
+                return;
+            case CVV:
+                return; // CVV not on chip
             default:
-                // Unknown field: paste PAN so any text field works as a test target
-                text = PaymentFieldDetector.formatPan(pan);
-                break;
+                // Unknown field (Keep, any text box): paste PAN and clear
+                mPendingPan = null; mPendingExpiry = null; mPendingLast4 = null;
+                ic.commitText(PaymentFieldDetector.formatPan(pan), 1);
+                showToast(getString(R.string.nfc_fill_confirm, last4));
+                return;
         }
-        ic.commitText(text, 1);
-        showToast(getString(R.string.nfc_fill_confirm, last4));
     }
 
     public void showToast(String message) {

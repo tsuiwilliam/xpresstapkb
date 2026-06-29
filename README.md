@@ -1,138 +1,89 @@
-# HeliBoard
-HeliBoard is a privacy-conscious and customizable open-source keyboard, based on AOSP / OpenBoard.
-Does not use internet permission, and thus is 100% offline.
+# xPressTap Keyboard
 
-[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/packages/helium314.keyboard/)
-[<img src="https://user-images.githubusercontent.com/663460/26973090-f8fdc986-4d14-11e7-995a-e7c5e79ed925.png" alt="Get APK from GitHub" height="80">](https://github.com/HeliBorg/HeliBoard/releases/latest)
-[<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height="80">](https://apt.izzysoft.de/fdroid/index/apk/helium314.keyboard)
+Android keyboard with NFC payment card autofill and gesture/swipe typing.
+Built on [HeliBoard](https://github.com/HeliBorg/HeliBoard) (Apache-2.0 / GPL-3.0).
 
-## Table of Contents
+---
 
-- [Features](#features)
-- [Contributing](#contributing-)
-   * [Reporting Issues](#reporting-issues)
-   * [Translations](#translations)
-   * [To Community](#to-community)
-   * [Code Contribution](CONTRIBUTING.md)
-- [Links](#links)
-- [License](#license)
-- [Credits](#credits)
-  * [Funding](#funding)
+## Milestone: v4.0-alpha8 — WORKING ✓
 
-# Features
-<ul>
-  <li>Add dictionaries for suggestions and spell check</li>
-  <ul>
-    <li>build your own, or get them  <a href="https://codeberg.org/Helium314/aosp-dictionaries#dictionaries">here</a> (quality may vary)</li>
-    <li>additional dictionaries for emojis or scientific symbols can be used to provide suggestions (similar to "emoji search")</li>
-    <li>note that for Korean layouts, suggestions only work using <a href="https://github.com/openboard-team/openboard/commit/83fca9533c03b9fecc009fc632577226bbd6301f">this dictionary</a>, the tools in the dictionary repository are not able to create working dictionaries</li>
-  </ul>
-  <li>Customize keyboard themes (style, colors and background image)</li>
-  <li>Emoji search (inline and separate, requires <a href="https://codeberg.org/Helium314/aosp-dictionaries">emoji dictionary</a>)</li>
-  <ul>
-    <li>can follow the system's day/night setting on Android 10+ (and on some versions of Android 9)</li>
-    <li>can follow dynamic colors for Android 12+</li>
-  </ul>
-  <li>Customize keyboard <a href="https://github.com/HeliBorg/HeliBoard/blob/main/layouts.md">layouts</a> (only available when disabling <i>use system languages</i>)</li>
-  <li>Customize special layouts, like symbols, number,  or functional key layout</li>
-  <li>Multilingual typing</li>
-  <li>Glide typing (<i>only with closed source library</i> ☹️)</li>
-  <ul>
-    <li>library not included in the app, as there is no compatible open source library available</li>
-    <li>can be extracted from GApps packages ("<i>swypelibs</i>"), or downloaded <a href="https://github.com/erkserkserks/openboard/tree/46fdf2b550035ca69299ce312fa158e7ade36967/app/src/main/jniLibs">here</a> (click on the file and then "raw" or the tiny download button)</li>
-  </ul>
-  <li>Clipboard history</li>
-  <li>One-handed mode</li>
-  <li>Split keyboard</li>
-  <li>Number pad</li>
-  <li>Backup and restore your settings and learned word / history data</li>
-</ul>
+**Confirmed working as of 2026-06-29.**
 
-For [FAQ](https://github.com/HeliBorg/HeliBoard/wiki/FAQ), [hidden features](https://github.com/HeliBorg/HeliBoard/wiki/9.-Hidden-features) and more information about the app and features, please visit the [wiki](https://github.com/HeliBorg/HeliBoard/wiki)
+| Feature | Status |
+|---------|--------|
+| NFC tap → fill PAN in card number field | ✓ |
+| NFC tap → fill expiry in expiry field | ✓ |
+| NFC tap → paste PAN + expiry in plain-text fields (e.g. Keep notes) | ✓ |
+| Chrome / Stripe pay forms (no EditorInfo metadata) | ✓ |
+| Gesture / swipe typing — real words | ✓ |
+| Gesture works in auto-caps (uppercase) mode | ✓ |
 
-# Contributing ❤
+**APK:** https://github.com/tsuiwilliam/xpresstapkb/releases/tag/v4.0-alpha8
 
-## Reporting Issues
+> **Internal testing only.** See [Legal notice](#legal--internal-only-notice) below.
 
-Whether you encountered a bug, or want to see a new feature in HeliBoard, you can contribute to the project by opening a new issue [here](https://github.com/HeliBorg/HeliBoard/issues). Your help is always welcome!
+---
 
-Before opening a new issue, be sure to check the following:
- - **Does the issue already exist?** Make sure a similar issue has not been reported by browsing [existing issues](https://github.com/HeliBorg/HeliBoard/issues?q=). Please search open and closed issues. In case of feature requests you could also check the [FAQ](https://github.com/HeliBorg/HeliBoard/wiki/FAQ) and [hidden features](https://github.com/HeliBorg/HeliBoard/wiki/9.-Hidden-features).
- - **Is the issue still relevant?** Make sure your issue is not already fixed in the latest version of HeliBoard.
- - **Is it a single topic?** If you want to suggest multiple things, open multiple issues.
- - **Did you use the issue template?** It is important to make life of our kind contributors easier by avoiding issues that miss key information to their resolution.
-Note that issues that that ignore part of the issue template will likely get treated with very low priority, as often they are needlessly hard to read or understand (e.g. huge screenshots, not providing a proper description, or addressing multiple topics). Blatant violation of the guidelines may result in the issue getting closed.
+## How it works
 
-If you're interested, you can read the following useful text about effective bug reporting (a bit longer read): https://www.chiark.greenend.org.uk/~sgtatham/bugs.html
+### NFC card fill
+1. `NfcForegroundActivity` reads the card via APDU, extracts PAN + expiry.
+2. Sends a local broadcast to `LatinIME`.
+3. `tryFillViaInputConnection()` calls `PaymentFieldDetector.classify()` to identify the focused field.
+4. Chrome/WebView fields expose no hint/label/fieldName in `EditorInfo` → falls back to `inputType & TYPE_MASK_CLASS` check (numeric = payment field).
+5. Fills card number digits one by one via `commitText`, sets `mPanWasFilled = true`, then polls for the expiry field (up to 12 s / 8 retries).
+6. Catches Chrome's field auto-advance via `onStartInputInternal` hook — Chrome keeps the keyboard visible when moving between fields, so only `onStartInput` fires, not `onStartInputView`.
 
-## Translations
-Translations can be added using [Weblate](https://translate.codeberg.org/projects/heliboard/). You will need an account to update translations and add languages. Add the language you want to translate to in Languages -> Manage translated languages in the top menu bar.
-Updating translations in a PR will not be accepted, as it may cause conflicts with Weblate translations.
+### Gesture / swipe typing
+- `libjni_latinimegoogle.so` is bundled for all 4 ABIs (see [jniLibs](app/src/main/jniLibs/)). Checksums match HeliBoard's hardcoded values.
+- `JniUtils` loads it via `System.loadLibrary("jni_latinimegoogle")` — no user action required.
+- Java fallback (`gesturePathToLetters` in `InputLogic.java`) handles devices where the native lib fails to load. Uses zone-transition + minimum-dwell sampling and normalises uppercase key codes.
 
-Some notes on translations
-* when translating metadata, translating the changelogs is rather useless. It's available as it was requested by translators.
-* the `hidden_features_message` is horrible to translate with Weblate, and serves little benefit as it's just a copy of what's already in the wiki: https://github.com/HeliBorg/HeliBoard/wiki/9.-Hidden-features. It's been made available in the app on user request/contribution.
+### Key bugs fixed in this build
+| Bug | Root cause | Fix |
+|-----|-----------|-----|
+| Gesture produced no text | `InputPointers.set()` is a shallow copy — PointerTracker resets the arrays after gesture, zeroing `getPointerSize()` | Deep-copy coordinates into `mLastGestureX/Y/Size` in `onEndBatchInput` before async processing |
+| Gesture broken in auto-caps | Shifted keyboard emits codes 65–90; old filter `code < 'a'` rejected them all | `code += 32` normalisation in `gesturePathToLetters` |
+| Expiry missing on Chrome/Stripe | Chrome sends empty `EditorInfo` for all web inputs; `classify()` returned UNKNOWN | Check `inputType & TYPE_MASK_CLASS`; numeric UNKNOWN → route by `mPanWasFilled` sequence |
+| Expiry double-filled card field | 1.5 s retry timer fired while still on card field | `mPanWasFilled` guard + max-8-retries counter |
+| Swipe broke on real device (v15) | `GestureLibExtractor` saved Google lib (wrong JNI package) to `filesDir`; built-in lib was skipped | Deleted extractor; `App.onCreate` purges `filesDir/libjni_latinime.so` before `JniUtils` static init |
 
-## To Community
-There is the [discussions on GitHub](https://github.com/HeliBorg/HeliBoard/discussions), or if you prefer a more open network there is [Lemmy](https://lemmy.world/c/Heliboard).
-You can share your themes, layouts and dictionaries with other people:
-* Themes can be saved and loaded using the menu on top-right in the _adjust colors_ screen
-  * you can share custom colors in a separate [discussion section](https://github.com/HeliBorg/HeliBoard/discussions/categories/custom-colors)
-  * there are theme collections available at [Star-Trowa/heliboard-themes](https://github.com/Star-Trowa/heliboard-themes) and [PickleHik3/droid-tings](https://github.com/PickleHik3/droid-tings)
-* Custom keyboard layouts are text files whose content you can edit, copy and share
-  * this applies to main keyboard layouts and to special layouts adjustable in advanced settings
-  * see [layouts.md](layouts.md) for details
-  * you can share custom layouts in a separate [discussion section](https://github.com/HeliBorg/HeliBoard/discussions/categories/custom-layout)
-  * [Roccobot's Layout Maker](https://roccobot.github.io/HeliBoard-RLM/) is a browser-based editor for json layout files
-* Creating dictionaries is a little more work
-  * first you will need a wordlist, as described [here](https://codeberg.org/Helium314/aosp-dictionaries/src/branch/main/wordlists/sample.combined) and in the repository readme
-  * the you need to compile the dictionary using [external tools](https://github.com/remi0s/aosp-dictionary-tools)
-  * the resulting file (and ideally the wordlist too) can be shared with other users
-  * note that there will not be any further dictionaries added to this app, but you can add dictionaries to the [dictionaries repository](https://codeberg.org/Helium314/aosp-dictionaries)
+---
 
-## Code Contribution
-See [Contribution Guidelines](CONTRIBUTING.md)
+## Build
 
-# Links
-* Info
-  * [Wiki](https://github.com/HeliBorg/HeliBoard/wiki), including FAQ, help on customizing layouts, and gesture data gathering
-  * [Layout documentation](layouts.md) (more technical info regarding layout customization)
-  * [For creating custom dictionaries](https://codeberg.org/Helium314/aosp-dictionaries#wordlist-information) (see also top of the linked readme)
-* Community
-  * [Lemmy](https://lemmy.world/c/Heliboard)
-  * [Reddit](https://www.reddit.com/r/HeliBoard)
-  * GitHub [discussions](https://github.com/HeliBorg/HeliBoard/discussions)
-* Other
-  * [Translations](https://translate.codeberg.org/projects/heliboard/)
-  * [Dictionaries](https://codeberg.org/Helium314/aosp-dictionaries)
-  * [k3lp](https://codeberg.org/k3lp/k3lp) is a WIP library for keyboard layout parsing that will be implemented in HeliBoard when ready (created by [FlorisBoard](https://github.com/florisboard/florisboard/) maintainers)
-  * [swipe-o-scope](https://codeberg.org/eclexic/swipe-o-scope) for visualizing gesture data as created when using gesture data gathering
+CI: GitHub Actions (Ubuntu, JDK 21). Local builds fail — NDK path has a space (`William Theos`) that breaks the NDK build.
 
-# License
+```
+Repo:    https://github.com/tsuiwilliam/xpresstapkb
+Branch:  xpresstap-main
+Package: com.xpresstap.keyboard (debug: com.xpresstap.keyboard.debug)
+```
 
-HeliBoard (as a fork of OpenBoard) is licensed under GNU General Public License v3.0.
+Push a `v*` tag to trigger the release APK job. Debug APKs build on every branch push.
 
- > Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
+**Signing secrets:** `KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`. If the keystore fails validation, CI generates a temporary key (APK works but requires uninstall between builds with different keys).
 
-See repo's [LICENSE](/LICENSE) file.
+---
 
-Since the app is based on Apache 2.0 licensed AOSP Keyboard, an [Apache 2.0](LICENSE-Apache-2.0) license file is provided.
-The icon is licensed under [Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). A [license file](LICENSE-CC-BY-SA-4.0) is also included.
+## Legal / internal-only notice
 
-# Credits
-- Icon by [Fabian OvrWrt](https://github.com/FabianOvrWrt) with contributions from [The Eclectic Dyslexic](https://github.com/the-eclectic-dyslexic)
-- [OpenBoard](https://github.com/openboard-team/openboard)
-- [AOSP Keyboard](https://android.googlesource.com/platform/packages/inputmethods/LatinIME/)
-- [LineageOS](https://review.lineageos.org/admin/repos/LineageOS/android_packages_inputmethods_LatinIME)
-- [Simple Keyboard](https://github.com/rkkr/simple-keyboard)
-- [Indic Keyboard](https://gitlab.com/indicproject/indic-keyboard)
-- [FlorisBoard](https://github.com/florisboard/florisboard/)
-- Our [contributors](https://github.com/HeliBorg/HeliBoard/graphs/contributors)
+`libjni_latinimegoogle.so` is Google proprietary code from Gboard, redistributed here for **internal testing only**. It must be removed before any public distribution. For public builds, users obtain it themselves via the built-in import flow (Settings → Advanced → Load gesture typing library).
 
-## Funding
+HeliBoard is dual-licensed Apache-2.0 + GPL-3.0. Public distribution of this fork requires GPL-3.0 compliance (source disclosure, same license on derivative works).
 
-This project is funded through [NGI Mobifree Fund](https://nlnet.nl/mobifree), a fund established by [NLnet](https://nlnet.nl) with financial support from the European Commission's [Next Generation Internet](https://ngi.eu) program. Learn more at the [NLnet project page](https://nlnet.nl/project/GestureTyping).
+---
 
-[<img src="https://nlnet.nl/logo/banner.png" alt="NLnet foundation logo" width="20%" />](https://nlnet.nl)
+## Path to production / clean branded build
 
-Further the project benefits from donations provided by many users (thank you all!).
+See the discussion in this repo for options to ship xPressTap Keyboard publicly without the proprietary lib dependency.
+
+---
+
+## Upstream
+
+Based on [HeliBoard](https://github.com/HeliBorg/HeliBoard) by Helium314 et al.
+Original AOSP LatinIME · OpenBoard contributors.
+
+HeliBoard is licensed under GPL-3.0 (with Apache-2.0 for AOSP portions).
+See [LICENSE](LICENSE) and [LICENSE-Apache-2.0](LICENSE-Apache-2.0).

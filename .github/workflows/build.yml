@@ -55,7 +55,7 @@ jobs:
 
       - name: Decode keystore
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > $RUNNER_TEMP/xpresstap-release-key.jks
+          printf '%s' "${{ secrets.KEYSTORE_BASE64 }}" | tr -d '[:space:]' | base64 --decode > $RUNNER_TEMP/xpresstap-release-key.jks
 
       - name: Build release APK
         env:
